@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | 新闻视觉创作</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Playfair+Display:wght@500;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    /* ========== 全局核心样式（整合两套配色，统一油画风格） ========== */
+    :root {
+      /* 油画主配色 */
+      --oil-blue: #2c3e50;
+      --oil-purple: #4a4367;
+      --oil-ivory: #f5f1eb;
+      --oil-gray: #b8b4ac;
+      --oil-dark: #1e2429;
+      --oil-gold: #d4b98c;
+      --oil-gold-dark: #8b7355;
+      /* 摄影详情页配色（兼容） */
+      --sargent-brown: #8a6e54;
+      --sargent-ivory: #f8f4ed;
+      --sargent-gray: #d9d2c8;
+      --sargent-dark: #4a3f35;
+      /* 通用渐变/阴影 */
+      --black-soft: #1a1a1a;
+      --gradient-1: rgba(44, 62, 80, 0.15);
+      --gradient-2: rgba(184, 180, 172, 0.2);
+      --gradient-3: rgba(212, 185, 140, 0.1);
+    }
+
+    /* 页面容器：默认隐藏，通过active控制显示 */
+    .page-container {
+      display: none;
+      width: 100%;
+      min-height: 100vh;
+    }
+    .page-container.active {
+      display: block;
+    }
+
+    body {
+      background: var(--oil-ivory);
+      background-image: url("https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/9421551ec1b84c2c90e8ab8faf4f82ce.jpg~tplv-a9rns2rl98-24:720:720.jpg");
+      background-size: cover;
+      background-attachment: fixed;
+      background-color: rgba(245, 241, 235, 0.92);
+      background-blend-mode: overlay;
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+      scroll-behavior: smooth;
+      cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path fill='%238b7355' d='M22 10c0-1.5-1.1-2.7-2.5-2.9l-6-1.3c-.6-.1-1.1.3-1.3.9l-2 6c-.2 1.4 1 2.5 2.5 2.5h6c.8 0 1.5-.6 1.7-1.4l1-5c.1-.7-.4-1.3-1-1.5zM7 18c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z'/></svg>"), auto;
+    }
+
+    /* ========== 开屏动画样式 ========== */
+    .splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--oil-ivory);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.5s ease-out;
+    }
+    .splash-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .handwriting-container {
+      position: relative;
+      width: 300px;
+      height: 120px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .handwriting-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 48px;
+      font-weight: 700;
+      background: linear-gradient(145deg, var(--oil-gold), var(--oil-gold-dark));
+      -webkit-background-clip: text;
+      background-clip: text;
+      position: relative;
+      background-size: 0% 100%;
+      background-repeat: no-repeat;
+      color: transparent;
+      animation: textWrite 2s ease-in-out forwards;
+      z-index: 5;
+    }
+    .pen-icon {
+      position: absolute;
+      color: var(--black-soft);
+      font-size: 24px;
+      opacity: 1;
+      transform: rotate(-30deg);
+      animation: penWrite 2s ease-in-out forwards, penFadeOut 0.3s ease-in-out 1.8s forwards;
+      z-index: 10;
+    }
+    .loading-text {
+      font-size: 14px;
+      color: var(--black-soft);
+      opacity: 0.7;
+      margin-top: 10px;
+      animation: fadePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes penWrite {
+      0% { top: 45px; left: 60px; transform: rotate(-30deg); }
+      10% { top: 50px; left: 75px; transform: rotate(-25deg); }
+      20% { top: 48px; left: 90px; transform: rotate(-20deg); }
+      30% { top: 55px; left: 105px; transform: rotate(-15deg); }
+      40% { top: 50px; left: 120px; transform: rotate(-10deg); }
+      50% { top: 45px; left: 135px; transform: rotate(-5deg); }
+      60% { top: 55px; left: 150px; transform: rotate(0deg); }
+      70% { top: 48px; left: 165px; transform: rotate(5deg); }
+      80% { top: 52px; left: 180px; transform: rotate(10deg); }
+      90% { top: 48px; left: 195px; transform: rotate(15deg); }
+      100% { top: 50px; left: 210px; transform: rotate(20deg); }
+    }
+    @keyframes textWrite {
+      0% { background-size: 0% 100%; }
+      100% { background-size: 100% 100%; }
+    }
+    @keyframes penFadeOut { to { opacity: 0; } }
+    @keyframes fadePulse { 0%,100% { opacity:0.7; } 50% { opacity:1; } }
+
+    /* ========== 主页核心样式 ========== */
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.25;
+      z-index: -1;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(245,241,235,0.8), rgba(245,241,235,0.95));
+      z-index: -1;
+    }
+
+    .card-art {
+      transition: all 0.4s ease;
+      border: 1px solid rgba(184, 180, 172, 0.3);
+      background: rgba(255, 253, 248, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 8px 32px var(--gradient-1);
+      background-image: radial-gradient(var(--gradient-2) 0%, transparent 70%);
+    }
+    .card-art:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px var(--gradient-1);
+      background-image: radial-gradient(var(--gradient-3) 0%, transparent 70%);
+    }
+
+    .scroll-container {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 1rem 0 2rem 0;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .scroll-container::-webkit-scrollbar { display: none; }
+    .scroll-content {
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+      padding: 0 1rem;
+    }
+    .scroll-item { flex: 0 0 320px; min-height: 400px; }
+    .scroll-item-lg { flex: 0 0 600px; min-height: 400px; }
+
+    /* ========== 按钮/导航通用样式（兼容两套页面） ========== */
+    .btn-base {
+      border: 1px solid rgba(184, 180, 172, 0.5);
+      background: rgba(255, 253, 248, 0.7);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      color: var(--oil-dark);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 4px 16px var(--gradient-1);
+    }
+    .btn-base:hover {
+      background: linear-gradient(145deg, rgba(184, 180, 172, 0.8), rgba(245,241,235, 0.8));
+      color: var(--oil-gold-dark);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 24px var(--gradient-1);
+    }
+    .btn-base:active {
+      transform: translateY(0) scale(0.98);
+      box-shadow: 0 2px 8px var(--gradient-1);
+    }
+    .btn-base::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+      transform: rotate(30deg);
+      animation: shine 3s infinite linear;
+      opacity: 0;
+    }
+    .btn-base:hover::after { opacity: 1; }
+    @keyframes shine { 0% { transform: rotate(30deg) translateX(-100%); } 100% { transform: rotate(30deg) translateX(100%); } }
+
+    .nav-bar {
+      background: rgba(245, 241, 235, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(184, 180, 172, 0.2);
+    }
+    .nav-link {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: -2px;
+      left: 0;
+      background-color: var(--oil-gold-dark);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover { color: var(--oil-gold-dark); }
+    .nav-link:hover::after { width: 100%; }
+
+    .project-link {
+      position: relative;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .project-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: -1px;
+      left: 0;
+      background-color: var(--oil-gold-dark);
+      transition: width 0.3s ease;
+    }
+    .project-link:hover {
+      color: var(--oil-gold-dark);
+      transform: translateX(3px);
+    }
+    .project-link:hover::after { width: 100%; }
+
+    .info-card {
+      background: rgba(255, 253, 248, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(184, 180, 172, 0.3);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 8px 32px var(--gradient-1);
+    }
+
+    /* ========== 详情页通用样式 ========== */
+    .detail-header {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 2rem 0;
+    }
+    .detail-title {
+      color: var(--sargent-brown);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .detail-desc {
+      color: var(--sargent-dark);
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+    .location-card {
+      background: rgba(255, 253, 248, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(184, 180, 172, 0.3);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 8px 32px var(--gradient-1);
+      margin-bottom: 1.5rem;
+    }
+    .location-title {
+      color: var(--sargent-brown);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body class="text-[#1e2429]">
+  <!-- ========== 开屏动画层（全局） ========== -->
+  <div class="splash-screen" id="splashScreen">
+    <div class="handwriting-container">
+      <i class="fa fa-pencil pen-icon" aria-hidden="true"></i>
+      <div class="handwriting-text">Vickywan</div>
+    </div>
+    <div class="loading-text">Sailing my ship...</div>
+  </div>
+
+  <!-- ========== 主页容器（默认激活） ========== -->
+  <div class="page-container active" id="homePage">
+    <!-- 导航栏 -->
+    <header class="sticky top-0 nav-bar z-50 px-4 py-4">
+      <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <div class="text-xl font-semibold text-[#8b7355]">
+          <span class="en">Vickywan</span>
+          <span class="cn hidden">你的名字</span>
+        </div>
+        <div class="flex items-center gap-6">
+          <nav class="hidden md:flex gap-8 text-sm">
+            <a href="#hero" class="nav-link main-nav"><span class="en">Home</span><span class="cn hidden">首页</span></a>
+            <a href="#experience" class="nav-link main-nav"><span class="en">Experience</span><span class="cn hidden">个人经历</span></a>
+            <a href="#projects" class="nav-link main-nav"><span class="en">Projects</span><span class="cn hidden">精选项目</span></a>
+            <a href="#advantages" class="nav-link main-nav"><span class="en">Strengths</span><span class="cn hidden">个人优势</span></a>
+          </nav>
+          <button id="langToggle" class="btn-base px-3 py-1 rounded-md text-sm">中文 / English</button>
+          <a href="#contact" class="btn-base px-4 py-1 rounded-md text-sm main-nav">
+            <span class="en">Contact Me</span><span class="cn hidden">联系我</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 1. 全屏首页Hero -->
+    <section id="hero" class="h-screen relative flex flex-col">
+      <video class="hero-video" autoplay loop muted playsinline>
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-water-21764-large.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="flex-1 flex flex-col justify-center items-center text-center px-6">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 text-[#8b7355] leading-tight">
+          <span class="en">Storytelling with<br>Words & Images</span>
+          <span class="cn hidden text-3xl md:text-5xl">用文字与影像<br>讲述真实故事</span>
+        </h1>
+        <p class="text-lg md:text-xl text-[#1e2429]/80 max-w-2xl mb-8">
+          <span class="en">Journalism · Photography · Filmmaking</span>
+          <span class="cn hidden">新闻报道 · 摄影创作 · 影像制作</span>
+        </p>
+        <a href="#projects" class="btn-base px-8 py-3 rounded-md text-base font-medium">
+          <span class="en">View My Works</span><span class="cn hidden">查看我的作品</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 2. 个人经历模块 -->
+    <section id="experience" class="max-w-6xl mx-auto px-4 py-20">
+      <h2 class="text-2xl md:text-3xl font-bold mb-12 text-center text-[#8b7355]">
+        <span class="en">Personal Experience</span>
+        <span class="cn hidden">个人经历</span>
+      </h2>
+      <div class="grid md:grid-cols-3 gap-8 items-center">
+        <div class="text-center">
+          <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-[#b8b4ac]/50 mx-auto mb-4">
+            <img src="https://picsum.photos/id/64/400/400" alt="Portrait" class="w-full h-full object-cover">
+          </div>
+          <h3 class="font-bold text-lg text-[#8b7355]">
+            <span class="en">Vickywan</span>
+            <span class="cn hidden">你的名字</span>
+          </h3>
+        </div>
+        <div class="md:col-span-2">
+          <p class="text-[#1e2429]/90 mb-6 leading-relaxed">
+            <span class="en">With 5+ years of experience in in-depth news reporting, documentary photography and short film production, I have published 80+ news articles, completed 20+ photography series, and produced 15+ short films. Focus on recording social reality and expressing humanistic care through professional and artistic methods.</span>
+            <span class="cn hidden">拥有5年+深度新闻报道、纪实摄影与短片制作经验，累计刊发80+篇新闻稿件，完成20+组摄影系列作品，制作15+部短片。专注以专业且艺术的方式记录社会现实，表达人文关怀。</span>
+          </p>
+          <div class="grid grid-cols-3 gap-4 mb-6">
+            <div class="text-center p-4 info-card">
+              <div class="text-2xl font-bold text-[#8b7355]">28</div>
+              <div class="text-sm"><span class="en">Age</span><span class="cn hidden">年龄</span></div>
+            </div>
+            <div class="text-center p-4 info-card">
+              <div class="text-2xl font-bold text-[#8b7355]">HK</div>
+              <div class="text-sm"><span class="en">Location</span><span class="cn hidden">所在地</span></div>
+            </div>
+            <div class="text-center p-4 info-card">
+              <div class="text-2xl font-bold text-[#8b7355]">MA</div>
+              <div class="text-sm"><span class="en">Education</span><span class="cn hidden">学历</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 精选项目模块（点击跳转到对应详情页） -->
+    <section id="projects" class="max-w-6xl mx-auto px-4 py-20 bg-[#f5f1eb]/50">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center text-[#8b7355]">
+        <span class="en">Featured Projects</span>
+        <span class="cn hidden">精选项目</span>
+      </h2>
+      <p class="text-center text-[#1e2429]/70 mb-8">
+        <span class="en">Scroll horizontally to explore more works</span>
+        <span class="cn hidden">横向滑动查看更多作品</span>
+      </p>
+      
+      <div class="scroll-container mb-12">
+        <div class="scroll-content">
+          <!-- 项目1（新闻报道）- 点击跳转到详情页 -->
+          <div class="card-art rounded-xl overflow-hidden scroll-item">
+            <img src="https://picsum.photos/id/328/800/500" alt="News Project" class="w-full h-60 object-cover">
+            <div class="p-6">
+              <h3 class="font-bold text-xl mb-2 text-[#8b7355]">
+                <span class="en">In-depth News: Urban Life</span>
+                <span class="cn hidden">深度报道：城市生活实录</span>
+              </h3>
+              <p class="text-[#1e2429]/80 mb-4">
+                <span class="en">A 3-month in-depth investigation on the living conditions of urban grassroots groups, published in core media.</span>
+                <span class="cn hidden">历时3个月的城市草根群体生存状态深度调查，刊发于核心媒体平台。</span>
+              </p>
+              <div onclick="switchPage('newsPage')" class="project-link text-[#8b7355] flex items-center gap-1 cursor-pointer">
+                <span class="en">View Details</span><span class="cn hidden">查看详情</span>
+                <i class="fa fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- 项目2（摄影）- 点击跳转到详情页 -->
+          <div class="card-art rounded-xl overflow-hidden scroll-item">
+            <img src="https://picsum.photos/id/1050/800/500" alt="Photo Project" class="w-full h-60 object-cover">
+            <div class="p-6">
+              <h3 class="font-bold text-xl mb-2 text-[#8b7355]">
+                <span class="en">Photo Series: Rural Memory</span>
+                <span class="cn hidden">摄影系列：乡村记忆</span>
+              </h3>
+              <p class="text-[#1e2429]/80 mb-4">
+                <span class="en">A documentary photography series recording the changes of rural areas in southern China, with 50+ works.</span>
+                <span class="cn hidden">记录中国南方乡村变迁的纪实摄影系列，包含50+幅作品。</span>
+              </p>
+              <div onclick="switchPage('photoPage')" class="project-link text-[#8b7355] flex items-center gap-1 cursor-pointer">
+                <span class="en">View Photo Series</span><span class="cn hidden">查看摄影系列</span>
+                <i class="fa fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- 项目3（影片）- 点击跳转到详情页 -->
+          <div class="card-art rounded-xl overflow-hidden scroll-item-lg">
+            <img src="https://picsum.photos/id/431/1200/400" alt="Film Project" class="w-full h-60 object-cover">
+            <div class="p-6">
+              <h3 class="font-bold text-xl mb-2 text-[#8b7355]">
+                <span class="en">Short Film: The River</span>
+                <span class="cn hidden">短片作品：河流</span>
+              </h3>
+              <p class="text-[#1e2429]/80 mb-4 max-w-3xl">
+                <span class="en">A 15-minute documentary short film about the ecological protection of urban rivers, selected into 3 film festivals.</span>
+                <span class="cn hidden">15分钟城市河流生态保护纪实短片，入选3个专业影展。</span>
+              </p>
+              <div onclick="switchPage('filmPage')" class="project-link text-[#8b7355] flex items-center gap-1 cursor-pointer">
+                <span class="en">View Details</span><span class="cn hidden">查看详情</span>
+                <i class="fa fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 个人优势模块 -->
+    <section id="advantages" class="max-w-6xl mx-auto px-4 py-20">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center text-[#8b7355]">
+        <span class="en">Core Strengths</span>
+        <span class="cn hidden">个人优势</span>
+      </h2>
+      <p class="text-center text-[#1e2429]/70 mb-8">
+        <span class="en">Scroll horizontally to explore more strengths</span>
+        <span class="cn hidden">横向滑动查看更多优势</span>
+      </p>
+      <div class="scroll-container">
+        <div class="scroll-content">
+          <div class="card-art rounded-xl p-6 text-center scroll-item">
+            <div class="w-16 h-16 bg-[#b8b4ac]/30 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fa fa-pencil text-2xl text-[#8b7355]"></i>
+            </div>
+            <h3 class="font-bold text-lg mb-2 text-[#8b7355]">
+              <span class="en">News Writing</span>
+              <span class="cn hidden">新闻写作</span>
+            </h3>
+            <p class="text-sm text-[#1e2429]/80">
+              <span class="en">Proficiency in in-depth feature writing, news interview and text polishing, with strong narrative ability.</span>
+              <span class="cn hidden">精通深度特稿写作、新闻采访与文字打磨，具备极强的叙事能力。</span>
+            </p>
+          </div>
+          <div class="card-art rounded-xl p-6 text-center scroll-item">
+            <div class="w-16 h-16 bg-[#b8b4ac]/30 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fa fa-camera text-2xl text-[#8b7355]"></i>
+            </div>
+            <h3 class="font-bold text-lg mb-2 text-[#8b7355]">
+              <span class="en">Documentary Photography</span>
+              <span class="cn hidden">纪实摄影</span>
+            </h3>
+            <p class="text-sm text-[#1e2429]/80">
+              <span class="en">Skilled in capturing real moments, mastering light and composition, with artistic and professional expression.</span>
+              <span class="cn hidden">擅长捕捉真实瞬间，精通光影与构图，兼具艺术与专业表达。</span>
+            </p>
+          </div>
+          <div class="card-art rounded-xl p-6 text-center scroll-item">
+            <div class="w-16 h-16 bg-[#b8b4ac]/30 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fa fa-video-camera text-2xl text-[#8b7355]"></i>
+            </div>
+            <h3 class="font-bold text-lg mb-2 text-[#8b7355]">
+              <span class="en">Video Production</span>
+              <span class="cn hidden">视频制作</span>
+            </h3>
+            <p class="text-sm text-[#1e2429]/80">
+              <span class="en">Complete video production process: shooting, editing, color grading, with clear story logic.</span>
+              <span class="cn hidden">完整视频制作流程：拍摄、剪辑、调色，故事逻辑清晰。</span>
+            </p>
+          </div>
+          <div class="card-art rounded-xl p-6 text-center scroll-item">
+            <div class="w-16 h-16 bg-[#b8b4ac]/30 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fa fa-globe text-2xl text-[#8b7355]"></i>
+            </div>
+            <h3 class="font-bold text-lg mb-2 text-[#8b7355]">
+              <span class="en">Cross-cultural Communication</span>
+              <span class="cn hidden">跨文化沟通</span>
+            </h3>
+            <p class="text-sm text-[#1e2429]/80">
+              <span class="en">Excellent bilingual communication skills, able to tell Chinese stories to international audiences.</span>
+              <span class="cn hidden">优秀的双语沟通能力，能够向国际受众讲述中国故事。</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 底部联系方式模块 -->
+    <section id="contact" class="bg-[#8b7355]/5 py-20">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-2xl md:text-3xl font-bold mb-6 text-[#8b7355]">
+          <span class="en">Get In Touch</span>
+          <span class="cn hidden">联系我</span>
+        </h2>
+        <p class="text-[#1e2429]/80 mb-8 max-w-2xl mx-auto">
+          <span class="en">I am open to cooperation opportunities, interviews and project collaborations. Feel free to contact me.</span>
+          <span class="cn hidden">我开放合作机会、面试邀约与项目协作，期待与你沟通。</span>
+        </p>
+        <div class="flex flex-col md:flex-row justify-center gap-6 mb-12">
+          <a href="mailto:your-email@example.com" class="btn-base px-8 py-4 rounded-md flex items-center justify-center gap-2 w-full md:w-auto text-base">
+            <i class="fa fa-envelope text-lg"></i>
+            <span class="en">Send Email</span>
+            <span class="cn hidden">发送邮件</span>
+          </a>
+          <a href="weixin://dl/chat?YourWeChatID" class="btn-base px-8 py-4 rounded-md flex items-center justify-center gap-2 w-full md:w-auto text-base">
+            <i class="fa fa-wechat text-lg"></i>
+            <span class="en">Add WeChat</span>
+            <span class="cn hidden">添加微信</span>
+          </a>
+        </div>
+        <div class="text-sm text-[#1e2429]/70">
+          <span class="en">© 2026 Vickywan. All Rights Reserved.</span>
+          <span class="cn hidden">© 2026 你的名字. 保留所有权利。</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========== 新闻报道详情页容器 ========== -->
+  <div class="page-container" id="newsPage">
+    <!-- 导航栏（返回主页） -->
+    <header class="sticky top-0 nav-bar z-40 px-4 py-4">
+      <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <div class="text-xl font-semibold text-[#8a6e54]">
+          <span class="en">Vickywan</span>
+          <span class="cn hidden">你的名字</span>
+        </div>
+        <div class="flex items-center gap-6">
+          <nav class="hidden md:flex gap-8 text-sm">
+            <a onclick="switchPage('homePage')" class="nav-link cursor-pointer"><span class="en">Home</span><span class="cn hidden">首页</span></a>
+            <a onclick="switchPage('homePage')" class="nav-link cursor-pointer"><span class="en">Projects</span><span class="cn hidden">精选项目</span></a>
+          </nav>
+          <button id="langToggleNews" class="btn-base px-3 py-1 rounded-md text-sm">中文 / English</button>
+          <a onclick="switchPage('homePage')" class="btn-base px-4 py-1 rounded-md text-sm">
+            <span class="en">Contact Me</span><span class="cn hidden">联系我</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 页面标题 -->
+    <section class="detail-header px-4">
+      <h1 class="detail-title text-3xl md:text-4xl">
+        <span class="en">In-depth News: Urban Life</span>
+        <span class="cn hidden">深度报道：城市生活实录</span>
+      </h1>
+      <p class="detail-desc text-lg">
+        <span class="en">A 3-month in-depth investigation on the living conditions of urban grassroots groups</span>
+        <span class="cn hidden">历时3个月的城市草根群体生存状态深度调查</span>
+      </p>
+    </section>
+
+    <!-- 新闻详情内容 -->
+    <section class="max-w-6xl mx-auto px-4 py-8">
+      <div class="bg-white/70 backdrop-blur-md rounded-xl p-8 shadow-lg mb-8">
+        <h3 class="text-xl font-bold text-[#8a6e54] mb-4">
+          <span class="en">Project Overview</span>
+          <span class="cn hidden">项目概述</span>
+        </h3>
+        <p class="text-[#4a3f35]/80 mb-6 leading-relaxed">
+          <span class="en">This in-depth news project focuses on the living conditions, challenges and aspirations of urban grassroots groups including delivery riders, street vendors, and community cleaners. Through 50+ interviews and on-site investigations in 8 districts of the city, the project presents a true and comprehensive picture of the survival status of this group.</span>
+          <span class="cn hidden">本次深度报道项目聚焦外卖骑手、街头小贩、社区保洁等城市草根群体的生存状态、面临的挑战与诉求。通过对城市8个行政区的50+人次访谈和实地调研，真实、全面地呈现了该群体的生存现状。</span>
+        </p>
+        <h3 class="text-xl font-bold text-[#8a6e54] mb-4">
+          <span class="en">Key Findings</span>
+          <span class="cn hidden">核心发现</span>
+        </h3>
+        <ul class="list-disc pl-6 text-[#4a3f35]/80 mb-6 space-y-2">
+          <li><span class="en">78% of delivery riders work more than 10 hours a day, with an average monthly income of 5000-8000 RMB</span><span class="cn hidden">78%的外卖骑手日均工作超10小时，月均收入5000-8000元</span></li>
+          <li><span class="en">Street vendors face frequent administrative penalties, but 90% of them have no other source of income</span><span class="cn hidden">街头小贩频繁面临行政处罚，但90%的小贩无其他收入来源</span></li>
+          <li><span class="en">Community cleaners have an average age of 58, with no social security coverage in 65% of cases</span><span class="cn hidden">社区保洁人员平均年龄58岁，65%无社保覆盖</span></li>
+        </ul>
+        <h3 class="text-xl font-bold text-[#8a6e54] mb-4">
+          <span class="en">Publication & Influence</span>
+          <span class="cn hidden">刊发与影响</span>
+        </h3>
+        <p class="text-[#4a3f35]/80 leading-relaxed">
+          <span class="en">The report was published in 3 core media platforms, with a total reading volume of over 1 million, and attracted attention from relevant government departments, which subsequently introduced targeted improvement measures for the rights and interests protection of grassroots groups.</span>
+          <span class="cn hidden">该报道刊发于3家核心媒体平台，总阅读量超100万，引发相关政府部门关注，后续出台了针对草根群体权益保障的专项改进措施。</span>
+        </p>
+      </div>
+
+      <!-- 返回按钮 -->
+      <div class="mt-8 text-center">
+        <button onclick="switchPage('homePage')" class="btn-base px-8 py-3 rounded-md">
+          <i class="fa fa-arrow-left mr-2"></i>
+          <span class="en">Back to Projects</span>
+          <span class="cn hidden">返回项目列表</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 底部版权 -->
+    <footer class="bg-[#8a6e54]/5 py-6 text-center text-sm text-[#4a3f35]/70">
+      <span class="en">© 2026 Vickywan. All Rights Reserved.</span>
+      <span class="cn hidden">© 2026 你的名字. 保留所有权利。</span>
+    </footer>
+  </div>
+
+  <!-- ========== 摄影详情页容器（移除地图，替换为地名板块） ========== -->
+  <div class="page-container" id="photoPage">
+    <!-- 导航栏（返回主页） -->
+    <header class="sticky top-0 nav-bar z-40 px-4 py-4">
+      <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <div class="text-xl font-semibold text-[#8a6e54]">
+          <span class="en">Vickywan</span>
+          <span class="cn hidden">你的名字</span>
+        </div>
+        <div class="flex items-center gap-6">
+          <nav class="hidden md:flex gap-8 text-sm">
+            <a onclick="switchPage('homePage')" class="nav-link cursor-pointer"><span class="en">Home</span><span class="cn hidden">首页</span></a>
+            <a onclick="switchPage('homePage')" class="nav-link cursor-pointer"><span class="en">Projects</span><span class="cn hidden">精选项目</span></a>
+          </nav>
+          <button id="langTogglePhoto" class="btn-base px-3 py-1 rounded-md text-sm">中文 / English</button>
+          <a onclick="switchPage('homePage')" class="btn-base px-4 py-1 rounded-md text-sm">
+            <span class="en">Contact Me</span><span class="cn hidden">联系我</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 页面标题 -->
+    <section class="detail-header px-4">
+      <h1 class="detail-title text-3xl md:text-4xl">
+        <span class="en">Photo Series: Rural Memory</span>
+        <span class="cn hidden">摄影系列：乡村记忆</span>
+      </h1>
+      <p class="detail-desc text-lg">
+        <span class="en">Recording the changes of rural areas in 5 representative cities of China</span>
+        <span class="cn hidden">记录中国5个代表性城市的乡村变迁</span>
+      </p>
+    </section>
+
+    <!-- 地名板块内容 -->
+    <section class="max-w-6xl mx-auto px-4 py-8">
+      <!-- 香港 -->
+      <div class="location-card">
+        <h2 class="location-title text-2xl">香港 · Hong Kong</h2>
+        <p class="text-[#4a3f35]/80">
+          <span class="en">Rural memory photography series in Hong Kong, recording the traditional villages and cultural heritage in the New Territories. This series includes 12 works, focusing on the Hakka villages in the New Territories and the changes of fishing villages in Lantao Island.</span>
+          <span class="cn hidden">香港乡村记忆摄影系列，记录新界地区的传统村落与文化遗产。本系列包含12幅作品，聚焦新界客家村落及大屿山渔村变迁。</span>
+        </p>
+      </div>
+
+      <!-- 青岛 -->
+      <div class="location-card">
+        <h2 class="location-title text-2xl">青岛 · Qingdao</h2>
+        <p class="text-[#4a3f35]/80">
+          <span class="en">Coastal rural culture in Qingdao, focusing on the fishing village culture and marine heritage. 15 works record the changes of fishing villages along the coast of Jiaozhou Bay over the past 10 years.</span>
+          <span class="cn hidden">青岛沿海乡村文化，聚焦渔村文化与海洋遗产。15幅作品记录胶州湾沿岸渔村近10年的变迁。</span>
+        </p>
+      </div>
+
+      <!-- 西安 -->
+      <div class="location-card">
+        <h2 class="location-title text-2xl">西安 · Xi'an</h2>
+        <p class="text-[#4a3f35]/80">
+          <span class="en">Ancient rural culture in the Guanzhong Plain, recording the traditional farming civilization. 10 works show the farming customs and folk culture of the ancient villages in Zhouzhi County.</span>
+          <span class="cn hidden">关中平原古村落文化，记录传统农耕文明。10幅作品展现周至县古村落的农耕习俗与民俗文化。</span>
+        </p>
+      </div>
+
+      <!-- 南京 -->
+      <div class="location-card">
+        <h2 class="location-title text-2xl">南京 · Nanjing</h2>
+        <p class="text-[#4a3f35]/80">
+          <span class="en">Water town culture in southern Jiangsu, focusing on the rural landscape of the Yangtze River Delta. 18 works present the water town style and rural revitalization achievements of Gaochun District.</span>
+          <span class="cn hidden">苏南水乡文化，聚焦长三角乡村风貌。18幅作品呈现高淳区的水乡风貌与乡村振兴成果。</span>
+        </p>
+      </div>
+
+      <!-- 台湾 -->
+      <div class="location-card">
+        <h2 class="location-title text-2xl">台湾 · Taiwan</h2>
+        <p class="text-[#4a3f35]/80">
+          <span class="en">Cross-strait rural cultural exchanges, recording the traditional rural customs of Taiwan. 14 works show the rural style of Tainan and Hualien, reflecting the cultural identity between cross-strait rural areas.</span>
+          <span class="cn hidden">两岸乡村文化交流，记录台湾传统乡村风貌。14幅作品展现台南、花莲的乡村风貌，体现两岸乡村的文化同根性。</span>
+        </p>
+      </div>
+
+      <!-- 返回按钮 -->
+      <div class="mt-8 text-center">
+        <button onclick="switchPage('homePage')" class="btn-base px-8 py-3 rounded-md">
+          <i class="fa fa-arrow-left mr-2"></i>
+          <span class="en">Back to Projects</span>
+          <span class="cn hidden">返回项目列表</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 底部版权 -->
+    <footer class="bg-[#8a6e54]/5 py-6 text-center text-sm text-[#4a3f35]/70">
+      <span class="en">© 2026 Vickywan. All Rights Reserved.</span>
+      <span class="cn hidden">© 2026 你的名字. 保留所有权利。</span>
+    </footer>
+  </div>
+
+  <!-- ========== 短片作品详情页容器 ========== -->
+  <div class="page-container" id="filmPage">
+    <!-- 导航栏（返回主页） -->
+    <header class="sticky top-0 nav-bar z-40 px-4 py-4">
+      <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <div class="text-xl font-semibold text-[#8a6e54]">
+          <span class="en">Vickywan</span>
+          <span class="cn hidden">你的名字</span>
+        </div>
+        <div class="flex items-center gap-6">
+          <nav class="hidden md:flex gap-8 text-sm">
+            <a onclick="switchPage('homePage')" class="nav-link cursor-pointer"><span class="en">Home</span><span class="cn hidden">首页</span></a>
+            <a onclick="switchPage('homePage')" class="nav-link cursor-pointer"><span class="en">Projects</span><span class="cn hidden">精选项目</span></a>
+          </nav>
+          <button id="langToggleFilm" class="btn-base px-3 py-1 rounded-md text-sm">中文 / English</button>
+          <a onclick="switchPage('homePage')" class="btn-base px-4 py-1 rounded-md text-sm">
+            <span class="en">Contact Me</span><span class="cn hidden">联系我</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 页面标题 -->
+    <section class="detail-header px-4">
+      <h1 class="detail-title text-3xl md:text-4xl">
+        <span class="en">Short Film: The River</span>
+        <span class="cn hidden">短片作品：河流</span>
+      </h1>
+      <p class="detail-desc text-lg">
+        <span class="en">A 15-minute documentary short film about the ecological protection of urban rivers</span>
+        <span class="cn hidden">15分钟城市河流生态保护纪实短片</span>
+      </p>
+    </section>
+
+    <!-- 短片详情内容 -->
+    <section class="max-w-6xl mx-auto px-4 py-8">
+      <div class="bg-white/70 backdrop-blur-md rounded-xl p-8 shadow-lg mb-8">
+        <div class="aspect-video rounded-lg overflow-hidden mb-6">
+          <img src="https://picsum.photos/id/431/1200/675" alt="Film Cover" class="w-full h-full object-cover">
+        </div>
+        
+        <h3 class="text-xl font-bold text-[#8a6e54] mb-4">
+          <span class="en">Film Introduction</span>
+          <span class="cn hidden">影片介绍</span>
+        </h3>
+        <p class="text-[#4a3f35]/80 mb-6 leading-relaxed">
+          <span class="en">"The River" is a 15-minute documentary short film that records the ecological restoration process of an urban river over the past 5 years. The film uses a follow-up shooting method to present the changes of the river from a stinking ditch to a clear waterway through the perspectives of environmental protection volunteers, river management personnel and nearby residents.</span>
+          <span class="cn hidden">《河流》是一部15分钟的纪实短片，记录了一条城市河流近5年的生态修复过程。影片采用跟踪拍摄的方式，通过环保志愿者、河道管理人员、周边居民等视角，呈现了这条河流从臭水沟到清水廊道的变迁。</span>
+        </p>
+        
+        <h3 class="text-xl font-bold text-[#8a6e54] mb-4">
+          <span class="en">Production Information</span>
+          <span class="cn hidden">制作信息</span>
+        </h3>
+        <div class="grid md:grid-cols-2 gap-4 mb-6 text-[#4a3f35]/80">
+          <div><strong><span class="en">Duration:</span><span class="cn hidden">时长：</span></strong> 15 minutes 28 seconds</div>
+          <div><strong><span class="en">Shooting Period:</span><span class="cn hidden">拍摄周期：</span></strong> 8 months (2022-2023)</div>
+          <div><strong><span class="en">Shooting Equipment:</span><span class="cn hidden">拍摄设备：</span></strong> Sony FX3 + DJI Air 2S</div>
+          <div><strong><span class="en">Post-production:</span><span class="cn hidden">后期制作：</span></strong> Adobe Premiere Pro + DaVinci Resolve</div>
+        </div>
+        
+        <h3 class="text-xl font-bold text-[#8a6e54] mb-4">
+          <span class="en">Awards & Selections</span>
+          <span class="cn hidden">获奖与入选</span>
+        </h3>
+        <ul class="list-disc pl-6 text-[#4a3f35]/80 mb-6 space-y-2">
+          <li><span class="en">Selected into the 12th China Documentary Short Film Festival</span><span class="cn hidden">入选第12届中国纪实短片节</span></li>
+          <li><span class="en">Won the Excellent Work Award at the Urban Ecology Film Festival</span><span class="cn hidden">获城市生态电影节优秀作品奖</span></li>
+          <li><span class="en">Shortlisted for the Environmental Protection Category of the Asian Short Film Awards</span><span class="cn hidden">入围亚洲短片奖环保单元</span></li>
+        </ul>
+      </div>
+
+      <!-- 返回按钮 -->
+      <div class="mt-8 text-center">
+        <button onclick="switchPage('homePage')" class="btn-base px-8 py-3 rounded-md">
+          <i class="fa fa-arrow-left mr-2"></i>
+          <span class="en">Back to Projects</span>
+          <span class="cn hidden">返回项目列表</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 底部版权 -->
+    <footer class="bg-[#8a6e54]/5 py-6 text-center text-sm text-[#4a3f35]/70">
+      <span class="en">© 2026 Vickywan. All Rights Reserved.</span>
+      <span class="cn hidden">© 2026 你的名字. 保留所有权利。</span>
+    </footer>
+  </div>
+
+  <!-- ========== 全局交互脚本 ========== -->
+  <script>
+    // 1. 开屏动画逻辑
+    const splashScreen = document.getElementById('splashScreen');
+    setTimeout(() => {
+      splashScreen.classList.add('splash-hidden');
+    }, 2300); 
+
+    // 2. 页面切换核心函数（隐藏所有页面，显示目标页面）
+    function switchPage(targetPageId) {
+      // 隐藏所有页面容器
+      const allPages = document.querySelectorAll('.page-container');
+      allPages.forEach(page => page.classList.remove('active'));
+      // 显示目标页面
+      document.getElementById(targetPageId).classList.add('active');
+      // 页面切换后滚动到顶部
+      window.scrollTo(0, 0);
+    }
+
+    // 3. 双语切换逻辑（统一处理所有切换按钮）
+    const langToggleMain = document.getElementById('langToggle');
+    const langToggleNews = document.getElementById('langToggleNews');
+    const langTogglePhoto = document.getElementById('langTogglePhoto');
+    const langToggleFilm = document.getElementById('langToggleFilm');
+    const enElements = document.querySelectorAll('.en');
+    const cnElements = document.querySelectorAll('.cn');
+    let isEn = true;
+
+    // 统一的切换函数
+    function toggleLanguage() {
+      isEn = !isEn;
+      if (isEn) {
+        document.documentElement.lang = 'en';
+        enElements.forEach(el => el.classList.remove('hidden'));
+        cnElements.forEach(el => el.classList.add('hidden'));
+      } else {
+        document.documentElement.lang = 'zh-CN';
+        enElements.forEach(el => el.classList.add('hidden'));
+        cnElements.forEach(el => el.classList.remove('hidden'));
+      }
+    }
+
+    // 绑定所有语言切换按钮
+    [langToggleMain, langToggleNews, langTogglePhoto, langToggleFilm].forEach(btn => {
+      if (btn) btn.addEventListener('click', toggleLanguage);
+    });
+
+    // 4. 主页导航滚动逻辑
+    const mainNavLinks = document.querySelectorAll('.main-nav');
+    mainNavLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
