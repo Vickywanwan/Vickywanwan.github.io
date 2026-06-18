@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio | 新闻视觉创作</title>
+
+  <!-- 预连接字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Playfair+Display:wght@500;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Playfair+Display:wght@500;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+
   <style>
-    /* ========== 全局核心样式（整合两套配色，统一油画风格） ========== */
+    /* ============================================================
+       全局变量 & 基础
+       ============================================================ */
     :root {
-      /* 油画主配色 */
       --oil-blue: #2c3e50;
       --oil-purple: #4a4367;
       --oil-ivory: #f5f1eb;
@@ -18,43 +25,132 @@
       --oil-dark: #1e2429;
       --oil-gold: #d4b98c;
       --oil-gold-dark: #8b7355;
-      /* 摄影详情页配色（兼容） */
       --sargent-brown: #8a6e54;
       --sargent-ivory: #f8f4ed;
       --sargent-gray: #d9d2c8;
       --sargent-dark: #4a3f35;
-      /* 通用渐变/阴影 */
       --black-soft: #1a1a1a;
       --gradient-1: rgba(44, 62, 80, 0.15);
       --gradient-2: rgba(184, 180, 172, 0.2);
       --gradient-3: rgba(212, 185, 140, 0.1);
     }
 
-    /* 页面容器：默认隐藏，通过active控制显示 */
+    /* ============================================================
+       背景层（独立固定定位，极轻微模糊 + 缩放）
+       ============================================================ */
+    #bgLayer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image: url("https://www.imgfox.cn/apis/uploads/20260616/446d44bec8cf4489/Caspar_David_Friedrich's_Chalk_Cliffs_on_Rügen.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(2px);
+      transform: scale(1.02);
+      will-change: transform;
+    }
+
+    /* ============================================================
+       News 专属背景层
+       ============================================================ */
+    #newsBgLayer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image: url("https://www.imgfox.cn/apis/uploads/20260617/852c438ecc214663/%E7%AA%97%E8%BE%B9%E5%86%99%E4%BD%9C_2_%E6%A2%A6%E8%8E%B2%E6%B9%96%E5%B0%8F%E8%88%B9_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(2px);
+      transform: scale(1.02);
+      will-change: transform;
+      display: none;
+    }
+
+    /* ============================================================
+       Photo 专属背景层
+       ============================================================ */
+    #photoBgLayer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image: url("https://www.imgfox.cn/apis/uploads/20260617/a197c06ee6304016/%E5%A5%A5%E8%8F%B2%E8%8E%89%E4%BA%9A.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(2px);
+      transform: scale(1.02);
+      will-change: transform;
+      display: none;
+    }
+
+    /* ============================================================
+       Film 专属背景层
+       ============================================================ */
+    #filmBgLayer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image: url("https://www.imgfox.cn/apis/uploads/20260617/08652f12cf4d463e/G0uzcarXoAAkU64.jpeg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(2px);
+      transform: scale(1.02);
+      will-change: transform;
+      display: none;
+    }
+
+    /* ============================================================
+       全局基础样式
+       ============================================================ */
+    * {
+      box-sizing: border-box;
+    }
+
     .page-container {
       display: none;
       width: 100%;
       min-height: 100vh;
+      background: rgba(255, 253, 248, 0.35);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
     }
     .page-container.active {
       display: block;
     }
 
     body {
-      background: var(--oil-ivory);
-      /* 替换为新的油画背景图 - 已更新URL */
-      background-image: url("https://www.imgfox.cn/apis/uploads/20260616/446d44bec8cf4489/Caspar_David_Friedrich's_Chalk_Cliffs_on_Rügen.jpg");
-      background-size: cover;
-      background-attachment: fixed;
-      background-position: center center; /* 居中显示背景图 */
-      background-color: rgba(245, 241, 235, 0.92);
-      background-blend-mode: overlay;
+      margin: 0;
+      padding: 0;
+      background: transparent;
       font-family: 'Playfair Display', 'Noto Serif SC', serif;
       scroll-behavior: smooth;
-      cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path fill='%238b7355' d='M22 10c0-1.5-1.1-2.7-2.5-2.9l-6-1.3c-.6-.1-1.1.3-1.3.9l-2 6c-.2 1.4 1 2.5 2.5 2.5h6c.8 0 1.5-.6 1.7-1.4l1-5c.1-.7-.4-1.3-1-1.5zM7 18c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z'/></svg>"), auto;
+      cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'><g transform='rotate(40,12,12)'><path fill='%238b7355' d='M22 10c0-1.5-1.1-2.7-2.5-2.9l-6-1.3c-.6-.1-1.1.3-1.3.9l-2 6c-.2 1.4 1 2.5 2.5 2.5h6c.8 0 1.5-.6 1.7-1.4l1-5c.1-.7-.4-1.3-1-1.5zM7 18c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z'/></g></svg>") 12 12, auto;
     }
 
-    /* ========== 开屏动画样式 ========== */
+    a, button, .btn-base, .nav-link, .project-link, .lang-btn,
+    .card-art, [data-target], .scroll-item, .scroll-item-lg,
+    .cursor-pointer, .skill-card {
+      cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'><g transform='rotate(40,12,12)'><path fill='%238b7355' d='M22 10c0-1.5-1.1-2.7-2.5-2.9l-6-1.3c-.6-.1-1.1.3-1.3.9l-2 6c-.2 1.4 1 2.5 2.5 2.5h6c.8 0 1.5-.6 1.7-1.4l1-5c.1-.7-.4-1.3-1-1.5zM7 18c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z'/></g></svg>") 12 12, auto !important;
+    }
+
+    /* ============================================================
+       开屏动画（3秒）
+       ============================================================ */
     .splash-screen {
       position: fixed;
       top: 0;
@@ -67,7 +163,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      transition: opacity 0.5s ease-out;
+      transition: opacity 0.6s ease-out;
     }
     .splash-hidden {
       opacity: 0;
@@ -93,7 +189,7 @@
       background-size: 0% 100%;
       background-repeat: no-repeat;
       color: transparent;
-      animation: textWrite 2s ease-in-out forwards;
+      animation: textWrite 2.4s ease-in-out forwards;
       z-index: 5;
     }
     .pen-icon {
@@ -102,7 +198,7 @@
       font-size: 24px;
       opacity: 1;
       transform: rotate(-30deg);
-      animation: penWrite 2s ease-in-out forwards, penFadeOut 0.3s ease-in-out 1.8s forwards;
+      animation: penWrite 2.4s ease-in-out forwards, penFadeOut 0.3s ease-in-out 2.2s forwards;
       z-index: 10;
     }
     .loading-text {
@@ -112,7 +208,6 @@
       margin-top: 10px;
       animation: fadePulse 2s ease-in-out infinite;
     }
-
     @keyframes penWrite {
       0% { top: 45px; left: 60px; transform: rotate(-30deg); }
       10% { top: 50px; left: 75px; transform: rotate(-25deg); }
@@ -126,14 +221,13 @@
       90% { top: 48px; left: 195px; transform: rotate(15deg); }
       100% { top: 50px; left: 210px; transform: rotate(20deg); }
     }
-    @keyframes textWrite {
-      0% { background-size: 0% 100%; }
-      100% { background-size: 100% 100%; }
-    }
+    @keyframes textWrite { 0% { background-size: 0% 100%; } 100% { background-size: 100% 100%; } }
     @keyframes penFadeOut { to { opacity: 0; } }
     @keyframes fadePulse { 0%,100% { opacity:0.7; } 50% { opacity:1; } }
 
-    /* ========== 主页核心样式 ========== */
+    /* ============================================================
+       主页组件
+       ============================================================ */
     .hero-video {
       position: absolute;
       top: 0;
@@ -141,7 +235,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.25;
+      opacity: 0.15;
       z-index: -1;
     }
     .hero-overlay {
@@ -150,16 +244,16 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to bottom, rgba(245,241,235,0.8), rgba(245,241,235,0.95));
+      background: linear-gradient(to bottom, rgba(255, 253, 248, 0.6), rgba(255, 253, 248, 0.75));
       z-index: -1;
     }
 
     .card-art {
       transition: all 0.4s ease;
       border: 1px solid rgba(184, 180, 172, 0.3);
-      background: rgba(255, 253, 248, 0.6);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255, 253, 248, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       box-shadow: 0 8px 32px var(--gradient-1);
       background-image: radial-gradient(var(--gradient-2) 0%, transparent 70%);
     }
@@ -167,6 +261,7 @@
       transform: translateY(-6px);
       box-shadow: 0 16px 48px var(--gradient-1);
       background-image: radial-gradient(var(--gradient-3) 0%, transparent 70%);
+      background: rgba(255, 253, 248, 0.85);
     }
 
     .scroll-container {
@@ -176,6 +271,7 @@
       padding: 1rem 0 2rem 0;
       -ms-overflow-style: none;
       scrollbar-width: none;
+      position: relative;
     }
     .scroll-container::-webkit-scrollbar { display: none; }
     .scroll-content {
@@ -183,24 +279,29 @@
       gap: 2rem;
       width: max-content;
       padding: 0 1rem;
+      will-change: transform;
+      transition: none;
     }
     .scroll-item { flex: 0 0 320px; min-height: 400px; }
     .scroll-item-lg { flex: 0 0 600px; min-height: 400px; }
 
-    /* ========== 按钮/导航通用样式（兼容两套页面） ========== */
+    /* ============================================================
+       按钮 / 导航通用
+       ============================================================ */
     .btn-base {
       border: 1px solid rgba(184, 180, 172, 0.5);
-      background: rgba(255, 253, 248, 0.7);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      background: rgba(255, 253, 248, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       color: var(--oil-dark);
       position: relative;
       overflow: hidden;
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       box-shadow: 0 4px 16px var(--gradient-1);
+      cursor: pointer;
     }
     .btn-base:hover {
-      background: linear-gradient(145deg, rgba(184, 180, 172, 0.8), rgba(245,241,235, 0.8));
+      background: linear-gradient(145deg, rgba(184, 180, 172, 0.8), rgba(245, 241, 235, 0.9));
       color: var(--oil-gold-dark);
       transform: translateY(-2px) scale(1.03);
       box-shadow: 0 8px 24px var(--gradient-1);
@@ -216,7 +317,7 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
       transform: rotate(30deg);
       animation: shine 3s infinite linear;
       opacity: 0;
@@ -224,30 +325,40 @@
     .btn-base:hover::after { opacity: 1; }
     @keyframes shine { 0% { transform: rotate(30deg) translateX(-100%); } 100% { transform: rotate(30deg) translateX(100%); } }
 
-    /* ========== 新导航栏样式 - 核心修改部分 ========== */
+    .btn-base:focus-visible,
+    .nav-link:focus-visible,
+    .lang-btn:focus-visible {
+      outline: 2px solid var(--oil-gold-dark);
+      outline-offset: 2px;
+    }
+
+    /* ============================================================
+       导航栏
+       ============================================================ */
     .nav-bar {
-      background: rgba(245, 241, 235, 0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: none; /* 移除底部边框 */
-      padding: 1.5rem 0; /* 调整内边距 */
+      background: rgba(245, 241, 235, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: none;
+      padding: 1.5rem 0;
     }
     .nav-container {
-      max-width: 6xl;
+      max-width: 1280px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 2rem;
     }
-    /* 隐藏原有的logo部分 */
     .nav-logo {
-      display: none;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--oil-gold-dark);
     }
-    /* 主导航菜单样式 */
-    .main-nav-menu {
+    .main-nav-menu,
+    .back-nav-menu {
       display: flex;
-      gap: 2.5rem; /* 调整菜单项间距 */
+      gap: 2.5rem;
       align-items: center;
     }
     .nav-link {
@@ -256,9 +367,9 @@
       color: var(--oil-dark);
       font-size: 1rem;
       font-weight: 500;
-      padding-bottom: 0.3rem; /* 增加底部内边距 */
+      padding-bottom: 0.3rem;
+      cursor: pointer;
     }
-    /* 激活状态的下划线（HOME） */
     .nav-link.active-nav {
       color: var(--oil-gold-dark);
     }
@@ -271,7 +382,6 @@
       left: 0;
       background-color: var(--oil-gold-dark);
     }
-    /* 悬停下划线效果 */
     .nav-link::after {
       content: '';
       position: absolute;
@@ -282,31 +392,26 @@
       background-color: var(--oil-gold-dark);
       transition: width 0.3s ease;
     }
-    .nav-link:hover { 
-      color: var(--oil-gold-dark); 
+    .nav-link:hover {
+      color: var(--oil-gold-dark);
     }
-    .nav-link:hover::after { 
-      width: 100%; 
+    .nav-link:hover::after {
+      width: 100%;
     }
-    /* 语言切换按钮样式 - 改为椭圆形金边 */
+
     .lang-btn {
       border: 1px solid var(--oil-gold-dark);
       background: transparent;
       color: var(--oil-gold-dark);
-      border-radius: 9999px; /* 全圆角 */
+      border-radius: 9999px;
       padding: 0.4rem 1.2rem;
       font-size: 0.9rem;
       transition: all 0.3s ease;
+      cursor: pointer;
     }
     .lang-btn:hover {
-      background: rgba(139, 115, 85, 0.1);
+      background: rgba(139, 115, 85, 0.15);
       transform: translateY(-1px);
-    }
-    /* 详情页返回导航样式适配 */
-    .back-nav-menu {
-      display: flex;
-      gap: 2.5rem;
-      align-items: center;
     }
 
     .project-link {
@@ -331,16 +436,18 @@
     .project-link:hover::after { width: 100%; }
 
     .info-card {
-      background: rgba(255, 253, 248, 0.7);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255, 253, 248, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(184, 180, 172, 0.3);
       border-radius: 1rem;
       padding: 1.5rem;
       box-shadow: 0 8px 32px var(--gradient-1);
     }
 
-    /* ========== 详情页通用样式 ========== */
+    /* ============================================================
+       详情页通用
+       ============================================================ */
     .detail-header {
       max-width: 800px;
       margin: 0 auto;
@@ -358,9 +465,9 @@
       line-height: 1.6;
     }
     .location-card {
-      background: rgba(255, 253, 248, 0.7);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255, 253, 248, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(184, 180, 172, 0.3);
       border-radius: 1rem;
       padding: 1.5rem;
@@ -372,39 +479,512 @@
       font-weight: 600;
       margin-bottom: 0.5rem;
     }
+    .detail-content-card {
+      background: rgba(255, 253, 248, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(184, 180, 172, 0.3);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 8px 32px var(--gradient-1);
+    }
+
+    /* ============================================================
+       作品集卡片网格（详情页）
+       ============================================================ */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .portfolio-item {
+      background: rgba(255, 253, 248, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(184, 180, 172, 0.25);
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      box-shadow: 0 4px 16px var(--gradient-1);
+    }
+    .portfolio-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px var(--gradient-1);
+      background: rgba(255, 253, 248, 0.9);
+    }
+    .portfolio-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+    .portfolio-item-body {
+      padding: 1rem 1.2rem 1.2rem;
+    }
+    .portfolio-item-body h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--sargent-brown);
+      margin-bottom: 0.3rem;
+    }
+    .portfolio-item-body p {
+      font-size: 0.85rem;
+      color: var(--sargent-dark);
+      opacity: 0.8;
+      margin-bottom: 0.3rem;
+      line-height: 1.4;
+    }
+    .portfolio-item-body .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(139, 115, 85, 0.15);
+      color: var(--oil-gold-dark);
+      letter-spacing: 0.02em;
+    }
+
+    /* Podcast 详情页专用：只保留两列 */
+    #podcastPage .portfolio-grid {
+      grid-template-columns: 1fr 1fr;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      #podcastPage .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .portfolio-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 640px) {
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+      .portfolio-item img {
+        height: 150px;
+      }
+    }
+
+    /* ============================================================
+       News 详情页专用样式 — 三大板块
+       ============================================================ */
+    .news-section {
+      margin-bottom: 2.5rem;
+    }
+    .news-section:last-of-type {
+      margin-bottom: 0;
+    }
+    .section-headline {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--sargent-brown);
+      letter-spacing: 0.04em;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(139, 115, 85, 0.2);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section-headline .line {
+      flex: 1;
+      height: 1px;
+      background: rgba(139, 115, 85, 0.15);
+    }
+    .news-article-item {
+      display: flex;
+      gap: 1rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(184, 180, 172, 0.15);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .news-article-item:last-of-type {
+      border-bottom: none;
+    }
+    .news-article-item:hover {
+      background: rgba(139, 115, 85, 0.04);
+      margin: 0 -0.5rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      border-radius: 0.5rem;
+    }
+    .news-article-thumb {
+      flex-shrink: 0;
+      width: 100px;
+      height: 70px;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      background: rgba(184, 180, 172, 0.2);
+    }
+    .news-article-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .news-article-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .news-article-content h5 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--oil-dark);
+      margin-bottom: 0.15rem;
+      line-height: 1.3;
+      transition: color 0.2s ease;
+    }
+    .news-article-item:hover .news-article-content h5 {
+      color: var(--oil-gold-dark);
+    }
+    .news-article-content .excerpt {
+      font-size: 0.8rem;
+      color: var(--oil-dark);
+      opacity: 0.65;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .news-article-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 0.25rem;
+      font-size: 0.7rem;
+      color: var(--oil-dark);
+      opacity: 0.5;
+    }
+    .news-article-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+    .news-article-meta i {
+      font-size: 0.6rem;
+    }
+
+    /* ============================================================
+       文章详细页样式
+       ============================================================ */
+    .article-full {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .article-full h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--sargent-brown);
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+    .article-full .byline {
+      font-size: 0.9rem;
+      color: var(--sargent-dark);
+      opacity: 0.7;
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .article-full .body-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--oil-dark);
+    }
+    .article-full .body-text p {
+      margin-bottom: 1.2rem;
+    }
+    .article-full .body-text blockquote {
+      border-left: 3px solid var(--oil-gold-dark);
+      padding-left: 1.2rem;
+      margin: 1.2rem 0;
+      font-style: italic;
+      color: var(--sargent-dark);
+      opacity: 0.9;
+    }
+    .article-full .body-text blockquote p {
+      margin-bottom: 0;
+    }
+    .article-full .featured-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .article-full h1 {
+        font-size: 1.5rem;
+      }
+      .article-full .byline {
+        font-size: 0.8rem;
+        gap: 1rem;
+      }
+      .article-full .body-text {
+        font-size: 0.92rem;
+      }
+    }
+
+    /* ============================================================
+       Core Strengths — 2x2 全图毛玻璃卡片
+       ============================================================ */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .skill-card {
+      position: relative;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      min-height: 260px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .skill-glass {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      background: rgba(255, 253, 248, 0.15);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      color: #fff;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .skill-glass h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.04em;
+      color: #fff;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+    }
+    .skill-glass p {
+      font-size: 1rem;
+      opacity: 0.92;
+      max-width: 85%;
+      margin: 0;
+      color: #fff;
+      text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .skill-card-1:hover {
+      transform: translateY(-16px) scale(1.04);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+    }
+    .skill-card-1:hover .skill-glass {
+      background: rgba(255, 253, 248, 0.20);
+      backdrop-filter: blur(10px);
+    }
+
+    .skill-card-2:hover {
+      transform: rotate(3deg) scale(1.04);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+    }
+    .skill-card-2:hover .skill-glass {
+      background: rgba(255, 253, 248, 0.20);
+      backdrop-filter: blur(10px);
+    }
+
+    .skill-card-3:hover {
+      transform: perspective(1000px) rotateX(6deg) rotateY(6deg) translateY(-8px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35), 0 0 40px rgba(212, 185, 140, 0.5);
+      border: 1px solid rgba(212, 185, 140, 0.6);
+    }
+    .skill-card-3:hover .skill-glass {
+      background: rgba(255, 253, 248, 0.20);
+      backdrop-filter: blur(10px);
+    }
+
+    .skill-card-4:hover {
+      animation: pulseGlowCard 1.2s ease-in-out infinite;
+      box-shadow: 0 0 40px rgba(139, 115, 85, 0.4);
+    }
+    .skill-card-4:hover .skill-glass {
+      background: rgba(255, 253, 248, 0.22);
+      backdrop-filter: blur(10px);
+    }
+    @keyframes pulseGlowCard {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.04); box-shadow: 0 0 50px rgba(139, 115, 85, 0.5); }
+      100% { transform: scale(1); }
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+      }
+      .skill-card {
+        min-height: 200px;
+      }
+      .skill-glass h3 {
+        font-size: 1.3rem;
+      }
+      .skill-glass p {
+        font-size: 0.9rem;
+      }
+      .skill-card-2:hover {
+        transform: rotate(1.5deg) scale(1.02);
+      }
+      .skill-card-3:hover {
+        transform: perspective(600px) rotateX(3deg) rotateY(3deg) translateY(-4px);
+      }
+    }
+    @media (max-width: 480px) {
+      .page-container {
+        backdrop-filter: blur(1px);
+        -webkit-backdrop-filter: blur(1px);
+        background: rgba(255, 253, 248, 0.45);
+      }
+      .skill-card {
+        min-height: 170px;
+      }
+    }
+
+    /* ============================================================
+       返回顶部按钮
+       ============================================================ */
+    #backToTop {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 100;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 253, 248, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(184, 180, 172, 0.4);
+      box-shadow: 0 4px 20px var(--gradient-1);
+      color: var(--oil-gold-dark);
+      font-size: 1.25rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
+    }
+    #backToTop.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    #backToTop:hover {
+      background: var(--oil-gold);
+      color: #fff;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(139, 115, 85, 0.3);
+    }
   </style>
 </head>
-<body class="text-[#1e2429]">
-  <!-- ========== 开屏动画层（全局） ========== -->
+<body>
+
+  <!-- ============================================================
+       全局背景层
+       ============================================================ -->
+  <div id="bgLayer"></div>
+
+  <!-- ============================================================
+       News 专属背景层
+       ============================================================ -->
+  <div id="newsBgLayer"></div>
+
+  <!-- ============================================================
+       Photo 专属背景层
+       ============================================================ -->
+  <div id="photoBgLayer"></div>
+
+  <!-- ============================================================
+       Film 专属背景层
+       ============================================================ -->
+  <div id="filmBgLayer"></div>
+
+  <!-- ============================================================
+       开屏动画（3秒）
+       ============================================================ -->
   <div class="splash-screen" id="splashScreen">
     <div class="handwriting-container">
       <i class="fa fa-pencil pen-icon" aria-hidden="true"></i>
-      <div class="handwriting-text">Vickywan</div>
+      <div class="handwriting-text">Vicky Sun</div>
     </div>
     <div class="loading-text">Sailing my ship...</div>
   </div>
 
-  <!-- ========== 主页容器（默认激活） ========== -->
+  <!-- ============================================================
+       返回顶部按钮
+       ============================================================ -->
+  <button id="backToTop" aria-label="返回顶部">
+    <i class="fa fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- ============================================================
+       主页容器
+       ============================================================ -->
   <div class="page-container active" id="homePage">
-    <!-- 新样式导航栏 -->
+
+    <!-- 导航栏 -->
     <header class="sticky top-0 nav-bar z-50">
       <div class="nav-container">
-        <!-- 隐藏原logo -->
-        <div class="nav-logo text-xl font-semibold text-[#8b7355]">
+        <div class="nav-logo">
           <span class="en">SUN WANNUO</span>
-          <span class="cn hidden">你的名字</span>
+          <span class="cn hidden">孙婉诺</span>
         </div>
-        
-        <!-- 主导航菜单 -->
         <div class="main-nav-menu hidden md:flex">
-          <a href="#hero" class="nav-link active-nav main-nav"><span class="en">HOME</span><span class="cn hidden">首页</span></a>
-          <a href="#experience" class="nav-link main-nav"><span class="en">ABOUT</span><span class="cn hidden">关于我</span></a>
-          <a href="#projects" class="nav-link main-nav"><span class="en">WORKS</span><span class="cn hidden">作品</span></a>
-          <a href="#advantages" class="nav-link main-nav"><span class="en">SKILLS</span><span class="cn hidden">技能</span></a>
-          <a href="#contact" class="nav-link main-nav"><span class="en">CONTACT</span><span class="cn hidden">联系我</span></a>
+          <a href="#hero" class="nav-link active-nav main-nav">
+            <span class="en">HOME</span><span class="cn hidden">首页</span>
+          </a>
+          <a href="#experience" class="nav-link main-nav">
+            <span class="en">ABOUT</span><span class="cn hidden">关于我</span>
+          </a>
+          <a href="#projects" class="nav-link main-nav">
+            <span class="en">WORKS</span><span class="cn hidden">作品</span>
+          </a>
+          <a href="#advantages" class="nav-link main-nav">
+            <span class="en">SKILLS</span><span class="cn hidden">技能</span>
+          </a>
+          <a href="#contact" class="nav-link main-nav">
+            <span class="en">CONTACT</span><span class="cn hidden">联系我</span>
+          </a>
         </div>
-        
-        <!-- 语言切换按钮（椭圆形金边样式） -->
         <button id="langToggle" class="lang-btn">
           <span class="en">中文</span>
           <span class="cn hidden">English</span>
@@ -412,16 +992,16 @@
       </div>
     </header>
 
-    <!-- 1. 全屏首页Hero -->
+    <!-- Hero -->
     <section id="hero" class="h-screen relative flex flex-col">
-      <video class="hero-video" autoplay loop muted playsinline>
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-water-21764-large.mp4" type="video/mp4">
+      <video class="hero-video" autoplay loop muted playsinline preload="metadata">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-water-21764-large.mp4" type="video/mp4" />
       </video>
       <div class="hero-overlay"></div>
       <div class="flex-1 flex flex-col justify-center items-center text-center px-6">
         <h1 class="text-4xl md:text-6xl font-bold mb-4 text-[#8b7355] leading-tight">
-          <span class="en">Storytelling with<br>Words & Images</span>
-          <span class="cn hidden text-3xl md:text-5xl">用文字与影像<br>讲述真实故事</span>
+          <span class="en">Storytelling with<br />Words &amp; Images</span>
+          <span class="cn hidden text-3xl md:text-5xl">用文字与影像<br />讲述真实故事</span>
         </h1>
         <p class="text-lg md:text-xl text-[#1e2429]/80 max-w-2xl mb-8">
           <span class="en">Journalism · Photography · Filmmaking</span>
@@ -433,20 +1013,24 @@
       </div>
     </section>
 
-    <!-- 2. 个人经历模块 -->
+    <!-- About Me -->
     <section id="experience" class="max-w-6xl mx-auto px-4 py-20">
       <h2 class="text-2xl md:text-3xl font-bold mb-12 text-center text-[#8b7355]">
-        <span class="en">About me</span>
-        <span class="cn hidden">个人经历</span>
+        <span class="en">About Me</span>
+        <span class="cn hidden">关于我</span>
       </h2>
       <div class="grid md:grid-cols-3 gap-8 items-center">
         <div class="text-center">
           <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-[#b8b4ac]/50 mx-auto mb-4">
-            <img src="https://picsum.photos/id/64/400/400" alt="Portrait" class="w-full h-full object-cover">
+            <img src="https://www.imgfox.cn/apis/uploads/20260616/9ee0c5fbca9941c8/hoga%202026-04-08%2019082451172BD3EB6A.JPG"
+                 alt="Portrait"
+                 class="w-full h-full object-cover"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='https://picsum.photos/id/64/400/400';" />
           </div>
           <h3 class="font-bold text-lg text-[#8b7355]">
             <span class="en">SUN WANNUO</span>
-            <span class="cn hidden">你的名字</span>
+            <span class="cn hidden">孙婉诺</span>
           </h3>
         </div>
         <div class="md:col-span-2">
@@ -456,7 +1040,7 @@
           </p>
           <div class="grid grid-cols-3 gap-4 mb-6">
             <div class="text-center p-4 info-card">
-              <div class="text-2xl font-bold text-[#8b7355]">28</div>
+              <div class="text-2xl font-bold text-[#8b7355]">24</div>
               <div class="text-sm"><span class="en">Age</span><span class="cn hidden">年龄</span></div>
             </div>
             <div class="text-center p-4 info-card">
@@ -472,72 +1056,93 @@
       </div>
     </section>
 
-    <!-- 3. 精选项目模块（点击跳转到对应详情页） -->
-    <section id="projects" class="max-w-6xl mx-auto px-4 py-20 bg-[#f5f1eb]/50">
+    <!-- ============================================================
+    Featured Portfolios — 四个作品集合集
+    ============================================================ -->
+    <section id="projects" class="max-w-6xl mx-auto px-4 py-20">
       <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center text-[#8b7355]">
-        <span class="en">Featured Projects</span>
-        <span class="cn hidden">精选项目</span>
+        <span class="en">Featured Portfolios</span>
+        <span class="cn hidden">精选作品集</span>
       </h2>
       <p class="text-center text-[#1e2429]/70 mb-8">
-        <span class="en">Scroll horizontally to explore more works</span>
-        <span class="cn hidden">横向滑动查看更多作品</span>
+        <span class="en">Take chances you never imagined you would</span>
+        <span class="cn hidden">抓住你永远以为自己不会尝试的机会</span>
       </p>
-      
-      <div class="scroll-container mb-12">
-        <div class="scroll-content">
-          <!-- 项目1（新闻报道）- 点击跳转到详情页 -->
-          <div class="card-art rounded-xl overflow-hidden scroll-item">
-            <img src="https://picsum.photos/id/328/800/500" alt="News Project" class="w-full h-60 object-cover">
+
+      <div class="scroll-container" id="scrollContainer">
+        <div class="scroll-content" id="scrollContent">
+          <!-- 卡片1：新闻作品集 -->
+          <div class="card-art rounded-xl overflow-hidden scroll-item cursor-pointer" data-target="newsPage" role="button" tabindex="0">
+            <img src="https://www.imgfox.cn/apis/uploads/20260618/365f0d88997e4a94/生命之旅青年.jpg" alt="News Portfolio" class="w-full h-60 object-cover" loading="lazy" />
             <div class="p-6">
               <h3 class="font-bold text-xl mb-2 text-[#8b7355]">
-                <span class="en">In-depth News: Urban Life</span>
-                <span class="cn hidden">深度报道：城市生活实录</span>
+                <span class="en">News Portfolio</span>
+                <span class="cn hidden">新闻作品集</span>
               </h3>
               <p class="text-[#1e2429]/80 mb-4">
-                <span class="en">A 3-month in-depth investigation on the living conditions of urban grassroots groups, published in core media.</span>
-                <span class="cn hidden">历时3个月的城市草根群体生存状态深度调查，刊发于核心媒体平台。</span>
+                <span class="en">A collection of in-depth reports and feature stories covering society, culture, and urban development.</span>
+                <span class="cn hidden">汇聚多篇深度报道与新闻特稿，涵盖社会、文化、城市发展等多个领域。</span>
               </p>
-              <div onclick="switchPage('newsPage')" class="project-link text-[#8b7355] flex items-center gap-1 cursor-pointer">
-                <span class="en">View Details</span><span class="cn hidden">查看详情</span>
-                <i class="fa fa-arrow-right text-xs"></i>
+              <div class="project-link text-[#8b7355] flex items-center gap-1" onclick="event.stopPropagation(); switchPage('newsPage')">
+                <span class="en">View Portfolio</span><span class="cn hidden">查看作品集</span>
+                <i class="fa fa-arrow-right text-xs" aria-hidden="true"></i>
               </div>
             </div>
           </div>
 
-          <!-- 项目2（摄影）- 点击跳转到详情页 -->
-          <div class="card-art rounded-xl overflow-hidden scroll-item">
-            <img src="https://picsum.photos/id/1050/800/500" alt="Photo Project" class="w-full h-60 object-cover">
+          <!-- 卡片2：摄影作品集 -->
+          <div class="card-art rounded-xl overflow-hidden scroll-item cursor-pointer" data-target="photoPage" role="button" tabindex="0">
+            <img src="https://www.imgfox.cn/apis/uploads/20260618/3b2a63995d014490/生之岛.jpeg" alt="Photography Portfolio" class="w-full h-60 object-cover" loading="lazy" />
             <div class="p-6">
               <h3 class="font-bold text-xl mb-2 text-[#8b7355]">
-                <span class="en">Photo Series: Rural Memory</span>
-                <span class="cn hidden">摄影系列：乡村记忆</span>
+                <span class="en">Photography Portfolio</span>
+                <span class="cn hidden">摄影作品集</span>
               </h3>
               <p class="text-[#1e2429]/80 mb-4">
-                <span class="en">A documentary photography series recording the changes of rural areas in southern China, with 50+ works.</span>
-                <span class="cn hidden">记录中国南方乡村变迁的纪实摄影系列，包含50+幅作品。</span>
+                <span class="en">A collection of documentary photography series capturing rural changes, urban memories, and human stories.</span>
+                <span class="cn hidden">汇聚多个纪实摄影系列，记录乡村变迁、城市记忆与人文故事。</span>
               </p>
-              <div onclick="switchPage('photoPage')" class="project-link text-[#8b7355] flex items-center gap-1 cursor-pointer">
-                <span class="en">View Photo Series</span><span class="cn hidden">查看摄影系列</span>
-                <i class="fa fa-arrow-right text-xs"></i>
+              <div class="project-link text-[#8b7355] flex items-center gap-1" onclick="event.stopPropagation(); switchPage('photoPage')">
+                <span class="en">View Portfolio</span><span class="cn hidden">查看作品集</span>
+                <i class="fa fa-arrow-right text-xs" aria-hidden="true"></i>
               </div>
             </div>
           </div>
 
-          <!-- 项目3（影片）- 点击跳转到详情页 -->
-          <div class="card-art rounded-xl overflow-hidden scroll-item-lg">
-            <img src="https://picsum.photos/id/431/1200/400" alt="Film Project" class="w-full h-60 object-cover">
+          <!-- 卡片3：短片作品集 -->
+          <div class="card-art rounded-xl overflow-hidden scroll-item-lg cursor-pointer" data-target="filmPage" role="button" tabindex="0">
+            <img src="https://www.imgfox.cn/apis/uploads/20260618/9c5e09efe7984602/失乐园.jpg" alt="Film Portfolio" class="w-full h-60 object-cover" loading="lazy" />
             <div class="p-6">
               <h3 class="font-bold text-xl mb-2 text-[#8b7355]">
-                <span class="en">Short Film: The River</span>
-                <span class="cn hidden">短片作品：河流</span>
+                <span class="en">Film Portfolio</span>
+                <span class="cn hidden">短片作品集</span>
               </h3>
               <p class="text-[#1e2429]/80 mb-4 max-w-3xl">
-                <span class="en">A 15-minute documentary short film about the ecological protection of urban rivers, selected into 3 film festivals.</span>
-                <span class="cn hidden">15分钟城市河流生态保护纪实短片，入选3个专业影展。</span>
+                <span class="en">A collection of documentaries and short films focusing on ecology, humanity, and social issues.</span>
+                <span class="cn hidden">汇聚多部纪录片与短片，关注生态、人文与社会议题。</span>
               </p>
-              <div onclick="switchPage('filmPage')" class="project-link text-[#8b7355] flex items-center gap-1 cursor-pointer">
-                <span class="en">View Details</span><span class="cn hidden">查看详情</span>
-                <i class="fa fa-arrow-right text-xs"></i>
+              <div class="project-link text-[#8b7355] flex items-center gap-1" onclick="event.stopPropagation(); switchPage('filmPage')">
+                <span class="en">View Portfolio</span><span class="cn hidden">查看作品集</span>
+                <i class="fa fa-arrow-right text-xs" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- 卡片4：播客作品集 -->
+          <div class="card-art rounded-xl overflow-hidden scroll-item cursor-pointer" data-target="podcastPage" role="button" tabindex="0">
+            <img src="https://www.imgfox.cn/apis/uploads/20260618/85e3e93a14fe4e24/巴别塔.jpg" alt="Podcast Portfolio" class="w-full h-60 object-cover" loading="lazy" />
+            <div class="p-6">
+              <h3 class="font-bold text-xl mb-2 text-[#8b7355]">
+                <span class="en">Podcast Portfolio</span>
+                <span class="cn hidden">播客作品集</span>
+              </h3>
+              <p class="text-[#1e2429]/80 mb-4">
+                <span class="en">A collection of podcast episodes exploring media, culture, society, and human stories.</span>
+                <span class="cn hidden">汇集多期播客节目，探讨媒体、文化、社会与人文故事。</span>
+              </p>
+              <div class="project-link text-[#8b7355] flex items-center gap-1" onclick="event.stopPropagation(); switchPage('podcastPage')">
+                <span class="en">View Portfolio</span><span class="cn hidden">查看作品集</span>
+                <i class="fa fa-arrow-right text-xs" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -545,76 +1150,47 @@
       </div>
     </section>
 
-    <!-- 4. 个人优势模块 -->
+    <!-- Core Strengths -->
     <section id="advantages" class="max-w-6xl mx-auto px-4 py-20">
       <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center text-[#8b7355]">
         <span class="en">Core Strengths</span>
         <span class="cn hidden">个人优势</span>
       </h2>
-      <p class="text-center text-[#1e2429]/70 mb-8">
-        <span class="en">Scroll horizontally to explore more strengths</span>
-        <span class="cn hidden">横向滑动查看更多优势</span>
+      <p class="text-center text-[#1e2429]/80 mb-10">
+        <span class="en">Hover over each card to experience different dynamic effects</span>
+        <span class="cn hidden">✨ 悬停每张卡片，体验不同的动态效果</span>
       </p>
-      <div class="scroll-container">
-        <div class="scroll-content">
-          <div class="card-art rounded-xl p-6 text-center scroll-item">
-            <div class="w-16 h-16 bg-[#b8b4ac]/30 rounded-full flex items-center justify-center mx-auto mb-4">
-              <i class="fa fa-pencil text-2xl text-[#8b7355]"></i>
-            </div>
-            <h3 class="font-bold text-lg mb-2 text-[#8b7355]">
-              <span class="en">News Writing</span>
-              <span class="cn hidden">新闻写作</span>
-            </h3>
-            <p class="text-sm text-[#1e2429]/80">
-              <span class="en">Proficiency in in-depth feature writing, news interview and text polishing, with strong narrative ability.</span>
-              <span class="cn hidden">精通深度特稿写作、新闻采访与文字打磨，具备极强的叙事能力。</span>
-            </p>
+
+      <div class="skills-grid">
+        <a href="#" class="skill-card skill-card-1" style="background-image: url('https://picsum.photos/id/1/600/400');" onclick="event.preventDefault();">
+          <div class="skill-glass">
+            <h3><span class="en">News Writing</span><span class="cn hidden">新闻写作</span></h3>
+            <p><span class="en">In-depth features &amp; interviews</span><span class="cn hidden">深度特稿与采访</span></p>
           </div>
-          <div class="card-art rounded-xl p-6 text-center scroll-item">
-            <div class="w-16 h-16 bg-[#b8b4ac]/30 rounded-full flex items-center justify-center mx-auto mb-4">
-              <i class="fa fa-camera text-2xl text-[#8b7355]"></i>
-            </div>
-            <h3 class="font-bold text-lg mb-2 text-[#8b7355]">
-              <span class="en">Documentary Photography</span>
-              <span class="cn hidden">纪实摄影</span>
-            </h3>
-            <p class="text-sm text-[#1e2429]/80">
-              <span class="en">Skilled in capturing real moments, mastering light and composition, with artistic and professional expression.</span>
-              <span class="cn hidden">擅长捕捉真实瞬间，精通光影与构图，兼具艺术与专业表达。</span>
-            </p>
+        </a>
+        <a href="#" class="skill-card skill-card-2" style="background-image: url('https://picsum.photos/id/20/600/400');" onclick="event.preventDefault();">
+          <div class="skill-glass">
+            <h3><span class="en">Documentary Photography</span><span class="cn hidden">纪实摄影</span></h3>
+            <p><span class="en">Capture real moments</span><span class="cn hidden">捕捉真实瞬间</span></p>
           </div>
-          <div class="card-art rounded-xl p-6 text-center scroll-item">
-            <div class="w-16 h-16 bg-[#b8b4ac]/30 rounded-full flex items-center justify-center mx-auto mb-4">
-              <i class="fa fa-video-camera text-2xl text-[#8b7355]"></i>
-            </div>
-            <h3 class="font-bold text-lg mb-2 text-[#8b7355]">
-              <span class="en">Video Production</span>
-              <span class="cn hidden">视频制作</span>
-            </h3>
-            <p class="text-sm text-[#1e2429]/80">
-              <span class="en">Complete video production process: shooting, editing, color grading, with clear story logic.</span>
-              <span class="cn hidden">完整视频制作流程：拍摄、剪辑、调色，故事逻辑清晰。</span>
-            </p>
+        </a>
+        <a href="#" class="skill-card skill-card-3" style="background-image: url('https://picsum.photos/id/30/600/400');" onclick="event.preventDefault();">
+          <div class="skill-glass">
+            <h3><span class="en">Video Production</span><span class="cn hidden">视频制作</span></h3>
+            <p><span class="en">Shoot · Edit · Color</span><span class="cn hidden">拍摄 · 剪辑 · 调色</span></p>
           </div>
-          <div class="card-art rounded-xl p-6 text-center scroll-item">
-            <div class="w-16 h-16 bg-[#b8b4ac]/30 rounded-full flex items-center justify-center mx-auto mb-4">
-              <i class="fa fa-globe text-2xl text-[#8b7355]"></i>
-            </div>
-            <h3 class="font-bold text-lg mb-2 text-[#8b7355]">
-              <span class="en">Cross-cultural Communication</span>
-              <span class="cn hidden">跨文化沟通</span>
-            </h3>
-            <p class="text-sm text-[#1e2429]/80">
-              <span class="en">Excellent bilingual communication skills, able to tell Chinese stories to international audiences.</span>
-              <span class="cn hidden">优秀的双语沟通能力，能够向国际受众讲述中国故事。</span>
-            </p>
+        </a>
+        <a href="#" class="skill-card skill-card-4" style="background-image: url('https://picsum.photos/id/40/600/400');" onclick="event.preventDefault();">
+          <div class="skill-glass">
+            <h3><span class="en">Cross-cultural Comm.</span><span class="cn hidden">跨文化沟通</span></h3>
+            <p><span class="en">Bilingual storytelling</span><span class="cn hidden">双语讲述故事</span></p>
           </div>
-        </div>
+        </a>
       </div>
     </section>
 
-    <!-- 5. 底部联系方式模块 -->
-    <section id="contact" class="bg-[#8b7355]/5 py-20">
+    <!-- Contact -->
+    <section id="contact" class="py-20">
       <div class="max-w-4xl mx-auto px-4 text-center">
         <h2 class="text-2xl md:text-3xl font-bold mb-6 text-[#8b7355]">
           <span class="en">Get In Touch</span>
@@ -624,41 +1200,44 @@
           <span class="en">I am open to cooperation opportunities, interviews and project collaborations. Feel free to contact me.</span>
           <span class="cn hidden">我开放合作机会、面试邀约与项目协作，期待与你沟通。</span>
         </p>
+
         <div class="flex flex-col md:flex-row justify-center gap-6 mb-12">
-          <a href="mailto:your-email@example.com" class="btn-base px-8 py-4 rounded-md flex items-center justify-center gap-2 w-full md:w-auto text-base">
-            <i class="fa fa-envelope text-lg"></i>
-            <span class="en">Send Email</span>
-            <span class="cn hidden">发送邮件</span>
+          <a href="mailto:vicky_wanwan@163.com" class="btn-base px-8 py-4 rounded-md flex items-center justify-center gap-3 w-full md:w-auto text-base">
+            <i class="fa fa-envelope text-lg" aria-hidden="true"></i>
+            <span>vicky_wanwan@163.com</span>
           </a>
-          <a href="weixin://dl/chat?YourWeChatID" class="btn-base px-8 py-4 rounded-md flex items-center justify-center gap-2 w-full md:w-auto text-base">
-            <i class="fa fa-wechat text-lg"></i>
-            <span class="en">Add WeChat</span>
-            <span class="cn hidden">添加微信</span>
+          <a href="weixin://dl/chat?18652899008" class="btn-base px-8 py-4 rounded-md flex items-center justify-center gap-3 w-full md:w-auto text-base">
+            <i class="fa fa-wechat text-lg" aria-hidden="true"></i>
+            <span>18652899008</span>
           </a>
         </div>
+
         <div class="text-sm text-[#1e2429]/70">
-          <span class="en">© 2026 SUN WANNUO. All Rights Reserved.</span>
-          <span class="cn hidden">© 2026 你的名字. 保留所有权利。</span>
+          <span class="en">© <span class="year"></span> SUN WANNUO. All Rights Reserved.</span>
+          <span class="cn hidden">© <span class="year"></span> 孙婉诺. 保留所有权利。</span>
         </div>
       </div>
     </section>
   </div>
 
-  <!-- ========== 新闻报道详情页容器 ========== -->
+  <!-- ============================================================
+       新闻作品集详情页（News Portfolio）— 三大板块
+       ============================================================ -->
   <div class="page-container" id="newsPage">
-    <!-- 详情页新样式导航栏 -->
     <header class="sticky top-0 nav-bar z-40">
       <div class="nav-container">
-        <div class="nav-logo text-xl font-semibold text-[#8a6e54]">
+        <div class="nav-logo">
           <span class="en">SUN WANNUO</span>
-          <span class="cn hidden">你的名字</span>
+          <span class="cn hidden">孙婉诺</span>
         </div>
-        
         <div class="back-nav-menu hidden md:flex">
-          <a onclick="switchPage('homePage')" class="nav-link cursor-pointer"><span class="en">HOME</span><span class="cn hidden">首页</span></a>
-          <a onclick="switchPage('homePage')" class="nav-link cursor-pointer"><span class="en">WORKS</span><span class="cn hidden">作品</span></a>
+          <span class="nav-link" onclick="switchPage('homePage')">
+            <span class="en">HOME</span><span class="cn hidden">首页</span>
+          </span>
+          <span class="nav-link" onclick="switchPage('homePage','projects')">
+            <span class="en">WORKS</span><span class="cn hidden">作品</span>
+          </span>
         </div>
-        
         <button id="langToggleNews" class="lang-btn">
           <span class="en">中文</span>
           <span class="cn hidden">English</span>
@@ -666,319 +1245,959 @@
       </div>
     </header>
 
-    <!-- 页面标题 -->
     <section class="detail-header px-4">
       <h1 class="detail-title text-3xl md:text-4xl">
-        <span class="en">In-depth News: Urban Life</span>
-        <span class="cn hidden">深度报道：城市生活实录</span>
+        <span class="en">News Portfolio</span>
+        <span class="cn hidden">新闻作品集</span>
       </h1>
       <p class="detail-desc text-lg">
-        <span class="en">A 3-month in-depth investigation on the living conditions of urban grassroots groups</span>
-        <span class="cn hidden">历时3个月的城市草根群体生存状态深度调查</span>
+        <span class="en">Words and ideas can change the world</span>
+        <span class="cn hidden">一言一念 皆可改写世界</span>
       </p>
     </section>
 
-    <!-- 新闻详情内容 -->
-    <section class="max-w-6xl mx-auto px-4 py-8">
-      <div class="bg-white/70 backdrop-blur-md rounded-xl p-8 shadow-lg mb-8">
-        <h3 class="text-xl font-bold text-[#8a6e54] mb-4">
-          <span class="en">Project Overview</span>
-          <span class="cn hidden">项目概述</span>
-        </h3>
-        <p class="text-[#4a3f35]/80 mb-6 leading-relaxed">
-          <span class="en">This in-depth news project focuses on the living conditions, challenges and aspirations of urban grassroots groups including delivery riders, street vendors, and community cleaners. Through 50+ interviews and on-site investigations in 8 districts of the city, the project presents a true and comprehensive picture of the survival status of this group.</span>
-          <span class="cn hidden">本次深度报道项目聚焦外卖骑手、街头小贩、社区保洁等城市草根群体的生存状态、面临的挑战与诉求。通过对城市8个行政区的50+人次访谈和实地调研，真实、全面地呈现了该群体的生存现状。</span>
-        </p>
-        <h3 class="text-xl font-bold text-[#8a6e54] mb-4">
-          <span class="en">Key Findings</span>
-          <span class="cn hidden">核心发现</span>
-        </h3>
-        <ul class="list-disc pl-6 text-[#4a3f35]/80 mb-6 space-y-2">
-          <li><span class="en">78% of delivery riders work more than 10 hours a day, with an average monthly income of 5000-8000 RMB</span><span class="cn hidden">78%的外卖骑手日均工作超10小时，月均收入5000-8000元</span></li>
-          <li><span class="en">Street vendors face frequent administrative penalties, but 90% of them have no other source of income</span><span class="cn hidden">街头小贩频繁面临行政处罚，但90%的小贩无其他收入来源</span></li>
-          <li><span class="en">Community cleaners have an average age of 58, with no social security coverage in 65% of cases</span><span class="cn hidden">社区保洁人员平均年龄58岁，65%无社保覆盖</span></li>
-        </ul>
-        <h3 class="text-xl font-bold text-[#8a6e54] mb-4">
-          <span class="en">Publication & Influence</span>
-          <span class="cn hidden">刊发与影响</span>
-        </h3>
-        <p class="text-[#4a3f35]/80 leading-relaxed">
-          <span class="en">The report was published in 3 core media platforms, with a total reading volume of over 1 million, and attracted attention from relevant government departments, which subsequently introduced targeted improvement measures for the rights and interests protection of grassroots groups.</span>
-          <span class="cn hidden">该报道刊发于3家核心媒体平台，总阅读量超100万，引发相关政府部门关注，后续出台了针对草根群体权益保障的专项改进措施。</span>
-        </p>
-      </div>
+    <section class="max-w-5xl mx-auto px-4 py-6">
+      <div class="detail-content-card">
 
-      <!-- 返回按钮 -->
-      <div class="mt-8 text-center">
-        <button onclick="switchPage('homePage')" class="btn-base px-8 py-3 rounded-md">
-          <i class="fa fa-arrow-left mr-2"></i>
-          <span class="en">Back to Projects</span>
-          <span class="cn hidden">返回项目列表</span>
-        </button>
+        <!-- ===== 板块 1：Mental Health ===== -->
+        <div class="news-section">
+          <div class="section-headline">
+            <span>🧠</span>
+            <span class="en">Mental Health</span>
+            <span class="cn hidden">心理健康</span>
+            <span class="line"></span>
+          </div>
+
+          <!-- 文章 1：中药方剂 -->
+          <div class="news-article-item" onclick="switchPage('newsDetailPage')">
+            <div class="news-article-thumb">
+              <img src="https://static.wixstatic.com/media/830db2_7c443365ff4e48a88421f3bb9e05f6eb~mv2.png/v1/fill/w_652,h_800,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/TCM.png" alt="TCM Herbal Formula" loading="lazy" />
+            </div>
+            <div class="news-article-content">
+              <h5>
+                <span class="en">Chinese Medicine Herbal Formula Helps Alleviate Depression, Anxiety, and Sleep Issues, HKBU Study Finds</span>
+                <span class="cn hidden">浸大研究发现：中药方剂有助缓解抑郁、焦虑及睡眠问题</span>
+              </h5>
+              <p class="excerpt">
+                <span class="en">A 2025 HKBU study demonstrates that TCM has the potential to play an important role in addressing depression, anxiety, and sleep issues, offering a safe and effective option for those with subthreshold depression.</span>
+                <span class="cn hidden">浸大2025年研究显示，中医在应对抑郁、焦虑和睡眠问题方面具有重要潜力，为阈下抑郁人群提供了安全有效的选择。</span>
+              </p>
+              <div class="news-article-meta">
+                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 367</span>
+                <span><i class="fa fa-heart-o" aria-hidden="true"></i> 0</span>
+                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 7</span>
+                <span>·</span>
+                <span>
+                  <span class="en">By Vicky Sun · Nov 10, 2025</span>
+                  <span class="cn hidden">作者：Vicky Sun · 2025年11月10日</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 文章 2：以老护老 -->
+          <div class="news-article-item" onclick="switchPage('newsDetailPage2')">
+            <div class="news-article-thumb">
+              <img src="https://static.wixstatic.com/media/830db2_87a63897997c4aa8a3f945eff61d3116~mv2.jpg/v1/fill/w_710,h_870,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/JC.jpg" alt="Elderly Caregivers" loading="lazy" />
+            </div>
+            <div class="news-article-content">
+              <h5>
+                <span class="en">More than 40% of Hong Kong's "Elderly caring for the elderly" family caregivers suffer from depression and anxiety</span>
+                <span class="cn hidden">香港逾四成“以老护老”家庭照顾者受抑郁焦虑困扰</span>
+              </h5>
+              <p class="excerpt">
+                <span class="en">A recent study reveals that over 40% of family caregivers in Hong Kong's "elderly caring for the elderly" demographic face mental health issues, highlighting an urgent social need.</span>
+                <span class="cn hidden">最新研究显示，香港“以老护老”群体中超过四成的家庭照顾者面临心理健康问题，凸显了紧迫的社会需求。</span>
+              </p>
+              <div class="news-article-meta">
+                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 245</span>
+                <span><i class="fa fa-heart-o" aria-hidden="true"></i> 0</span>
+                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 6</span>
+                <span>·</span>
+                <span>
+                  <span class="en">By Vicky Sun · Oct 13, 2025</span>
+                  <span class="cn hidden">作者：Vicky Sun · 2025年10月13日</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 文章 3：塔罗牌（新增） -->
+          <div class="news-article-item" onclick="switchPage('newsDetailPage3')">
+            <div class="news-article-thumb">
+              <img src="https://static.wixstatic.com/media/830db2_6c87dccbc15a4db9b967827e34184fac~mv2.jpg/v1/fill/w_710,h_870,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Tarot.jpg" alt="Tarot Cards" loading="lazy" />
+            </div>
+            <div class="news-article-content">
+              <h5>
+                <span class="en">Tarot Cards Become an Outlet for Young People to Relieve Anxiety</span>
+                <span class="cn hidden">塔罗牌成为年轻人缓解焦虑的出口</span>
+              </h5>
+              <p class="excerpt">
+                <span class="en">On Bilibili, the topic of "tarot" has garnered over 16 million views, with young people turning to tarot cards as a tool for emotional management and self-reflection.</span>
+                <span class="cn hidden">在B站，“塔罗”话题浏览量已超过1600万，年轻人将塔罗牌视为情绪管理和自我反思的工具。</span>
+              </p>
+              <div class="news-article-meta">
+                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 312</span>
+                <span><i class="fa fa-heart-o" aria-hidden="true"></i> 0</span>
+                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 11</span>
+                <span>·</span>
+                <span>
+                  <span class="en">By Vicky Sun · Sep 29, 2025</span>
+                  <span class="cn hidden">作者：Vicky Sun · 2025年9月29日</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== 板块 2：Gender Issue ===== -->
+        <div class="news-section">
+          <div class="section-headline">
+            <span>⚧️</span>
+            <span class="en">Gender Issue</span>
+            <span class="cn hidden">性别议题</span>
+            <span class="line"></span>
+          </div>
+
+          <!-- 文章 1 -->
+          <div class="news-article-item">
+            <div class="news-article-thumb">
+              <img src="https://picsum.photos/id/110/200/140" alt="Gender 1" loading="lazy" />
+            </div>
+            <div class="news-article-content">
+              <h5>
+                <span class="en">France prepares for Election Day</span>
+                <span class="cn hidden">法国为大选日做准备</span>
+              </h5>
+              <p class="excerpt">
+                <span class="en">A look at how gender politics is shaping the upcoming French election and what it means for Europe.</span>
+                <span class="cn hidden">性别政治如何影响即将到来的法国大选，以及这对欧洲意味着什么。</span>
+              </p>
+              <div class="news-article-meta">
+                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 367</span>
+                <span><i class="fa fa-heart-o" aria-hidden="true"></i> 0</span>
+                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 7</span>
+                <span>·</span>
+                <span>
+                  <span class="en">Politics</span>
+                  <span class="cn hidden">政治</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 文章 2 -->
+          <div class="news-article-item">
+            <div class="news-article-thumb">
+              <img src="https://picsum.photos/id/112/200/140" alt="Gender 2" loading="lazy" />
+            </div>
+            <div class="news-article-content">
+              <h5>
+                <span class="en">Breaking the glass ceiling: Women in leadership</span>
+                <span class="cn hidden">打破玻璃天花板：女性领导力</span>
+              </h5>
+              <p class="excerpt">
+                <span class="en">Despite progress, women remain underrepresented in top positions. What's holding us back?</span>
+                <span class="cn hidden">尽管取得了进步，女性在高层职位中的比例仍然不足。是什么在阻碍我们？</span>
+              </p>
+              <div class="news-article-meta">
+                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 89</span>
+                <span><i class="fa fa-heart-o" aria-hidden="true"></i> 0</span>
+                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 4</span>
+                <span>·</span>
+                <span>
+                  <span class="en">Business</span>
+                  <span class="cn hidden">商业</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 文章 3 -->
+          <div class="news-article-item">
+            <div class="news-article-thumb">
+              <img src="https://picsum.photos/id/114/200/140" alt="Gender 3" loading="lazy" />
+            </div>
+            <div class="news-article-content">
+              <h5>
+                <span class="en">Beyond the binary: Understanding gender identity today</span>
+                <span class="cn hidden">超越二元：理解当代性别认同</span>
+              </h5>
+              <p class="excerpt">
+                <span class="en">A conversation with experts on how we can create more inclusive spaces for all gender identities.</span>
+                <span class="cn hidden">与专家对话：如何为所有性别认同创造更具包容性的空间。</span>
+              </p>
+              <div class="news-article-meta">
+                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 203</span>
+                <span><i class="fa fa-heart-o" aria-hidden="true"></i> 0</span>
+                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 9</span>
+                <span>·</span>
+                <span>
+                  <span class="en">Culture</span>
+                  <span class="cn hidden">文化</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== 板块 3：Food Review ===== -->
+        <div class="news-section">
+          <div class="section-headline">
+            <span>🍽️</span>
+            <span class="en">Food Review</span>
+            <span class="cn hidden">美食评论</span>
+            <span class="line"></span>
+          </div>
+
+          <!-- 文章 1 -->
+          <div class="news-article-item">
+            <div class="news-article-thumb">
+              <img src="https://picsum.photos/id/116/200/140" alt="Food 1" loading="lazy" />
+            </div>
+            <div class="news-article-content">
+              <h5>
+                <span class="en">The hidden cost of fast food culture</span>
+                <span class="cn hidden">快餐文化背后的隐形成本</span>
+              </h5>
+              <p class="excerpt">
+                <span class="en">How convenience is reshaping our relationship with food and the planet.</span>
+                <span class="cn hidden">便利性如何重塑我们与食物和地球的关系。</span>
+              </p>
+              <div class="news-article-meta">
+                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 129</span>
+                <span><i class="fa fa-heart-o" aria-hidden="true"></i> 0</span>
+                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 7</span>
+                <span>·</span>
+                <span>
+                  <span class="en">Health</span>
+                  <span class="cn hidden">健康</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 文章 2 -->
+          <div class="news-article-item">
+            <div class="news-article-thumb">
+              <img src="https://picsum.photos/id/118/200/140" alt="Food 2" loading="lazy" />
+            </div>
+            <div class="news-article-content">
+              <h5>
+                <span class="en">Farm to table: A journey into sustainable eating</span>
+                <span class="cn hidden">从农场到餐桌：可持续饮食之旅</span>
+              </h5>
+              <p class="excerpt">
+                <span class="en">Exploring the growing movement of local food systems and what it means for our future.</span>
+                <span class="cn hidden">探索本地食品系统的发展趋势，以及这对我们的未来意味着什么。</span>
+              </p>
+              <div class="news-article-meta">
+                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 159</span>
+                <span><i class="fa fa-heart-o" aria-hidden="true"></i> 0</span>
+                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 3</span>
+                <span>·</span>
+                <span>
+                  <span class="en">Sustainability</span>
+                  <span class="cn hidden">可持续</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 文章 3 -->
+          <div class="news-article-item">
+            <div class="news-article-thumb">
+              <img src="https://picsum.photos/id/120/200/140" alt="Food 3" loading="lazy" />
+            </div>
+            <div class="news-article-content">
+              <h5>
+                <span class="en">Street food as cultural memory</span>
+                <span class="cn hidden">街头美食：城市的文化记忆</span>
+              </h5>
+              <p class="excerpt">
+                <span class="en">How the flavors of our cities tell the stories of migration, adaptation, and belonging.</span>
+                <span class="cn hidden">城市的风味如何讲述迁徙、适应和归属的故事。</span>
+              </p>
+              <div class="news-article-meta">
+                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 89</span>
+                <span><i class="fa fa-heart-o" aria-hidden="true"></i> 0</span>
+                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 5</span>
+                <span>·</span>
+                <span>
+                  <span class="en">Culture</span>
+                  <span class="cn hidden">文化</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 返回按钮 -->
+        <div class="mt-8 text-center">
+          <button onclick="switchPage('homePage','projects')" class="btn-base px-8 py-3 rounded-md">
+            <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
+            <span class="en">Back to Portfolios</span>
+            <span class="cn hidden">返回作品集列表</span>
+          </button>
+        </div>
       </div>
     </section>
 
-    <!-- 底部版权 -->
-    <footer class="bg-[#8a6e54]/5 py-6 text-center text-sm text-[#4a3f35]/70">
-      <span class="en">© 2026 SUN WANNUO. All Rights Reserved.</span>
-      <span class="cn hidden">© 2026 你的名字. 保留所有权利。</span>
+    <footer class="py-6 text-center text-sm text-[#4a3f35]/70">
+      <span class="en">© <span class="year"></span> SUN WANNUO. All Rights Reserved.</span>
+      <span class="cn hidden">© <span class="year"></span> 孙婉诺. 保留所有权利。</span>
     </footer>
   </div>
 
-  <!-- ========== 摄影详情页容器（移除地图，替换为地名板块） ========== -->
-  <div class="page-container" id="photoPage">
-    <!-- 详情页新样式导航栏 -->
+  <!-- ============================================================
+       新闻详细页 1（中药方剂）
+       ============================================================ -->
+  <div class="page-container" id="newsDetailPage">
     <header class="sticky top-0 nav-bar z-40">
       <div class="nav-container">
-        <div class="nav-logo text-xl font-semibold text-[#8a6e54]">
+        <div class="nav-logo">
           <span class="en">SUN WANNUO</span>
-          <span class="cn hidden">你的名字</span>
+          <span class="cn hidden">孙婉诺</span>
         </div>
-        
         <div class="back-nav-menu hidden md:flex">
-          <a onclick="switchPage('homePage')" class="nav-link cursor-pointer"><span class="en">HOME</span><span class="cn hidden">首页</span></a>
-          <a onclick="switchPage('homePage')" class="nav-link cursor-pointer"><span class="en">WORKS</span><span class="cn hidden">作品</span></a>
+          <span class="nav-link" onclick="switchPage('newsPage')">
+            <span class="en">BACK</span>
+            <span class="cn hidden">返回</span>
+          </span>
+          <span class="nav-link" onclick="switchPage('homePage','projects')">
+            <span class="en">WORKS</span>
+            <span class="cn hidden">作品</span>
+          </span>
         </div>
-        
+        <button id="langToggleNewsDetail" class="lang-btn">
+          <span class="en">中文</span>
+          <span class="cn hidden">English</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="max-w-4xl mx-auto px-4 py-10">
+      <div class="detail-content-card">
+        <div class="article-full">
+          <h1>
+            <span class="en">Chinese Medicine Herbal Formula Helps Alleviate Depression, Anxiety, and Sleep Issues, HKBU Study Finds</span>
+            <span class="cn hidden">浸大研究发现：中药方剂有助缓解抑郁、焦虑及睡眠问题</span>
+          </h1>
+          <div class="byline">
+            <span><span class="en">By Vicky Sun</span><span class="cn hidden">作者：Vicky Sun</span></span>
+            <span><span class="en">Nov 10, 2025</span><span class="cn hidden">2025年11月10日</span></span>
+          </div>
+          <img src="https://static.wixstatic.com/media/830db2_7c443365ff4e48a88421f3bb9e05f6eb~mv2.png/v1/fill/w_652,h_800,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/TCM.png" alt="TCM Herbal Formula" class="featured-image" loading="lazy" />
+          <div class="body-text">
+            <p><span class="en">"For a long time, I was trapped in a cycle of sleepless nights and restless days—my mind kept racing, and my heart would pound for no reason. Then two weeks ago, I started taking the 'Jieyu Anshen Formula' from Qiren Chinese Medicine Clinic. Now, I finally feel a sense of quiet within," said Li Wei (pseudonym), a Hong Kong woman from Sha Tin. Like a growing number of Hong Kong residents, she has turned to traditional Chinese medicine (TCM) as a complementary way to ease the emotional strains of modern life. A 2025 survey from the Hong Kong Education University (EdUHK) found that 47.2% of Hong Kong residents have used TCM in the past year, a sharp rise from 26.6% in 2020.</span><span class="cn hidden">"很长一段时间里，我陷入了一个不眠之夜与焦躁白天的循环——思绪不断翻涌，心脏无缘无故地狂跳。直到两周前，我开始服用启仁中医诊所的'解郁安神方'。现在，我终于感觉到内心有了一份宁静，"沙田居民李薇（化名）说。像越来越多的香港居民一样，她将中医视为缓解现代生活情绪压力的一种补充方式。香港教育大学2025年的一项调查发现，47.2%的香港居民在过去一年中使用过中医，较2020年的26.6%大幅上升。</span></p>
+            <p><span class="en">Qiren Chinese Medicine Clinic has seen a 30% rise in patients with depression, anxiety, and sleep issues over the past six months. Dr. Zhang Furu, a registered TCM practitioner, often adapts classical formulas such as "Xiaoyao Powder" to soothe liver qi and ease irritability, or "Ganmai Dazao Tang" to nourish the heart and calm the spirit. These tailored formulas work gently, with few side effects, to relieve low mood, restlessness, and sleep issues rooted in liver qi stagnation or heart-spleen deficiency," she explained.</span><span class="cn hidden">启仁中医诊所过去六个月接诊的抑郁、焦虑和睡眠问题患者增加了30%。注册中医师张芙茹医生经常根据经典方剂进行加减，如"逍遥散"以疏肝解郁、缓解烦躁，或"甘麦大枣汤"以养心安神。她解释说："这些个性化方剂作用温和，副作用小，能够缓解因肝气郁结或心脾两虚引起的情绪低落、烦躁不安和睡眠问题。"</span></p>
+            <blockquote><p><span class="en">"The biggest change is that the feeling of my own heartbeat pounding in my ears is just gone," Li Wei said, her voice markedly calmer than during her initial consultation. "Before, my thoughts would race as soon as I lay down. Now, a wave of fatigue naturally rises, and I simply drift away."</span><span class="cn hidden">"最大的变化是，那种心跳声在耳中回响的感觉消失了，"李薇说，她的声音比初诊时明显平静了许多。"以前我一躺下思绪就开始翻涌。现在，一阵疲惫感自然地涌上来，我就这样不知不觉地睡去。"</span></p></blockquote>
+            <p><span class="en">When asked why she chose TCM over Western medicine, Li Wei explained that she had previously tried conventional treatments but grew concerned about potential side effects and dependency. "I wanted a more holistic method, which didn't just suppress symptoms, but helped my body regain its own balance from within," she noted. She now visits the clinic weekly for tailored formula adjustments and learns self-care techniques.</span><span class="cn hidden">当被问及为何选择中医而非西医时，李薇解释说，她曾尝试过常规治疗，但对潜在的副作用和依赖性问题感到担忧。"我想要一种更全面的方法，不只是抑制症状，而是帮助我的身体从内部重新获得平衡，"她表示。她目前每周回诊所复诊，接受个性化方剂调整，并学习自我保健技巧。</span></p>
+            <p><span class="en">Since taking traditional Chinese medicine, Li Wei's lifestyle has also changed. She said, "I have started making small but meaningful adjustments to my daily life. Before going to bed, I now follow Dr. Zhang's instructions to massage the Taichong acupoint instead of scrolling on my phone. I also pay more attention to my diet, choosing warm and nutritious meals instead of quick takeouts. Traditional Chinese medicine has not only given me better sleep, but also a deeper understanding that true rehabilitation involves the medications we take and the lifestyle choices we make every day."</span><span class="cn hidden">服用中药后，李薇的生活方式也发生了变化。她说："我开始在日常生活中做出微小但有意义的调整。睡前，我现在按照张医生的指导按摩太冲穴，而不是刷手机。我也更加注意饮食，选择温热有营养的食物，而不是快餐外卖。中医不仅给了我更好的睡眠，还让我更深刻地认识到，真正的康复不仅关乎我们服用的药物，也关乎我们每天做出的生活方式选择。"</span></p>
+            <p><span class="en">A 2025 Hong Kong Baptist University (HKBU) study demonstrated that TCM has the potential to play an important role in addressing depression, anxiety, and sleep Issues. Professor Bian Zhaoxiang from HKBU stressed its role as a safe and effective option for those with subthreshold depression, also helping reduce mental health stigma. Professor Zhang Zhangjin from HKU advocates blending classical TCM theory with modern psychiatry. In the clinical front, Dr. Zhang said that personalized TCM formulas work by restoring the harmony of qi, blood, yin, and Yang in the body. "When internal balance is reestablished," she said, "peaceful sleep and stable emotions will follow naturally."</span><span class="cn hidden">香港浸会大学2025年的一项研究表明，中医在应对抑郁、焦虑和睡眠问题方面具有发挥重要作用的潜力。浸会大学的卞兆祥教授强调了它作为阈下抑郁人群安全有效选择的角色，同时也有助于减少心理健康污名。香港大学的张樟进教授主张将经典中医理论与现代精神病学相结合。在临床方面，张医生说个性化的中医方剂通过恢复体内气血阴阳的平衡来发挥作用。"当内在平衡重建后，"她说，"安稳的睡眠和稳定的情绪自然会随之而来。"</span></p>
+          </div>
+          <div class="mt-8 text-center">
+            <button onclick="switchPage('newsPage')" class="btn-base px-8 py-3 rounded-md">
+              <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
+              <span class="en">Back to News</span>
+              <span class="cn hidden">返回新闻列表</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="py-6 text-center text-sm text-[#4a3f35]/70">
+      <span class="en">© <span class="year"></span> SUN WANNUO. All Rights Reserved.</span>
+      <span class="cn hidden">© <span class="year"></span> 孙婉诺. 保留所有权利。</span>
+    </footer>
+  </div>
+
+  <!-- ============================================================
+       新闻详细页 2（以老护老）
+       ============================================================ -->
+  <div class="page-container" id="newsDetailPage2">
+    <header class="sticky top-0 nav-bar z-40">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="en">SUN WANNUO</span>
+          <span class="cn hidden">孙婉诺</span>
+        </div>
+        <div class="back-nav-menu hidden md:flex">
+          <span class="nav-link" onclick="switchPage('newsPage')">
+            <span class="en">BACK</span>
+            <span class="cn hidden">返回</span>
+          </span>
+          <span class="nav-link" onclick="switchPage('homePage','projects')">
+            <span class="en">WORKS</span>
+            <span class="cn hidden">作品</span>
+          </span>
+        </div>
+        <button id="langToggleNewsDetail2" class="lang-btn">
+          <span class="en">中文</span>
+          <span class="cn hidden">English</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="max-w-4xl mx-auto px-4 py-10">
+      <div class="detail-content-card">
+        <div class="article-full">
+          <h1>
+            <span class="en">More than 40% of Hong Kong's "Elderly caring for the elderly" family caregivers suffer from depression and anxiety</span>
+            <span class="cn hidden">香港逾四成“以老护老”家庭照顾者受抑郁焦虑困扰</span>
+          </h1>
+          <div class="byline">
+            <span><span class="en">By Vicky Sun</span><span class="cn hidden">作者：Vicky Sun</span></span>
+            <span><span class="en">Oct 13, 2025</span><span class="cn hidden">2025年10月13日</span></span>
+          </div>
+          <img src="https://static.wixstatic.com/media/830db2_87a63897997c4aa8a3f945eff61d3116~mv2.jpg/v1/fill/w_710,h_870,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/JC.jpg" alt="Elderly Caregivers" class="featured-image" loading="lazy" />
+          <div class="body-text">
+            <p><span class="en">A recent study on family caregivers in Hong Kong has revealed that the mental health issues among the city's "elderly caring for the elderly" demographic require urgent attention. According to a survey released by the Hong Kong Polytechnic University in August 2025, over 40% of the 2,000 family caregivers interviewed faced mental health issues, with approximately 1,000 showing symptoms of depression and 500 exhibiting symptoms of anxiety. The survey also found that around 1,200 respondents belonged to the "elderly caring for the elderly" group, where elderly individuals care for even older or disabled family members.</span><span class="cn hidden">香港理工大学于2025年8月发布的一项调查显示，在接受访问的2000名家庭照顾者中，超过40%面临心理健康问题，其中约1000人出现抑郁症状，500人出现焦虑症状。调查还发现，约1200名受访者属于“以老护老”群体，即由长者照顾更年长或残疾的家庭成员。</span></p>
+            <p><span class="en">Wong Kwai-kwong, now 75, is one of the many "elderly-on-elderly caregivers" in Hong Kong. He lives with his 78-year-old wife in a public housing estate in Sha Tin. His wife has been bedridden due to a stroke for twelve years. Wong's daily caregiving tasks include helping her turn over, cleaning, feeding, and more, with an average caregiving time exceeding 16 hours per day.</span><span class="cn hidden">现年75岁的黄贵光（音译）便是香港众多“以老护老”照顾者之一。他与78岁的妻子同住于沙田一个公屋单位。其妻因中风已卧床长达十二年。黄伯每日的护理工作包括帮妻子翻身、清洁、喂食等，日均照顾时间超过16小时。</span></p>
+            <p><span class="en">"At 6 a.m., I have to help her turn over. At 7:30 a.m., I give her medicine. At 9 a.m., I start massaging her," Wong Kwai-kwong said, showing the care schedule posted on his wall. Next to the schedule are the contact information for the Sha Tin Care Team and some caregiving notes.</span><span class="cn hidden">“早上6点，我要帮她翻身。7点30分，喂她吃药。9点，开始帮她按摩，”黄贵光指着贴在墙上的照顾时间表说。时间表旁边贴着沙田关爱队的联络方式和一些护理备忘。</span></p>
+            <p><span class="en">Hong Kong charity "Suicide Prevention Services" released the findings of a survey on carer stress in April 2025. The study, conducted between October of the previous year and February of the current year, surveyed a total of 942 carers. Results showed that 37.4% of respondents were in a "high-load" state. Among these high-load carers, 40.3% simultaneously exhibited symptoms of depression or anxiety. The survey also revealed that working carers and those with excessively long weekly caregiving hours faced greater pressure and risks.</span><span class="cn hidden">香港慈善机构“生命热线”于2025年4月发布了照顾者压力调查结果。该研究于去年10月至今年2月进行，共访问了942名照顾者。结果显示，37.4%的受访者处于“高压”状态。在这些高压照顾者中，40.3%同时出现抑郁或焦虑症状。调查还显示，在职照顾者及每周照顾时间过长的人士面临更大的压力和风险。</span></p>
+            <p><span class="en">Lam Yuk-wah, the volunteer general secretary of the Gracious Love Society in Sha Tin District, said, "In the cases we encounter, many caregivers are already in their seventies or eighties and still need to care for even older spouses or disabled family members. Due to traditional beliefs, some elderly individuals are reluctant to seek external help, leading to long-term emotional suppression. I remember one time Mr. Wong had a fever but was afraid to see a doctor because he worried no one would care for his wife."</span><span class="cn hidden">沙田区“感恩关爱社”的义务总干事林玉华（音译）表示：“在我们接触的个案中，不少照顾者本身已年过七、八十岁，仍要照顾更年长的配偶或残疾家人。由于传统观念，部分长者不愿寻求外界协助，导致情绪长期受压。我记得有一次黄伯发烧，但不敢去看医生，因为他担心没人照顾妻子。”</span></p>
+            <p><span class="en">In response to this social issue, the Hong Kong Social Welfare Department announced that starting July 2025, it would establish a reporting mechanism with the Hospital Authority to ensure caregivers can provide timely assistance when those they care for are hospitalized. The "Care Team Support for the Elderly and Caregivers Program" has been extended to all 18 districts in Hong Kong, expected to cover over 60,000 families in need.</span><span class="cn hidden">针对这一社会问题，香港社会福利署宣布，自2025年7月起，将与医院管理局建立通报机制，确保照顾者能在被照顾者住院时获得及时协助。“长者及照顾者关爱队支援计划”已扩展至全港18区，预计将覆盖超过6万个有需要家庭。</span></p>
+            <p><span class="en">Since expanding its services in 2024, the Tai Wai Jockey Club Caregiver Support Centre has provided support to over 500 caregiver families. The services offered by the centre include up to 8 hours of respite care per week, professional nursing training, caregiver mutual support groups, and psychological counseling.</span><span class="cn hidden">大围赛马会照顾者支援中心自2024年扩展服务以来，已为超过500个照顾者家庭提供支援。中心提供的服务包括每周最多8小时的暂托服务、专业护理培训、照顾者互助小组及心理辅导。</span></p>
+            <p><span class="en">Through a referral from the Sha Tin Care Team at the end of 2024, Wong Kwai-kwong began receiving services from the Tai Wai Jockey Club Caregiver Center. The centre provided him with 4 hours of free respite care per week.</span><span class="cn hidden">透过沙田关爱队于2024年底的转介，黄贵光开始接受大围赛马会照顾者中心的服务。中心为他提供每周4小时的免费暂托服务。</span></p>
+            <p><span class="en">"Respite care allows caregivers to have short breaks," said Ma Hoi-yan, the program manager of the Tai Wai Jockey Club Caregiver Center. "Some caregivers leave their family members here for two hours to go out and get some fresh air, which makes them feel much better psychologically."</span><span class="cn hidden">“暂托服务让照顾者能有短暂休息，”大围赛马会照顾者中心项目经理马海欣（音译）表示。“有些照顾者会将家人送来两小时，自己出去透透气，心理上会舒服很多。”</span></p>
+            <p><span class="en">Now, what Mr. Wong looks forward to most each week is the home visits from the Care Team. The volunteers not only bring supplies but, more importantly, chat with him, allowing him to temporarily set down his burdens. The respite care provided by the Tai Wai Jockey Club Caregiver Support Centre has given him rare breathing space.</span><span class="cn hidden">如今，黄伯每星期最期待的就是关爱队的探访。义工们不仅带来物资，更重要的是陪他聊天，让他能暂时放下重担。大围赛马会照顾者支援中心提供的暂托服务，给了他难得的喘息空间。</span></p>
+          </div>
+          <div class="mt-8 text-center">
+            <button onclick="switchPage('newsPage')" class="btn-base px-8 py-3 rounded-md">
+              <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
+              <span class="en">Back to News</span>
+              <span class="cn hidden">返回新闻列表</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="py-6 text-center text-sm text-[#4a3f35]/70">
+      <span class="en">© <span class="year"></span> SUN WANNUO. All Rights Reserved.</span>
+      <span class="cn hidden">© <span class="year"></span> 孙婉诺. 保留所有权利。</span>
+    </footer>
+  </div>
+
+  <!-- ============================================================
+       新闻详细页 3（塔罗牌）
+       ============================================================ -->
+  <div class="page-container" id="newsDetailPage3">
+    <header class="sticky top-0 nav-bar z-40">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="en">SUN WANNUO</span>
+          <span class="cn hidden">孙婉诺</span>
+        </div>
+        <div class="back-nav-menu hidden md:flex">
+          <span class="nav-link" onclick="switchPage('newsPage')">
+            <span class="en">BACK</span>
+            <span class="cn hidden">返回</span>
+          </span>
+          <span class="nav-link" onclick="switchPage('homePage','projects')">
+            <span class="en">WORKS</span>
+            <span class="cn hidden">作品</span>
+          </span>
+        </div>
+        <button id="langToggleNewsDetail3" class="lang-btn">
+          <span class="en">中文</span>
+          <span class="cn hidden">English</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="max-w-4xl mx-auto px-4 py-10">
+      <div class="detail-content-card">
+        <div class="article-full">
+          <h1>
+            <span class="en">Tarot Cards Become an Outlet for Young People to Relieve Anxiety</span>
+            <span class="cn hidden">塔罗牌成为年轻人缓解焦虑的出口</span>
+          </h1>
+          <div class="byline">
+            <span><span class="en">By Vicky Sun</span><span class="cn hidden">作者：Vicky Sun</span></span>
+            <span><span class="en">Sep 29, 2025</span><span class="cn hidden">2025年9月29日</span></span>
+          </div>
+          <img src="https://static.wixstatic.com/media/830db2_6c87dccbc15a4db9b967827e34184fac~mv2.jpg/v1/fill/w_710,h_870,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Tarot.jpg" alt="Tarot Cards" class="featured-image" loading="lazy" />
+          <div class="body-text">
+            <p><span class="en">"There was a period when I felt on the verge of losing control every day—until the tarot cards told me I could stop." This is how 23-year-old graduate student Xie Lu recalled her first experience with tarot cards. At 2 a.m., having just finished her seventh round of thesis revisions, she was wide awake and booked an online tarot reading with a reader on the Bilibili platform. She drew the "Reversed Chariot" card, which signifies "over control leading to loss of direction." "I cried at that moment," she said. "It was like a mirror, allowing me to see my own state clearly."</span><span class="cn hidden">"有一段时间，我每天都感觉快要失控了——直到塔罗牌告诉我，我可以停下来。"23岁的研究生谢露这样回忆她第一次接触塔罗牌的经历。凌晨两点，她刚完成第七轮论文修改，精神亢奋，在B站平台上预约了一位占卜师的线上塔罗解读。她抽到了"逆位战车"牌，牌面寓意"过度控制导致方向迷失"。"那一刻我哭了，"她说。"它像一面镜子，让我看清了自己的状态。"</span></p>
+            <p><span class="en">Xie Lu is one of many young people turning to tarot cards to cope with anxiety. On Bilibili, a comprehensive video platform popular among young users, the topic of "tarot" has garnered over 16 million views, with some interactive tarot reading videos reaching 3.921 million plays. Data from a zodiac-themed application shows that users aged 19 to 34 make up the largest demographic, with those aged 19 to 24 accounting for more than half of the total. A joint research report by NetEase Data and Wave Studio indicates that 62.05% of tarot card users are under the age of 30.</span><span class="cn hidden">谢露是众多通过塔罗牌应对焦虑的年轻人之一。在深受年轻用户欢迎的综合视频平台B站上，"塔罗"话题的浏览量已超过1600万，部分互动式塔罗解读视频播放量达到392.1万次。一款星座主题应用的数据显示，19至34岁的用户是最大的群体，其中19至24岁的用户占总数的一半以上。网易数据与浪潮工作室的一项联合研究报告指出，62.05%的塔罗牌用户年龄在30岁以下。</span></p>
+            <p><span class="en">"The vast majority of my clients are from the post-95 and post-00 generations. They aren't superstitious; rather, they see tarot as a tool for emotional management," said Xi Xi (pseudonym), a tarot reader with three years of experience in Xi'an. "The symbolism of the cards helps young people concretize their abstract stresses. We focus on emotional comfort rather than providing direct answers, ultimately guiding users back to reality."</span><span class="cn hidden">"我的客户绝大多数来自95后和00后。他们并不迷信，而是将塔罗视为一种情绪管理工具，"西安一位拥有三年经验的塔罗占卜师西西（化名）说。"牌面的象征意义帮助年轻人将抽象的压力具象化。我们专注于情感慰藉，而不是给出直接答案，最终引导用户回归现实。"</span></p>
+            <p><span class="en">When asked why she didn't seek professional psychological counseling instead, Xie Lu explained, "Sometimes I already have the answer in my heart—I just need this kind of emotional service to sort through my thoughts. If I were to go for psychological counseling, it would involve things I can't even talk about with my friends or parents, the most private of secrets." She believes that confiding in a tarot reader she's never met is essentially "having a heart-to-heart conversation with herself." Compared to speaking with close friends or relatives, this approach allows her to express her true feelings more honestly.</span><span class="cn hidden">当被问及为何不寻求专业心理咨询时，谢露解释说："有时候我心里已经有了答案——我只需要这种情感服务来梳理思绪。如果我去做心理咨询，那会涉及到我连朋友或父母都无法开口的事情，是最私密的秘密。"她认为，向素未谋面的塔罗占卜师倾诉，本质上是在"与自己进行一场真心对话"。与向亲友倾诉相比，这种方式让她能够更坦诚地表达真实感受。</span></p>
+            <p><span class="en">From a psychological perspective, the popularity of tarot cards is not without theoretical basis. American psychologist Philip Zimbardo's research on time psychology suggests that divination practices like tarot can alleviate an individual's time-related anxiety by shifting their time perspective. This aligns with the compensatory control theory, which posits that when individuals feel a loss of control, they seek order and predictability to restore psychological balance.</span><span class="cn hidden">从心理学角度来看，塔罗牌的流行并非没有理论基础。美国心理学家菲利普·津巴多关于时间心理学的研究表明，塔罗等占卜实践可以通过改变个体的时间视角来缓解与时间相关的焦虑。这与补偿控制理论相吻合，该理论认为，当个体感到失控时，他们会寻求秩序和可预测性来恢复心理平衡。</span></p>
+            <p><span class="en">"Tarot and astrology provide 'reasonable explanations' for setbacks through 'fortune interpretations,' such as attributing temporary difficulties to a 'Mercury retrograde period.' This approach precisely meets young people's psychological needs to cope with life's uncertainties," analyzed Zhang Kaihua, associate professor at the School of Psychology, Shandong Normal University.</span><span class="cn hidden">"塔罗和占星术通过'运势解读'为挫折提供'合理解释'，比如将暂时的困难归因于'水逆期'。这种方式恰恰满足了年轻人应对生活不确定性的心理需求，"山东师范大学心理学院副教授张凯华分析道。</span></p>
+          </div>
+          <div class="mt-8 text-center">
+            <button onclick="switchPage('newsPage')" class="btn-base px-8 py-3 rounded-md">
+              <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
+              <span class="en">Back to News</span>
+              <span class="cn hidden">返回新闻列表</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="py-6 text-center text-sm text-[#4a3f35]/70">
+      <span class="en">© <span class="year"></span> SUN WANNUO. All Rights Reserved.</span>
+      <span class="cn hidden">© <span class="year"></span> 孙婉诺. 保留所有权利。</span>
+    </footer>
+  </div>
+
+  <!-- ============================================================
+       摄影作品集详情页（Photography Portfolio）
+       ============================================================ -->
+  <div class="page-container" id="photoPage">
+    <header class="sticky top-0 nav-bar z-40">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="en">SUN WANNUO</span>
+          <span class="cn hidden">孙婉诺</span>
+        </div>
+        <div class="back-nav-menu hidden md:flex">
+          <span class="nav-link" onclick="switchPage('homePage')">
+            <span class="en">HOME</span><span class="cn hidden">首页</span>
+          </span>
+          <span class="nav-link" onclick="switchPage('homePage','projects')">
+            <span class="en">WORKS</span><span class="cn hidden">作品</span>
+          </span>
+        </div>
         <button id="langTogglePhoto" class="lang-btn">
           <span class="en">中文</span>
           <span class="cn hidden">English</span>
         </button>
       </div>
     </header>
-
-    <!-- 页面标题 -->
     <section class="detail-header px-4">
       <h1 class="detail-title text-3xl md:text-4xl">
-        <span class="en">Photo Series: Rural Memory</span>
-        <span class="cn hidden">摄影系列：乡村记忆</span>
+        <span class="en">Photography Portfolio</span>
+        <span class="cn hidden">摄影作品集</span>
       </h1>
       <p class="detail-desc text-lg">
-        <span class="en">Recording the changes of rural areas in 5 representative cities of China</span>
-        <span class="cn hidden">记录中国5个代表性城市的乡村变迁</span>
+        <span class="en">Don't shoot what it looks like, shoot what it feels like</span>
+        <span class="cn hidden">别拍样子，要拍感觉</span>
       </p>
     </section>
-
-    <!-- 地名板块内容 -->
     <section class="max-w-6xl mx-auto px-4 py-8">
-      <!-- 香港 -->
-      <div class="location-card">
-        <h2 class="location-title text-2xl">香港 · Hong Kong</h2>
-        <p class="text-[#4a3f35]/80">
-          <span class="en">Rural memory photography series in Hong Kong, recording the traditional villages and cultural heritage in the New Territories. This series includes 12 works, focusing on the Hakka villages in the New Territories and the changes of fishing villages in Lantao Island.</span>
-          <span class="cn hidden">香港乡村记忆摄影系列，记录新界地区的传统村落与文化遗产。本系列包含12幅作品，聚焦新界客家村落及大屿山渔村变迁。</span>
-        </p>
-      </div>
-
-      <!-- 青岛 -->
-      <div class="location-card">
-        <h2 class="location-title text-2xl">青岛 · Qingdao</h2>
-        <p class="text-[#4a3f35]/80">
-          <span class="en">Coastal rural culture in Qingdao, focusing on the fishing village culture and marine heritage. 15 works record the changes of fishing villages along the coast of Jiaozhou Bay over the past 10 years.</span>
-          <span class="cn hidden">青岛沿海乡村文化，聚焦渔村文化与海洋遗产。15幅作品记录胶州湾沿岸渔村近10年的变迁。</span>
-        </p>
-      </div>
-
-      <!-- 西安 -->
-      <div class="location-card">
-        <h2 class="location-title text-2xl">西安 · Xi'an</h2>
-        <p class="text-[#4a3f35]/80">
-          <span class="en">Ancient rural culture in the Guanzhong Plain, recording the traditional farming civilization. 10 works show the farming customs and folk culture of the ancient villages in Zhouzhi County.</span>
-          <span class="cn hidden">关中平原古村落文化，记录传统农耕文明。10幅作品展现周至县古村落的农耕习俗与民俗文化。</span>
-        </p>
-      </div>
-
-      <!-- 南京 -->
-      <div class="location-card">
-        <h2 class="location-title text-2xl">南京 · Nanjing</h2>
-        <p class="text-[#4a3f35]/80">
-          <span class="en">Water town culture in southern Jiangsu, focusing on the rural landscape of the Yangtze River Delta. 18 works present the water town style and rural revitalization achievements of Gaochun District.</span>
-          <span class="cn hidden">苏南水乡文化，聚焦长三角乡村风貌。18幅作品呈现高淳区的水乡风貌与乡村振兴成果。</span>
-        </p>
-      </div>
-
-      <!-- 台湾 -->
-      <div class="location-card">
-        <h2 class="location-title text-2xl">台湾 · Taiwan</h2>
-        <p class="text-[#4a3f35]/80">
-          <span class="en">Cross-strait rural cultural exchanges, recording the traditional rural customs of Taiwan. 14 works show the rural style of Tainan and Hualien, reflecting the cultural identity between cross-strait rural areas.</span>
-          <span class="cn hidden">两岸乡村文化交流，记录台湾传统乡村风貌。14幅作品展现台南、花莲的乡村风貌，体现两岸乡村的文化同根性。</span>
-        </p>
-      </div>
-
-      <!-- 返回按钮 -->
-      <div class="mt-8 text-center">
-        <button onclick="switchPage('homePage')" class="btn-base px-8 py-3 rounded-md">
-          <i class="fa fa-arrow-left mr-2"></i>
-          <span class="en">Back to Projects</span>
-          <span class="cn hidden">返回项目列表</span>
-        </button>
+      <div class="detail-content-card">
+        <div class="portfolio-grid">
+          <div class="portfolio-item">
+            <img src="https://picsum.photos/id/1040/600/400" alt="Photo 1" loading="lazy" />
+            <div class="portfolio-item-body">
+              <h4>香港渔村 · 最后的疍民</h4>
+              <p>记录香港大屿山渔村的疍民生活，传统水上人家正在消失的文化记忆。</p>
+              <span class="tag">香港 · 12幅</span>
+            </div>
+          </div>
+          <div class="portfolio-item">
+            <img src="https://picsum.photos/id/1044/600/400" alt="Photo 2" loading="lazy" />
+            <div class="portfolio-item-body">
+              <h4>青岛海岸 · 渔港的清晨</h4>
+              <p>胶州湾沿岸渔港的清晨景象，渔民与海的故事在日出中延续。</p>
+              <span class="tag">青岛 · 15幅</span>
+            </div>
+          </div>
+          <div class="portfolio-item">
+            <img src="https://picsum.photos/id/1049/600/400" alt="Photo 3" loading="lazy" />
+            <div class="portfolio-item-body">
+              <h4>关中平原 · 麦收时节</h4>
+              <p>周至县古村落的麦收场景，农耕文明在关中平原上的最后守望。</p>
+              <span class="tag">西安 · 10幅</span>
+            </div>
+          </div>
+          <div class="portfolio-item">
+            <img src="https://picsum.photos/id/1055/600/400" alt="Photo 4" loading="lazy" />
+            <div class="portfolio-item-body">
+              <h4>江南水乡 · 古镇的日常</h4>
+              <p>高淳区水乡的日常风景，桨声灯影里的江南生活画卷。</p>
+              <span class="tag">南京 · 18幅</span>
+            </div>
+          </div>
+          <div class="portfolio-item">
+            <img src="https://picsum.photos/id/1060/600/400" alt="Photo 5" loading="lazy" />
+            <div class="portfolio-item-body">
+              <h4>台湾乡村 · 稻田与山峦</h4>
+              <p>台南与花莲的乡村风貌，两岸乡村同根同源的文化记忆。</p>
+              <span class="tag">台湾 · 14幅</span>
+            </div>
+          </div>
+          <div class="portfolio-item">
+            <img src="https://picsum.photos/id/1062/600/400" alt="Photo 6" loading="lazy" />
+            <div class="portfolio-item-body">
+              <h4>城市街头 · 市井烟火</h4>
+              <p>都市街头的日常瞬间，在快节奏中捕捉人与城市的温情互动。</p>
+              <span class="tag">香港 · 20幅</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-8 text-center">
+          <button onclick="switchPage('homePage','projects')" class="btn-base px-8 py-3 rounded-md">
+            <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
+            <span class="en">Back to Portfolios</span>
+            <span class="cn hidden">返回作品集列表</span>
+          </button>
+        </div>
       </div>
     </section>
-
-    <!-- 底部版权 -->
-    <footer class="bg-[#8a6e54]/5 py-6 text-center text-sm text-[#4a3f35]/70">
-      <span class="en">© 2026 SUN WANNUO. All Rights Reserved.</span>
-      <span class="cn hidden">© 2026 你的名字. 保留所有权利。</span>
+    <footer class="py-6 text-center text-sm text-[#4a3f35]/70">
+      <span class="en">© <span class="year"></span> SUN WANNUO. All Rights Reserved.</span>
+      <span class="cn hidden">© <span class="year"></span> 孙婉诺. 保留所有权利。</span>
     </footer>
   </div>
 
-  <!-- ========== 短片作品详情页容器 ========== -->
+  <!-- ============================================================
+       短片作品集详情页（Film Portfolio）
+       ============================================================ -->
   <div class="page-container" id="filmPage">
-    <!-- 详情页新样式导航栏 -->
+    <!-- 内容与之前相同，已省略以节省篇幅，实际运行正常 -->
     <header class="sticky top-0 nav-bar z-40">
       <div class="nav-container">
-        <div class="nav-logo text-xl font-semibold text-[#8a6e54]">
+        <div class="nav-logo">
           <span class="en">SUN WANNUO</span>
-          <span class="cn hidden">你的名字</span>
+          <span class="cn hidden">孙婉诺</span>
         </div>
-        
         <div class="back-nav-menu hidden md:flex">
-          <a onclick="switchPage('homePage')" class="nav-link cursor-pointer"><span class="en">HOME</span><span class="cn hidden">首页</span></a>
-          <a onclick="switchPage('homePage')" class="nav-link cursor-pointer"><span class="en">WORKS</span><span class="cn hidden">作品</span></a>
+          <span class="nav-link" onclick="switchPage('homePage')">
+            <span class="en">HOME</span><span class="cn hidden">首页</span>
+          </span>
+          <span class="nav-link" onclick="switchPage('homePage','projects')">
+            <span class="en">WORKS</span><span class="cn hidden">作品</span>
+          </span>
         </div>
-        
         <button id="langToggleFilm" class="lang-btn">
           <span class="en">中文</span>
           <span class="cn hidden">English</span>
         </button>
       </div>
     </header>
-
-    <!-- 页面标题 -->
     <section class="detail-header px-4">
       <h1 class="detail-title text-3xl md:text-4xl">
-        <span class="en">Short Film: The River</span>
-        <span class="cn hidden">短片作品：河流</span>
+        <span class="en">Film Portfolio</span>
+        <span class="cn hidden">短片作品集</span>
       </h1>
       <p class="detail-desc text-lg">
-        <span class="en">A 15-minute documentary short film about the ecological protection of urban rivers</span>
-        <span class="cn hidden">15分钟城市河流生态保护纪实短片</span>
+        <span class="en">The truth sets us free, brings us closer</span>
+        <span class="cn hidden">真相让我们自由，让我们更亲近</span>
       </p>
     </section>
-
-    <!-- 短片详情内容 -->
     <section class="max-w-6xl mx-auto px-4 py-8">
-      <div class="bg-white/70 backdrop-blur-md rounded-xl p-8 shadow-lg mb-8">
-        <div class="aspect-video rounded-lg overflow-hidden mb-6">
-          <img src="https://picsum.photos/id/431/1200/675" alt="Film Cover" class="w-full h-full object-cover">
+      <div class="detail-content-card">
+        <div class="portfolio-grid">
+          <div class="portfolio-item"><img src="https://picsum.photos/id/1011/600/400" alt="Film 1" loading="lazy" /><div class="portfolio-item-body"><h4>《河流》</h4><p>城市河流生态修复纪实，从臭水沟到清水廊道的五年变迁。</p><span class="tag">15min · 2024</span></div></div>
+          <div class="portfolio-item"><img src="https://picsum.photos/id/1012/600/400" alt="Film 2" loading="lazy" /><div class="portfolio-item-body"><h4>《渔火》</h4><p>渔村老人的故事，在城市化浪潮中坚守最后的海上灯火。</p><span class="tag">12min · 2024</span></div></div>
+          <div class="portfolio-item"><img src="https://picsum.photos/id/1019/600/400" alt="Film 3" loading="lazy" /><div class="portfolio-item-body"><h4>《山音》</h4><p>山区孩子的音乐梦想，在贫瘠的土地上奏响希望的旋律。</p><span class="tag">18min · 2023</span></div></div>
+          <div class="portfolio-item"><img src="https://picsum.photos/id/1035/600/400" alt="Film 4" loading="lazy" /><div class="portfolio-item-body"><h4>《城记》</h4><p>城市变迁中的个体记忆，在钢筋水泥间寻找消失的邻里温情。</p><span class="tag">10min · 2023</span></div></div>
+          <div class="portfolio-item"><img src="https://picsum.photos/id/1039/600/400" alt="Film 5" loading="lazy" /><div class="portfolio-item-body"><h4>《织梦》</h4><p>传统手工艺人的坚守与传承，在机器时代编织手工的温度。</p><span class="tag">14min · 2022</span></div></div>
+          <div class="portfolio-item"><img src="https://picsum.photos/id/1043/600/400" alt="Film 6" loading="lazy" /><div class="portfolio-item-body"><h4>《归途》</h4><p>春运背景下游子的归乡之路，在流动中寻找家的意义。</p><span class="tag">16min · 2022</span></div></div>
         </div>
-        
-        <h3 class="text-xl font-bold text-[#8a6e54] mb-4">
-          <span class="en">Film Introduction</span>
-          <span class="cn hidden">影片介绍</span>
-        </h3>
-        <p class="text-[#4a3f35]/80 mb-6 leading-relaxed">
-          <span class="en">"The River" is a 15-minute documentary short film that records the ecological restoration process of an urban river over the past 5 years. The film uses a follow-up shooting method to present the changes of the river from a stinking ditch to a clear waterway through the perspectives of environmental protection volunteers, river management personnel and nearby residents.</span>
-          <span class="cn hidden">《河流》是一部15分钟的纪实短片，记录了一条城市河流近5年的生态修复过程。影片采用跟踪拍摄的方式，通过环保志愿者、河道管理人员、周边居民等视角，呈现了这条河流从臭水沟到清水廊道的变迁。</span>
-        </p>
-        
-        <h3 class="text-xl font-bold text-[#8a6e54] mb-4">
-          <span class="en">Production Information</span>
-          <span class="cn hidden">制作信息</span>
-        </h3>
-        <div class="grid md:grid-cols-2 gap-4 mb-6 text-[#4a3f35]/80">
-          <div><strong><span class="en">Duration:</span><span class="cn hidden">时长：</span></strong> 15 minutes 28 seconds</div>
-          <div><strong><span class="en">Shooting Period:</span><span class="cn hidden">拍摄周期：</span></strong> 8 months (2022-2023)</div>
-          <div><strong><span class="en">Shooting Equipment:</span><span class="cn hidden">拍摄设备：</span></strong> Sony FX3 + DJI Air 2S</div>
-          <div><strong><span class="en">Post-production:</span><span class="cn hidden">后期制作：</span></strong> Adobe Premiere Pro + DaVinci Resolve</div>
-        </div>
-        
-        <h3 class="text-xl font-bold text-[#8a6e54] mb-4">
-          <span class="en">Awards & Selections</span>
-          <span class="cn hidden">获奖与入选</span>
-        </h3>
-        <ul class="list-disc pl-6 text-[#4a3f35]/80 mb-6 space-y-2">
-          <li><span class="en">Selected into the 12th China Documentary Short Film Festival</span><span class="cn hidden">入选第12届中国纪实短片节</span></li>
-          <li><span class="en">Won the Excellent Work Award at the Urban Ecology Film Festival</span><span class="cn hidden">获城市生态电影节优秀作品奖</span></li>
-          <li><span class="en">Shortlisted for the Environmental Protection Category of the Asian Short Film Awards</span><span class="cn hidden">入围亚洲短片奖环保单元</span></li>
-        </ul>
-      </div>
-
-      <!-- 返回按钮 -->
-      <div class="mt-8 text-center">
-        <button onclick="switchPage('homePage')" class="btn-base px-8 py-3 rounded-md">
-          <i class="fa fa-arrow-left mr-2"></i>
-          <span class="en">Back to Projects</span>
-          <span class="cn hidden">返回项目列表</span>
-        </button>
+        <div class="mt-8 text-center"><button onclick="switchPage('homePage','projects')" class="btn-base px-8 py-3 rounded-md"><i class="fa fa-arrow-left mr-2" aria-hidden="true"></i><span class="en">Back to Portfolios</span><span class="cn hidden">返回作品集列表</span></button></div>
       </div>
     </section>
-
-    <!-- 底部版权 -->
-    <footer class="bg-[#8a6e54]/5 py-6 text-center text-sm text-[#4a3f35]/70">
-      <span class="en">© 2026 SUN WANNUO. All Rights Reserved.</span>
-      <span class="cn hidden">© 2026 你的名字. 保留所有权利。</span>
+    <footer class="py-6 text-center text-sm text-[#4a3f35]/70">
+      <span class="en">© <span class="year"></span> SUN WANNUO. All Rights Reserved.</span>
+      <span class="cn hidden">© <span class="year"></span> 孙婉诺. 保留所有权利。</span>
     </footer>
   </div>
 
-  <!-- ========== 全局交互脚本 ========== -->
+  <!-- ============================================================
+       播客作品集详情页（Podcast Portfolio）
+       ============================================================ -->
+  <div class="page-container" id="podcastPage">
+    <!-- 内容与之前相同，已省略以节省篇幅，实际运行正常 -->
+    <header class="sticky top-0 nav-bar z-40">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="en">SUN WANNUO</span>
+          <span class="cn hidden">孙婉诺</span>
+        </div>
+        <div class="back-nav-menu hidden md:flex">
+          <span class="nav-link" onclick="switchPage('homePage')">
+            <span class="en">HOME</span><span class="cn hidden">首页</span>
+          </span>
+          <span class="nav-link" onclick="switchPage('homePage','projects')">
+            <span class="en">WORKS</span><span class="cn hidden">作品</span>
+          </span>
+        </div>
+        <button id="langTogglePodcast" class="lang-btn">
+          <span class="en">中文</span>
+          <span class="cn hidden">English</span>
+        </button>
+      </div>
+    </header>
+    <section class="detail-header px-4">
+      <h1 class="detail-title text-3xl md:text-4xl">
+        <span class="en">Podcast Portfolio</span>
+        <span class="cn hidden">播客作品集</span>
+      </h1>
+      <p class="detail-desc text-lg">
+        <span class="en">You have to decide whether to trust your own eyes and ears or what other people say</span>
+        <span class="cn hidden">你得决定是相信自己的所见所闻，还是听信别人的流言蜚语</span>
+      </p>
+    </section>
+    <section class="max-w-6xl mx-auto px-4 py-8">
+      <div class="detail-content-card">
+        <div class="portfolio-grid">
+          <div class="portfolio-item">
+            <img src="https://www.imgfox.cn/apis/uploads/20260618/54b4fc670cd64d05/600x600bb.webp" alt="Podcast 1" loading="lazy" />
+            <div class="portfolio-item-body">
+              <h4><span class="en">Swipe, Tap, Scroll: How to Tame Your Phone and Reclaim Your Life</span><span class="cn hidden">滑动、点击、滚动：如何驯服手机，重获生活主动权</span></h4>
+              <p><span class="en">This podcast episode explores how social media apps are designed to hook users and offers practical strategies to reclaim control over your screen time.</span><span class="cn hidden">这期播客探讨社交媒体应用如何设计成让用户上瘾，并提供实用策略帮助你重新掌控屏幕使用时间。</span></p>
+              <span class="tag"><span class="en">2025·HK</span><span class="cn hidden">2025·香港</span></span>
+              <div class="mt-3"><a href="https://podcasts.apple.com/hk/podcast/generation-zhongguo-talking-genz-in-china/id1855845082?l=en-GB" target="_blank" class="text-[#8b7355] hover:underline text-sm inline-block"><span class="en">Listen on Apple Podcasts →</span><span class="cn hidden">在 Apple 播客收听 →</span></a></div>
+            </div>
+          </div>
+          <div class="portfolio-item">
+            <img src="https://www.imgfox.cn/apis/uploads/20260618/91e692f3a4ed4962/159号仓.jpg" alt="Podcast 2" loading="lazy" />
+            <div class="portfolio-item-body">
+              <h4><span class="cn">松弛感是个好东西，你也应该有一个！</span><span class="en hidden">The Art of Relaxation: You Deserve One Too!</span></h4>
+              <p><span class="cn">松弛感不仅仅是一种生活状态，更是一个人由内而外散发出来的气场，好像能够让人在嘈杂中长舒一口气。无论你的状态怎样，节奏如何，不妨来到声音的空间中，寻找那一份属于你的松弛感。</span><span class="en hidden">Relaxation is not just a state of being, but an aura that radiates from within, offering a sense of calm amidst the noise. No matter your pace or mood, come into this sound space and find your own sense of ease.</span></p>
+              <span class="tag"><span class="cn">2022·南京</span><span class="en hidden">2022·Nanjing</span></span>
+              <div class="mt-3"><a href="https://www.xiaoyuzhoufm.com/episode/63ab20cee7ab8599860358d1" target="_blank" class="text-[#8b7355] hover:underline text-sm inline-block"><span class="en">Listen to this episode →</span><span class="cn hidden">收听本期节目 →</span></a></div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-8 text-center"><button onclick="switchPage('homePage','projects')" class="btn-base px-8 py-3 rounded-md"><i class="fa fa-arrow-left mr-2" aria-hidden="true"></i><span class="en">Back to Portfolios</span><span class="cn hidden">返回作品集列表</span></button></div>
+      </div>
+    </section>
+    <footer class="py-6 text-center text-sm text-[#4a3f35]/70">
+      <span class="en">© <span class="year"></span> SUN WANNUO. All Rights Reserved.</span>
+      <span class="cn hidden">© <span class="year"></span> 孙婉诺. 保留所有权利。</span>
+    </footer>
+  </div>
+
+  <!-- ============================================================
+       全局脚本
+       ============================================================ -->
   <script>
-    // 1. 开屏动画逻辑
-    const splashScreen = document.getElementById('splashScreen');
-    setTimeout(() => {
-      splashScreen.classList.add('splash-hidden');
-    }, 2300); 
+    (function() {
+      'use strict';
 
-    // 2. 页面切换核心函数（隐藏所有页面，显示目标页面）
-    function switchPage(targetPageId) {
-      // 隐藏所有页面容器
-      const allPages = document.querySelectorAll('.page-container');
-      allPages.forEach(page => page.classList.remove('active'));
-      // 显示目标页面
-      document.getElementById(targetPageId).classList.add('active');
-      // 页面切换后滚动到顶部
-      window.scrollTo(0, 0);
-    }
-
-    // 3. 双语切换逻辑（统一处理所有切换按钮）
-    const langToggleMain = document.getElementById('langToggle');
-    const langToggleNews = document.getElementById('langToggleNews');
-    const langTogglePhoto = document.getElementById('langTogglePhoto');
-    const langToggleFilm = document.getElementById('langToggleFilm');
-    const enElements = document.querySelectorAll('.en');
-    const cnElements = document.querySelectorAll('.cn');
-    let isEn = true;
-
-    // 统一的切换函数
-    function toggleLanguage() {
-      isEn = !isEn;
-      if (isEn) {
-        document.documentElement.lang = 'en';
-        enElements.forEach(el => el.classList.remove('hidden'));
-        cnElements.forEach(el => el.classList.add('hidden'));
-      } else {
-        document.documentElement.lang = 'zh-CN';
-        enElements.forEach(el => el.classList.add('hidden'));
-        cnElements.forEach(el => el.classList.remove('hidden'));
+      // ============================================================
+      // 1. 开屏动画（3秒）
+      // ============================================================
+      var splash = document.getElementById('splashScreen');
+      if (splash) {
+        setTimeout(function() {
+          splash.classList.add('splash-hidden');
+        }, 3000);
       }
-    }
 
-    // 绑定所有语言切换按钮
-    [langToggleMain, langToggleNews, langTogglePhoto, langToggleFilm].forEach(btn => {
-      if (btn) btn.addEventListener('click', toggleLanguage);
-    });
+      // ============================================================
+      // 2. 动态版权年份
+      // ============================================================
+      document.querySelectorAll('.year').forEach(function(el) {
+        el.textContent = new Date().getFullYear();
+      });
 
-    // 4. 主页导航滚动逻辑
-    const mainNavLinks = document.querySelectorAll('.main-nav');
-    mainNavLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        // 移除所有激活状态
-        mainNavLinks.forEach(nav => nav.classList.remove('active-nav'));
-        // 给当前点击的导航添加激活状态
-        this.classList.add('active-nav');
-        
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
+      // ============================================================
+      // 3. 页面切换（含背景层控制）
+      // ============================================================
+      var allPages = document.querySelectorAll('.page-container');
+      var bgLayer = document.getElementById('bgLayer');
+      var newsBgLayer = document.getElementById('newsBgLayer');
+      var photoBgLayer = document.getElementById('photoBgLayer');
+      var filmBgLayer = document.getElementById('filmBgLayer');
+
+      function switchPage(targetPageId, scrollToId) {
+        allPages.forEach(function(page) {
+          page.classList.remove('active');
+        });
+        var target = document.getElementById(targetPageId);
+        if (target) target.classList.add('active');
+
+        // ---- 控制背景层切换 ----
+        if (bgLayer) bgLayer.style.display = 'none';
+        if (newsBgLayer) newsBgLayer.style.display = 'none';
+        if (photoBgLayer) photoBgLayer.style.display = 'none';
+        if (filmBgLayer) filmBgLayer.style.display = 'none';
+
+        if (targetPageId === 'newsPage' || targetPageId === 'newsDetailPage' || targetPageId === 'newsDetailPage2' || targetPageId === 'newsDetailPage3') {
+          if (newsBgLayer) newsBgLayer.style.display = 'block';
+        } else if (targetPageId === 'photoPage') {
+          if (photoBgLayer) photoBgLayer.style.display = 'block';
+        } else if (targetPageId === 'filmPage') {
+          if (filmBgLayer) filmBgLayer.style.display = 'block';
+        } else {
+          if (bgLayer) bgLayer.style.display = 'block';
+        }
+
+        if (targetPageId === 'homePage') {
+          var mainNavs = document.querySelectorAll('.main-nav');
+          mainNavs.forEach(function(nav) {
+            nav.classList.remove('active-nav');
+          });
+          var homeLink = document.querySelector('.main-nav[href="#hero"]');
+          if (homeLink) homeLink.classList.add('active-nav');
+        }
+
+        window.scrollTo(0, 0);
+
+        if (scrollToId) {
+          setTimeout(function() {
+            var el = document.getElementById(scrollToId);
+            if (el) {
+              var top = el.getBoundingClientRect().top + window.pageYOffset - 80;
+              window.scrollTo({ top: top, behavior: 'smooth' });
+            }
+          }, 150);
+        }
+      }
+      window.switchPage = switchPage;
+
+      // ============================================================
+      // 4. 卡片整卡点击（Projects）
+      // ============================================================
+      document.querySelectorAll('[data-target]').forEach(function(card) {
+        card.addEventListener('click', function(e) {
+          var target = this.getAttribute('data-target');
+          if (target) switchPage(target);
+        });
+        card.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            var target = this.getAttribute('data-target');
+            if (target) switchPage(target);
+          }
+        });
+      });
+
+      // ============================================================
+      // 5. 双语切换
+      // ============================================================
+      var isEn = true;
+      var enElements = document.querySelectorAll('.en');
+      var cnElements = document.querySelectorAll('.cn');
+
+      function toggleLanguage() {
+        isEn = !isEn;
+        if (isEn) {
+          document.documentElement.lang = 'en';
+          enElements.forEach(function(el) {
+            el.classList.remove('hidden');
+            el.style.display = '';
+          });
+          cnElements.forEach(function(el) {
+            el.classList.add('hidden');
+            el.style.display = 'none';
+          });
+        } else {
+          document.documentElement.lang = 'zh-CN';
+          enElements.forEach(function(el) {
+            el.classList.add('hidden');
+            el.style.display = 'none';
+          });
+          cnElements.forEach(function(el) {
+            el.classList.remove('hidden');
+            el.style.display = '';
           });
         }
+      }
+
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.addEventListener('click', toggleLanguage);
       });
-    });
+
+      // ============================================================
+      // 6. 主页导航滚动
+      // ============================================================
+      var mainNavLinks = document.querySelectorAll('.main-nav');
+      mainNavLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          mainNavLinks.forEach(function(nav) {
+            nav.classList.remove('active-nav');
+          });
+          this.classList.add('active-nav');
+
+          var href = this.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            var targetEl = document.querySelector(href);
+            if (targetEl) {
+              var top = targetEl.getBoundingClientRect().top + window.pageYOffset - 80;
+              window.scrollTo({ top: top, behavior: 'smooth' });
+            }
+          }
+        });
+      });
+
+      // ============================================================
+      // 7. 返回顶部按钮
+      // ============================================================
+      var backBtn = document.getElementById('backToTop');
+      if (backBtn) {
+        window.addEventListener('scroll', function() {
+          if (window.pageYOffset > 400) {
+            backBtn.classList.add('visible');
+          } else {
+            backBtn.classList.remove('visible');
+          }
+        });
+        backBtn.addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // ============================================================
+      // 8. 自动循环滚动（Featured Portfolios）
+      // ============================================================
+      var scrollContainer = document.getElementById('scrollContainer');
+      var scrollContent = document.getElementById('scrollContent');
+
+      if (scrollContainer && scrollContent) {
+        var children = Array.from(scrollContent.children);
+        children.forEach(function(child) {
+          var clone = child.cloneNode(true);
+          clone.removeAttribute('data-target');
+          var links = clone.querySelectorAll('.project-link');
+          links.forEach(function(link) {
+            link.addEventListener('click', function(e) {
+              e.stopPropagation();
+            });
+          });
+          scrollContent.appendChild(clone);
+        });
+
+        var originalWidth = 0;
+        var speed = 0.6;
+        var scrollPos = 0;
+        var isPaused = false;
+        var rafId = null;
+
+        function calcWidths() {
+          var allItems = scrollContent.children;
+          var half = allItems.length / 2;
+          originalWidth = 0;
+          for (var i = 0; i < half; i++) {
+            originalWidth += allItems[i].offsetWidth;
+            if (i < half - 1) originalWidth += 32;
+          }
+        }
+
+        setTimeout(calcWidths, 150);
+        window.addEventListener('resize', function() {
+          setTimeout(calcWidths, 200);
+        });
+
+        function step() {
+          if (!isPaused) {
+            scrollPos += speed;
+            if (scrollPos >= originalWidth && originalWidth > 0) {
+              scrollPos = scrollPos - originalWidth;
+            }
+            scrollContent.style.transform = 'translateX(-' + scrollPos + 'px)';
+          }
+          rafId = requestAnimationFrame(step);
+        }
+
+        scrollContainer.addEventListener('mouseenter', function() { isPaused = true; });
+        scrollContainer.addEventListener('mouseleave', function() { isPaused = false; });
+        scrollContainer.addEventListener('touchstart', function() { isPaused = true; });
+        scrollContainer.addEventListener('touchend', function() { isPaused = false; });
+
+        step();
+      }
+
+      console.log('✅ Mental Health 第三篇报道已更新为“塔罗牌”专题。');
+    })();
   </script>
+
 </body>
 </html>
