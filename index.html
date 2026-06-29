@@ -45,7 +45,7 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      background-image: url("https://www.imgfox.cn/apis/uploads/20260616/446d44bec8cf4489/Caspar_David_Friedrich's_Chalk_Cliffs_on_Rügen.jpg");
+      background-image: url("https://s3.bmp.ovh/2026/06/21/Zw3o83Tk.jpg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -54,9 +54,6 @@
       will-change: transform;
     }
 
-    /* ============================================================
-       News 专属背景层
-       ============================================================ */
     #newsBgLayer {
       position: fixed;
       top: 0;
@@ -64,7 +61,7 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      background-image: url("https://www.imgfox.cn/apis/uploads/20260617/852c438ecc214663/%E7%AA%97%E8%BE%B9%E5%86%99%E4%BD%9C_2_%E6%A2%A6%E8%8E%B2%E6%B9%96%E5%B0%8F%E8%88%B9_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.jpg");
+      background-image: url("https://s3.bmp.ovh/2026/06/21/ShrJM0A5.jpg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -74,9 +71,6 @@
       display: none;
     }
 
-    /* ============================================================
-       Photo 专属背景层
-       ============================================================ */
     #photoBgLayer {
       position: fixed;
       top: 0;
@@ -84,7 +78,7 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      background-image: url("https://www.imgfox.cn/apis/uploads/20260617/a197c06ee6304016/%E5%A5%A5%E8%8F%B2%E8%8E%89%E4%BA%9A.jpg");
+      background-image: url("https://s3.bmp.ovh/2026/06/21/WBecnqQZ.jpg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -94,9 +88,6 @@
       display: none;
     }
 
-    /* ============================================================
-       Film 专属背景层
-       ============================================================ */
     #filmBgLayer {
       position: fixed;
       top: 0;
@@ -104,7 +95,24 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      background-image: url("https://www.imgfox.cn/apis/uploads/20260617/08652f12cf4d463e/G0uzcarXoAAkU64.jpeg");
+      background-image: url("https://s3.bmp.ovh/2026/06/21/59a3jnbW.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(2px);
+      transform: scale(1.02);
+      will-change: transform;
+      display: none;
+    }
+
+    #podcastBgLayer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image: url("https://s3.bmp.ovh/2026/06/21/6sdZesS0.jpg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -149,7 +157,7 @@
     }
 
     /* ============================================================
-       开屏动画（3秒）
+       开屏动画（2秒）
        ============================================================ */
     .splash-screen {
       position: fixed;
@@ -189,7 +197,7 @@
       background-size: 0% 100%;
       background-repeat: no-repeat;
       color: transparent;
-      animation: textWrite 2.4s ease-in-out forwards;
+      animation: textWrite 1.8s ease-in-out forwards;
       z-index: 5;
     }
     .pen-icon {
@@ -198,7 +206,7 @@
       font-size: 24px;
       opacity: 1;
       transform: rotate(-30deg);
-      animation: penWrite 2.4s ease-in-out forwards, penFadeOut 0.3s ease-in-out 2.2s forwards;
+      animation: penWrite 1.8s ease-in-out forwards, penFadeOut 0.3s ease-in-out 1.6s forwards;
       z-index: 10;
     }
     .loading-text {
@@ -206,7 +214,7 @@
       color: var(--black-soft);
       opacity: 0.7;
       margin-top: 10px;
-      animation: fadePulse 2s ease-in-out infinite;
+      animation: fadePulse 1.5s ease-in-out infinite;
     }
     @keyframes penWrite {
       0% { top: 45px; left: 60px; transform: rotate(-30deg); }
@@ -228,24 +236,59 @@
     /* ============================================================
        主页组件
        ============================================================ */
-    .hero-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.15;
-      z-index: -1;
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 1.5rem;
+      overflow: hidden;
+      background: rgba(255, 253, 248, 0.2);
     }
-    .hero-overlay {
+    .hero-bg {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to bottom, rgba(255, 253, 248, 0.6), rgba(255, 253, 248, 0.75));
-      z-index: -1;
+      background-image: url("https://s3.bmp.ovh/2026/06/30/N10MMEcc.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 0;
+      opacity: 0.55;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: rgba(255, 253, 248, 0.2);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .hero-content h1 {
+      color: var(--oil-dark);
+      text-shadow: 0 2px 20px rgba(255, 253, 248, 0.4);
+    }
+    .hero-content p {
+      color: var(--oil-dark);
+      text-shadow: 0 2px 12px rgba(255, 253, 248, 0.3);
+    }
+    .hero-content .btn-base {
+      background: rgba(255, 253, 248, 0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-color: rgba(139, 115, 85, 0.3);
+    }
+    .hero-content .btn-base:hover {
+      background: rgba(255, 253, 248, 0.95);
     }
 
     .card-art {
@@ -341,6 +384,8 @@
       -webkit-backdrop-filter: blur(16px);
       border-bottom: none;
       padding: 1.5rem 0;
+      position: relative;
+      z-index: 10;
     }
     .nav-container {
       max-width: 1280px;
@@ -544,6 +589,34 @@
       color: var(--oil-gold-dark);
       letter-spacing: 0.02em;
     }
+    /* 视频链接样式 */
+    .video-link {
+      font-size: 0.8rem;
+      color: var(--oil-gold-dark);
+      margin-top: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+      word-break: break-all;
+    }
+    .video-link a {
+      color: var(--oil-gold-dark);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color 0.2s ease;
+    }
+    .video-link a:hover {
+      color: var(--sargent-brown);
+    }
+    .video-link .extract-code {
+      background: rgba(139, 115, 85, 0.12);
+      padding: 0.05rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--oil-gold-dark);
+    }
 
     /* Podcast 详情页专用：只保留两列 */
     #podcastPage .portfolio-grid {
@@ -737,143 +810,195 @@
     }
 
     /* ============================================================
-       Core Strengths — 2x2 全图毛玻璃卡片
+       Core Strengths — 水平标签布局
        ============================================================ */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+    .skills-wrapper {
+      text-align: center;
       max-width: 1000px;
       margin: 0 auto;
+      padding: 0 1rem;
     }
 
-    .skill-card {
-      position: relative;
-      border-radius: 1.5rem;
-      overflow: hidden;
-      min-height: 260px;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-      text-decoration: none;
+    .skills-headline {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--sargent-brown);
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .skills-subhead {
+      font-size: 1rem;
+      color: var(--oil-dark);
+      opacity: 0.7;
+      font-style: italic;
+      letter-spacing: 0.06em;
+      margin-bottom: 2rem;
+    }
+
+    .skills-tags {
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
       justify-content: center;
+      gap: 1rem 1.5rem;
+      margin-top: 0.5rem;
     }
 
-    .skill-glass {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    .skill-tag {
+      display: inline-block;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--oil-dark);
+      background: rgba(255, 253, 248, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.4rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid rgba(184, 180, 172, 0.3);
+      box-shadow: 0 4px 16px var(--gradient-1);
+      transition: all 0.3s ease;
+      letter-spacing: 0.03em;
+      cursor: default;
+    }
+    .skill-tag:hover {
+      background: rgba(255, 253, 248, 0.95);
+      border-color: var(--oil-gold);
+      box-shadow: 0 8px 32px var(--gradient-1);
+      transform: scale(1.05);
+      color: var(--oil-gold-dark);
+    }
+
+    @media (max-width: 640px) {
+      .skills-headline {
+        font-size: 1.6rem;
+      }
+      .skills-subhead {
+        font-size: 0.9rem;
+      }
+      .skill-tag {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.9rem;
+      }
+      .skills-tags {
+        gap: 0.6rem 1rem;
+      }
+    }
+
+    /* ============================================================
+       摄影画廊专用样式
+       ============================================================ */
+    .gallery-section {
+      margin-bottom: 3rem;
+    }
+    .gallery-section:last-of-type {
+      margin-bottom: 0;
+    }
+    .gallery-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--sargent-brown);
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid rgba(139, 115, 85, 0.2);
+    }
+
+    .gallery-container {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: visible;
+      padding: 20px 0 30px 0;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 10px;
+      scroll-padding: 0 50%;
+    }
+    .gallery-container::-webkit-scrollbar {
+      height: 6px;
+      background: rgba(184, 180, 172, 0.2);
+      border-radius: 3px;
+    }
+    .gallery-container::-webkit-scrollbar-thumb {
+      background: var(--oil-gold);
+      border-radius: 3px;
+    }
+
+    .photo-item {
+      flex: 0 0 auto;
+      width: 200px;
+      height: 150px;
+      margin: 0 5px;
+      scroll-snap-align: center;
+      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                  opacity 0.3s ease,
+                  box-shadow 0.3s ease;
+      transform: scale(0.8);
+      opacity: 0.6;
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 1.8rem 1.5rem;
+      justify-content: flex-start;
+      will-change: transform, opacity;
+    }
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: box-shadow 0.3s ease;
+      background: rgba(255,255,255,0.05);
+    }
+    .photo-item figcaption {
+      margin-top: 6px;
+      font-size: 0.75rem;
+      color: var(--oil-dark);
       text-align: center;
-      background: rgba(255, 253, 248, 0.15);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-      color: #fff;
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+      line-height: 1.2;
+      max-width: 180px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .photo-item.active {
+      transform: scale(1.15);
+      opacity: 1;
+      z-index: 2;
+    }
+    .photo-item.active figcaption {
+      opacity: 1;
+      color: var(--oil-gold-dark);
+    }
+    .photo-item:hover img {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
 
-    .skill-glass h3 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 0.3rem;
-      letter-spacing: 0.04em;
-      color: #fff;
-      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
-    }
-    .skill-glass p {
-      font-size: 1rem;
-      opacity: 0.92;
-      max-width: 85%;
-      margin: 0;
-      color: #fff;
-      text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
-    }
-
-    .skill-card-1:hover {
-      transform: translateY(-16px) scale(1.04);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
-    }
-    .skill-card-1:hover .skill-glass {
-      background: rgba(255, 253, 248, 0.20);
-      backdrop-filter: blur(10px);
-    }
-
-    .skill-card-2:hover {
-      transform: rotate(3deg) scale(1.04);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
-    }
-    .skill-card-2:hover .skill-glass {
-      background: rgba(255, 253, 248, 0.20);
-      backdrop-filter: blur(10px);
-    }
-
-    .skill-card-3:hover {
-      transform: perspective(1000px) rotateX(6deg) rotateY(6deg) translateY(-8px);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35), 0 0 40px rgba(212, 185, 140, 0.5);
-      border: 1px solid rgba(212, 185, 140, 0.6);
-    }
-    .skill-card-3:hover .skill-glass {
-      background: rgba(255, 253, 248, 0.20);
-      backdrop-filter: blur(10px);
-    }
-
-    .skill-card-4:hover {
-      animation: pulseGlowCard 1.2s ease-in-out infinite;
-      box-shadow: 0 0 40px rgba(139, 115, 85, 0.4);
-    }
-    .skill-card-4:hover .skill-glass {
-      background: rgba(255, 253, 248, 0.22);
-      backdrop-filter: blur(10px);
-    }
-    @keyframes pulseGlowCard {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.04); box-shadow: 0 0 50px rgba(139, 115, 85, 0.5); }
-      100% { transform: scale(1); }
-    }
-
-    /* 响应式 */
+    /* 响应式调整 */
     @media (max-width: 768px) {
-      .skills-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 0 1rem;
+      .photo-item {
+        width: 150px;
+        height: 112px;
       }
-      .skill-card {
-        min-height: 200px;
+      .photo-item.active {
+        transform: scale(1.1);
       }
-      .skill-glass h3 {
-        font-size: 1.3rem;
-      }
-      .skill-glass p {
-        font-size: 0.9rem;
-      }
-      .skill-card-2:hover {
-        transform: rotate(1.5deg) scale(1.02);
-      }
-      .skill-card-3:hover {
-        transform: perspective(600px) rotateX(3deg) rotateY(3deg) translateY(-4px);
+      .gallery-container {
+        padding: 10px 0 20px 0;
       }
     }
     @media (max-width: 480px) {
-      .page-container {
-        backdrop-filter: blur(1px);
-        -webkit-backdrop-filter: blur(1px);
-        background: rgba(255, 253, 248, 0.45);
+      .photo-item {
+        width: 120px;
+        height: 90px;
+        margin: 0 3px;
       }
-      .skill-card {
-        min-height: 170px;
+      .photo-item figcaption {
+        font-size: 0.6rem;
+        max-width: 100px;
       }
     }
 
@@ -939,7 +1064,12 @@
   <div id="filmBgLayer"></div>
 
   <!-- ============================================================
-       开屏动画（3秒）
+       Podcast 专属背景层
+       ============================================================ -->
+  <div id="podcastBgLayer"></div>
+
+  <!-- ============================================================
+       开屏动画（2秒）
        ============================================================ -->
   <div class="splash-screen" id="splashScreen">
     <div class="handwriting-container">
@@ -992,28 +1122,25 @@
       </div>
     </header>
 
-    <!-- Hero -->
-    <section id="hero" class="h-screen relative flex flex-col">
-      <video class="hero-video" autoplay loop muted playsinline preload="metadata">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-water-21764-large.mp4" type="video/mp4" />
-      </video>
-      <div class="hero-overlay"></div>
-      <div class="flex-1 flex flex-col justify-center items-center text-center px-6">
-        <h1 class="text-4xl md:text-6xl font-bold mb-4 text-[#8b7355] leading-tight">
+    <!-- Hero — 包含新背景图 -->
+    <section id="hero" class="hero-section">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 text-[#1e2429] leading-tight">
           <span class="en">Storytelling with<br />Words &amp; Images</span>
           <span class="cn hidden text-3xl md:text-5xl">用文字与影像<br />讲述真实故事</span>
         </h1>
-        <p class="text-lg md:text-xl text-[#1e2429]/80 max-w-2xl mb-8">
+        <p class="text-lg md:text-xl text-[#1e2429]/90 max-w-2xl mb-8">
           <span class="en">Journalism · Photography · Filmmaking</span>
           <span class="cn hidden">新闻报道 · 摄影创作 · 影像制作</span>
         </p>
-        <a href="#projects" class="btn-base px-8 py-3 rounded-md text-base font-medium">
+        <a href="#projects" class="btn-base px-8 py-3 rounded-md text-base font-medium inline-block">
           <span class="en">View My Works</span><span class="cn hidden">查看我的作品</span>
         </a>
       </div>
     </section>
 
-    <!-- About Me -->
+    <!-- About Me — 已更新内容和标签，Hobby 改为 Tennis -->
     <section id="experience" class="max-w-6xl mx-auto px-4 py-20">
       <h2 class="text-2xl md:text-3xl font-bold mb-12 text-center text-[#8b7355]">
         <span class="en">About Me</span>
@@ -1022,11 +1149,10 @@
       <div class="grid md:grid-cols-3 gap-8 items-center">
         <div class="text-center">
           <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-[#b8b4ac]/50 mx-auto mb-4">
-            <img src="https://www.imgfox.cn/apis/uploads/20260616/9ee0c5fbca9941c8/hoga%202026-04-08%2019082451172BD3EB6A.JPG"
+            <img src="https://s3.bmp.ovh/2026/06/21/WERrHldk.jpg"
                  alt="Portrait"
                  class="w-full h-full object-cover"
-                 loading="lazy"
-                 onerror="this.onerror=null; this.src='https://picsum.photos/id/64/400/400';" />
+                 loading="lazy" />
           </div>
           <h3 class="font-bold text-lg text-[#8b7355]">
             <span class="en">SUN WANNUO</span>
@@ -1035,8 +1161,8 @@
         </div>
         <div class="md:col-span-2">
           <p class="text-[#1e2429]/90 mb-6 leading-relaxed">
-            <span class="en">With 5+ years of experience in in-depth news reporting, documentary photography and short film production, I have published 80+ news articles, completed 20+ photography series, and produced 15+ short films. Focus on recording social reality and expressing humanistic care through professional and artistic methods.</span>
-            <span class="cn hidden">拥有5年+深度新闻报道、纪实摄影与短片制作经验，累计刊发80+篇新闻稿件，完成20+组摄影系列作品，制作15+部短片。专注以专业且艺术的方式记录社会现实，表达人文关怀。</span>
+            <span class="en">Background in journalism and communication, with a focus on arts and culture, gender equality, and mental health. Capable of producing multi-format content including graphics, video, and podcast, with proficiency in AIGC tools for workflow optimization. Previously ran an independent account from content creation to monetization. Bilingual in Chinese and English, with cross-cultural storytelling capabilities.</span>
+            <span class="cn hidden">新闻与传播学背景，关注人文艺术、性别平等、心理健康等社会议题。能独立完成图文、视频、播客等多形态内容创作，熟练运用 AIGC 工具提升产出效率。有独立操盘自媒体账号并实现商业变现的经验，具备中英双语内容创作与跨文化传播能力。</span>
           </p>
           <div class="grid grid-cols-3 gap-4 mb-6">
             <div class="text-center p-4 info-card">
@@ -1044,8 +1170,11 @@
               <div class="text-sm"><span class="en">Age</span><span class="cn hidden">年龄</span></div>
             </div>
             <div class="text-center p-4 info-card">
-              <div class="text-2xl font-bold text-[#8b7355]">HK</div>
-              <div class="text-sm"><span class="en">Location</span><span class="cn hidden">所在地</span></div>
+              <div class="text-2xl font-bold text-[#8b7355]">
+                <span class="en">Tennis</span>
+                <span class="cn hidden">网球</span>
+              </div>
+              <div class="text-sm"><span class="en">Hobby</span><span class="cn hidden">爱好</span></div>
             </div>
             <div class="text-center p-4 info-card">
               <div class="text-2xl font-bold text-[#8b7355]">MA</div>
@@ -1073,15 +1202,15 @@
         <div class="scroll-content" id="scrollContent">
           <!-- 卡片1：新闻作品集 -->
           <div class="card-art rounded-xl overflow-hidden scroll-item cursor-pointer" data-target="newsPage" role="button" tabindex="0">
-            <img src="https://www.imgfox.cn/apis/uploads/20260618/365f0d88997e4a94/生命之旅青年.jpg" alt="News Portfolio" class="w-full h-60 object-cover" loading="lazy" />
+            <img src="https://s3.bmp.ovh/2026/06/21/hXSV2tok.jpg" alt="News Portfolio" class="w-full h-60 object-cover" loading="lazy" />
             <div class="p-6">
               <h3 class="font-bold text-xl mb-2 text-[#8b7355]">
-                <span class="en">News Portfolio</span>
-                <span class="cn hidden">新闻作品集</span>
+                <span class="en">📰 News Portfolio</span>
+                <span class="cn hidden">📰 新闻作品集</span>
               </h3>
               <p class="text-[#1e2429]/80 mb-4">
-                <span class="en">A collection of in-depth reports and feature stories covering society, culture, and urban development.</span>
-                <span class="cn hidden">汇聚多篇深度报道与新闻特稿，涵盖社会、文化、城市发展等多个领域。</span>
+                <span class="en">A collection of in‑depth reports and feature stories covering mental health, gender issues, food culture, and urban life.</span>
+                <span class="cn hidden">汇聚多篇深度报道与新闻特稿，涵盖心理健康、性别议题、饮食文化及城市生活等多个领域。</span>
               </p>
               <div class="project-link text-[#8b7355] flex items-center gap-1" onclick="event.stopPropagation(); switchPage('newsPage')">
                 <span class="en">View Portfolio</span><span class="cn hidden">查看作品集</span>
@@ -1092,15 +1221,15 @@
 
           <!-- 卡片2：摄影作品集 -->
           <div class="card-art rounded-xl overflow-hidden scroll-item cursor-pointer" data-target="photoPage" role="button" tabindex="0">
-            <img src="https://www.imgfox.cn/apis/uploads/20260618/3b2a63995d014490/生之岛.jpeg" alt="Photography Portfolio" class="w-full h-60 object-cover" loading="lazy" />
+            <img src="https://s3.bmp.ovh/2026/06/21/xGzVn6BQ.jpg" alt="Photography Portfolio" class="w-full h-60 object-cover" loading="lazy" />
             <div class="p-6">
               <h3 class="font-bold text-xl mb-2 text-[#8b7355]">
-                <span class="en">Photography Portfolio</span>
-                <span class="cn hidden">摄影作品集</span>
+                <span class="en">📷 Photography Portfolio</span>
+                <span class="cn hidden">📷 摄影作品集</span>
               </h3>
               <p class="text-[#1e2429]/80 mb-4">
-                <span class="en">A collection of documentary photography series capturing rural changes, urban memories, and human stories.</span>
-                <span class="cn hidden">汇聚多个纪实摄影系列，记录乡村变迁、城市记忆与人文故事。</span>
+                <span class="en">A series of documentary photography capturing rural changes, urban memories, and human stories.</span>
+                <span class="cn hidden">一系列纪实摄影系列，记录乡村变迁、城市记忆与人文故事。</span>
               </p>
               <div class="project-link text-[#8b7355] flex items-center gap-1" onclick="event.stopPropagation(); switchPage('photoPage')">
                 <span class="en">View Portfolio</span><span class="cn hidden">查看作品集</span>
@@ -1111,15 +1240,15 @@
 
           <!-- 卡片3：短片作品集 -->
           <div class="card-art rounded-xl overflow-hidden scroll-item-lg cursor-pointer" data-target="filmPage" role="button" tabindex="0">
-            <img src="https://www.imgfox.cn/apis/uploads/20260618/9c5e09efe7984602/失乐园.jpg" alt="Film Portfolio" class="w-full h-60 object-cover" loading="lazy" />
+            <img src="https://s3.bmp.ovh/2026/06/21/gdw6aXld.jpg" alt="Film Portfolio" class="w-full h-60 object-cover" loading="lazy" />
             <div class="p-6">
               <h3 class="font-bold text-xl mb-2 text-[#8b7355]">
-                <span class="en">Film Portfolio</span>
-                <span class="cn hidden">短片作品集</span>
+                <span class="en">🎞️ Film Portfolio</span>
+                <span class="cn hidden">🎞️ 短片作品集</span>
               </h3>
               <p class="text-[#1e2429]/80 mb-4 max-w-3xl">
-                <span class="en">A collection of documentaries and short films focusing on ecology, humanity, and social issues.</span>
-                <span class="cn hidden">汇聚多部纪录片与短片，关注生态、人文与社会议题。</span>
+                <span class="en">Three documentaries and short films exploring local creativity, intangible cultural heritage, and family bonds.</span>
+                <span class="cn hidden">三部纪录片与短片，探索本土创意、非遗传承与家庭羁绊。</span>
               </p>
               <div class="project-link text-[#8b7355] flex items-center gap-1" onclick="event.stopPropagation(); switchPage('filmPage')">
                 <span class="en">View Portfolio</span><span class="cn hidden">查看作品集</span>
@@ -1130,15 +1259,15 @@
 
           <!-- 卡片4：播客作品集 -->
           <div class="card-art rounded-xl overflow-hidden scroll-item cursor-pointer" data-target="podcastPage" role="button" tabindex="0">
-            <img src="https://www.imgfox.cn/apis/uploads/20260618/85e3e93a14fe4e24/巴别塔.jpg" alt="Podcast Portfolio" class="w-full h-60 object-cover" loading="lazy" />
+            <img src="https://s3.bmp.ovh/2026/06/21/cd6xKeXt.jpg" alt="Podcast Portfolio" class="w-full h-60 object-cover" loading="lazy" />
             <div class="p-6">
               <h3 class="font-bold text-xl mb-2 text-[#8b7355]">
-                <span class="en">Podcast Portfolio</span>
-                <span class="cn hidden">播客作品集</span>
+                <span class="en">🎧 Podcast Portfolio</span>
+                <span class="cn hidden">🎧 播客作品集</span>
               </h3>
               <p class="text-[#1e2429]/80 mb-4">
-                <span class="en">A collection of podcast episodes exploring media, culture, society, and human stories.</span>
-                <span class="cn hidden">汇集多期播客节目，探讨媒体、文化、社会与人文故事。</span>
+                <span class="en">Two podcast episodes on digital wellbeing and the art of relaxation in modern life.</span>
+                <span class="cn hidden">两期播客节目，探讨数字时代的心理健康与松弛生活艺术。</span>
               </p>
               <div class="project-link text-[#8b7355] flex items-center gap-1" onclick="event.stopPropagation(); switchPage('podcastPage')">
                 <span class="en">View Portfolio</span><span class="cn hidden">查看作品集</span>
@@ -1150,42 +1279,27 @@
       </div>
     </section>
 
-    <!-- Core Strengths -->
+    <!-- Core Strengths — 水平标签布局 -->
     <section id="advantages" class="max-w-6xl mx-auto px-4 py-20">
-      <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center text-[#8b7355]">
-        <span class="en">Core Strengths</span>
-        <span class="cn hidden">个人优势</span>
-      </h2>
-      <p class="text-center text-[#1e2429]/80 mb-10">
-        <span class="en">Hover over each card to experience different dynamic effects</span>
-        <span class="cn hidden">✨ 悬停每张卡片，体验不同的动态效果</span>
-      </p>
+      <div class="skills-wrapper">
+        <div class="skills-headline">
+          <span class="en">What I bring<br />to the table</span>
+          <span class="cn hidden">我所能带来的</span>
+        </div>
+        <div class="skills-subhead">
+          <span class="en">Say yes to new adventures</span>
+          <span class="cn hidden">对新的冒险说“是”</span>
+        </div>
 
-      <div class="skills-grid">
-        <a href="#" class="skill-card skill-card-1" style="background-image: url('https://picsum.photos/id/1/600/400');" onclick="event.preventDefault();">
-          <div class="skill-glass">
-            <h3><span class="en">News Writing</span><span class="cn hidden">新闻写作</span></h3>
-            <p><span class="en">In-depth features &amp; interviews</span><span class="cn hidden">深度特稿与采访</span></p>
-          </div>
-        </a>
-        <a href="#" class="skill-card skill-card-2" style="background-image: url('https://picsum.photos/id/20/600/400');" onclick="event.preventDefault();">
-          <div class="skill-glass">
-            <h3><span class="en">Documentary Photography</span><span class="cn hidden">纪实摄影</span></h3>
-            <p><span class="en">Capture real moments</span><span class="cn hidden">捕捉真实瞬间</span></p>
-          </div>
-        </a>
-        <a href="#" class="skill-card skill-card-3" style="background-image: url('https://picsum.photos/id/30/600/400');" onclick="event.preventDefault();">
-          <div class="skill-glass">
-            <h3><span class="en">Video Production</span><span class="cn hidden">视频制作</span></h3>
-            <p><span class="en">Shoot · Edit · Color</span><span class="cn hidden">拍摄 · 剪辑 · 调色</span></p>
-          </div>
-        </a>
-        <a href="#" class="skill-card skill-card-4" style="background-image: url('https://picsum.photos/id/40/600/400');" onclick="event.preventDefault();">
-          <div class="skill-glass">
-            <h3><span class="en">Cross-cultural Comm.</span><span class="cn hidden">跨文化沟通</span></h3>
-            <p><span class="en">Bilingual storytelling</span><span class="cn hidden">双语讲述故事</span></p>
-          </div>
-        </a>
+        <div class="skills-tags">
+          <span class="skill-tag"><span class="en">Bilingual Proficiency</span><span class="cn hidden">双语技能</span></span>
+          <span class="skill-tag"><span class="en">Visual Aesthetics</span><span class="cn hidden">视觉审美</span></span>
+          <span class="skill-tag"><span class="en">AI Tool Proficiency</span><span class="cn hidden">AI 工具运用</span></span>
+          <span class="skill-tag"><span class="en">Research &amp; Analysis</span><span class="cn hidden">研究与分析</span></span>
+          <span class="skill-tag"><span class="en">Interpersonal &amp; Storytelling Skills</span><span class="cn hidden">人际沟通与叙事</span></span>
+          <span class="skill-tag"><span class="en">Creative Strategy</span><span class="cn hidden">创意策划与执行</span></span>
+          <span class="skill-tag"><span class="en">Content &amp; Social Media</span><span class="cn hidden">内容与社媒运营</span></span>
+        </div>
       </div>
     </section>
 
@@ -1262,7 +1376,7 @@
         <!-- ===== 板块 1：Mental Health ===== -->
         <div class="news-section">
           <div class="section-headline">
-            <span>🧠</span>
+            <span>🤍</span>
             <span class="en">Mental Health</span>
             <span class="cn hidden">心理健康</span>
             <span class="line"></span>
@@ -1271,7 +1385,7 @@
           <!-- 文章 1：中药方剂 -->
           <div class="news-article-item" onclick="switchPage('newsDetailPage')">
             <div class="news-article-thumb">
-              <img src="https://static.wixstatic.com/media/830db2_7c443365ff4e48a88421f3bb9e05f6eb~mv2.png/v1/fill/w_652,h_800,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/TCM.png" alt="TCM Herbal Formula" loading="lazy" />
+              <img src="https://s3.bmp.ovh/2026/06/21/QIgnSGQk.png" alt="TCM Herbal Formula" loading="lazy" />
             </div>
             <div class="news-article-content">
               <h5>
@@ -1295,10 +1409,10 @@
             </div>
           </div>
 
-          <!-- 文章 2：以老护老 -->
+          <!-- 文章 2：家庭照顾者 -->
           <div class="news-article-item" onclick="switchPage('newsDetailPage2')">
             <div class="news-article-thumb">
-              <img src="https://static.wixstatic.com/media/830db2_87a63897997c4aa8a3f945eff61d3116~mv2.jpg/v1/fill/w_710,h_870,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/JC.jpg" alt="Elderly Caregivers" loading="lazy" />
+              <img src="https://s3.bmp.ovh/2026/06/21/I5wLSM9L.png" alt="Elderly Caregivers" loading="lazy" />
             </div>
             <div class="news-article-content">
               <h5>
@@ -1322,10 +1436,10 @@
             </div>
           </div>
 
-          <!-- 文章 3：塔罗牌（新增） -->
+          <!-- 文章 3：塔罗牌 -->
           <div class="news-article-item" onclick="switchPage('newsDetailPage3')">
             <div class="news-article-thumb">
-              <img src="https://static.wixstatic.com/media/830db2_6c87dccbc15a4db9b967827e34184fac~mv2.jpg/v1/fill/w_710,h_870,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Tarot.jpg" alt="Tarot Cards" loading="lazy" />
+              <img src="https://s3.bmp.ovh/2026/06/21/12HrA0Zw.png" alt="Tarot Cards" loading="lazy" />
             </div>
             <div class="news-article-content">
               <h5>
@@ -1359,173 +1473,173 @@
             <span class="line"></span>
           </div>
 
-          <!-- 文章 1 -->
-         <!-- 替换后的 Gender Issue 文章 1 -->
-<div class="news-article-item" onclick="switchPage('genderDetailPage1')">
-  <div class="news-article-thumb">
-    <img src="https://www.imgfox.cn/apis/uploads/20260618/383584ea8b0f44ce/IMG_3414.JPG" alt="Elderly Women Poverty" loading="lazy" />
-  </div>
-  <div class="news-article-content">
-    <h5>
-      <span class="en">“I have HK$4,700 in my bank account”: Elderly Women in Hong Kong Are Poorer Due to Systemic Gender Inequality</span>
-      <span class="cn hidden">“我银行账户里只有4700港币”：系统性性别不平等导致香港老年女性更贫困</span>
-    </h5>
-    <p class="excerpt">
-      <span class="en">Elderly women in Hong Kong are disproportionately poorer than men, with 72.3% of elderly CSSA recipients being women. Many worked all their lives but have no savings due to family duties and lack of education.</span>
-      <span class="cn hidden">香港老年女性贫困率远高于男性，72.3%的综援长者受助人为女性。许多人辛劳一生却因家庭责任和缺乏教育而无积蓄。</span>
-    </p>
-    <div class="news-article-meta">
-      <span><i class="fa fa-comment-o" aria-hidden="true"></i> 421</span>
-      <span><i class="fa fa-heart-o" aria-hidden="true"></i> 0</span>
-      <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 18</span>
-      <span>·</span>
-      <span>
-        <span class="en">By Vicky Sun · Jun 17, 2026</span>
-        <span class="cn hidden">作者：Vicky Sun · 2026年6月17日</span>
-      </span>
-    </div>
-  </div>
-</div>
-          <!-- 文章 2 -->
-          <div class="news-article-item">
+          <!-- 文章 1：香港年长女性困境 -->
+          <div class="news-article-item" onclick="switchPage('genderDetailPage1')">
             <div class="news-article-thumb">
-              <img src="https://picsum.photos/id/112/200/140" alt="Gender 2" loading="lazy" />
+              <img src="https://s3.bmp.ovh/2026/06/21/vfyRpn9O.jpg" alt="Elderly Women Poverty" loading="lazy" />
             </div>
             <div class="news-article-content">
               <h5>
-                <span class="en">Breaking the glass ceiling: Women in leadership</span>
-                <span class="cn hidden">打破玻璃天花板：女性领导力</span>
+                <span class="en">"I have HK$4,700 in my bank account": Elderly Women in Hong Kong Are Poorer Due to Systemic Gender Inequality</span>
+                <span class="cn hidden">“我银行账户里只有4700港币”：系统性性别不平等导致香港老年女性更贫困</span>
               </h5>
               <p class="excerpt">
-                <span class="en">Despite progress, women remain underrepresented in top positions. What's holding us back?</span>
-                <span class="cn hidden">尽管取得了进步，女性在高层职位中的比例仍然不足。是什么在阻碍我们？</span>
+                <span class="en">Elderly women in Hong Kong are disproportionately poorer than men, with 72.3% of elderly CSSA recipients being women. Many worked all their lives but have no savings due to family duties and lack of education.</span>
+                <span class="cn hidden">香港老年女性贫困率远高于男性，72.3%的综援长者受助人为女性。许多人辛劳一生却因家庭责任和缺乏教育而无积蓄。</span>
               </p>
               <div class="news-article-meta">
-                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 89</span>
+                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 421</span>
                 <span><i class="fa fa-heart-o" aria-hidden="true"></i> 0</span>
-                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 4</span>
+                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 18</span>
                 <span>·</span>
                 <span>
-                  <span class="en">Business</span>
-                  <span class="cn hidden">商业</span>
+                  <span class="en">By Vicky Sun · Jun 17, 2026</span>
+                  <span class="cn hidden">作者：Vicky Sun · 2026年6月17日</span>
                 </span>
               </div>
             </div>
           </div>
 
-          <!-- 文章 3 -->
-          <div class="news-article-item">
+          <!-- 文章 2：月经报道 -->
+          <div class="news-article-item" onclick="switchPage('genderDetailPage2')">
             <div class="news-article-thumb">
-              <img src="https://picsum.photos/id/114/200/140" alt="Gender 3" loading="lazy" />
+              <img src="https://s3.bmp.ovh/2026/06/21/zirPgrjk.png" alt="Menstruation Exhibition" loading="lazy" />
             </div>
             <div class="news-article-content">
               <h5>
-                <span class="en">Beyond the binary: Understanding gender identity today</span>
-                <span class="cn hidden">超越二元：理解当代性别认同</span>
+                <span class="en">From Taboo to Talk: China's Shifting Attitudes Toward Menstruation</span>
+                <span class="cn hidden">从禁忌到公开谈论：中国对月经态度的转变</span>
               </h5>
               <p class="excerpt">
-                <span class="en">A conversation with experts on how we can create more inclusive spaces for all gender identities.</span>
-                <span class="cn hidden">与专家对话：如何为所有性别认同创造更具包容性的空间。</span>
+                <span class="en">Once seen as dirty and shameful, menstrual blood is now turned into paintings and embroidered art pieces. Public art exhibitions and university initiatives are challenging period shame across China.</span>
+                <span class="cn hidden">曾经被视为肮脏和羞耻的经血，如今被转化为绘画和刺绣艺术品。公共艺术展览和大学校园行动正在挑战中国的月经羞耻。</span>
               </p>
               <div class="news-article-meta">
-                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 203</span>
+                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 567</span>
                 <span><i class="fa fa-heart-o" aria-hidden="true"></i> 0</span>
-                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 9</span>
+                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 23</span>
                 <span>·</span>
                 <span>
-                  <span class="en">Culture</span>
-                  <span class="cn hidden">文化</span>
+                  <span class="en">By Vicky Sun · Apr 22, 2026</span>
+                  <span class="cn hidden">作者：Vicky Sun · 2026年4月22日</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 文章 3：重男轻女 -->
+          <div class="news-article-item" onclick="switchPage('genderDetailPage3')">
+            <div class="news-article-thumb">
+              <img src="https://s3.bmp.ovh/2026/06/21/Wbqpo2hC.jpg" alt="Invisible Son Preference" loading="lazy" />
+            </div>
+            <div class="news-article-content">
+              <h5>
+                <span class="en">Invisible Son Preference: Urban Daughters Denied Equal Inheritance of Parental Real Estate</span>
+                <span class="cn hidden">隐形重男轻女：城市女儿被剥夺父母房产平等继承权</span>
+              </h5>
+              <p class="excerpt">
+                <span class="en">Even in cities that advocate equality, 70.2% of urban parents provide down payments for sons' wedding homes, while only 13.1% do so for daughters. Daughters are often denied equal inheritance due to traditional patriarchal norms.</span>
+                <span class="cn hidden">即使在倡导平等的城市，70.2%的城市父母为儿子提供婚房首付，而为女儿提供的仅占13.1%。女儿常常因传统父权观念而被剥夺平等继承权。</span>
+              </p>
+              <div class="news-article-meta">
+                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 498</span>
+                <span><i class="fa fa-heart-o" aria-hidden="true"></i> 0</span>
+                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 29</span>
+                <span>·</span>
+                <span>
+                  <span class="en">By Vicky Sun · Mar 20, 2026</span>
+                  <span class="cn hidden">作者：Vicky Sun · 2026年3月20日</span>
                 </span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- ===== 板块 3：Food Review ===== -->
+        <!-- ===== 板块 3：Food Culture ===== -->
         <div class="news-section">
           <div class="section-headline">
             <span>🍽️</span>
-            <span class="en">Food Review</span>
-            <span class="cn hidden">美食评论</span>
+            <span class="en">Food Culture</span>
+            <span class="cn hidden">饮食文化</span>
             <span class="line"></span>
           </div>
 
-          <!-- 文章 1 -->
-          <div class="news-article-item">
+          <!-- 文章 1：香港奶粉 -->
+          <div class="news-article-item" onclick="switchPage('newsDetailPage4')">
             <div class="news-article-thumb">
-              <img src="https://picsum.photos/id/116/200/140" alt="Food 1" loading="lazy" />
+              <img src="https://s3.bmp.ovh/2026/06/21/r5sXjnJ1.jpg" alt="Baby Formula Safety" loading="lazy" />
             </div>
             <div class="news-article-content">
               <h5>
-                <span class="en">The hidden cost of fast food culture</span>
-                <span class="cn hidden">快餐文化背后的隐形成本</span>
+                <span class="en">Hong Kong Parents Vigilant over Baby Food Safety – Prompted by Recent Recalls</span>
+                <span class="cn hidden">香港家长对婴儿食品安全高度警惕——近期召回事件引发关注</span>
               </h5>
               <p class="excerpt">
-                <span class="en">How convenience is reshaping our relationship with food and the planet.</span>
-                <span class="cn hidden">便利性如何重塑我们与食物和地球的关系。</span>
+                <span class="en">Following a Nestle infant formula recall, complaints over baby food safety in Hong Kong have surged. Parents are shifting from blind trust to greater vigilance, with 72% now actively checking safety notices before purchases.</span>
+                <span class="cn hidden">继雀巢婴儿配方奶粉召回事件后，香港婴儿食品安全投诉激增。家长正从盲目信任转向高度警惕，72%的家长在购买前会主动查看安全通知。</span>
               </p>
               <div class="news-article-meta">
-                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 129</span>
+                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 386</span>
                 <span><i class="fa fa-heart-o" aria-hidden="true"></i> 0</span>
-                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 7</span>
+                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 14</span>
                 <span>·</span>
                 <span>
-                  <span class="en">Health</span>
-                  <span class="cn hidden">健康</span>
+                  <span class="en">By Vicky Sun · Feb 24, 2026</span>
+                  <span class="cn hidden">作者：Vicky Sun · 2026年2月24日</span>
                 </span>
               </div>
             </div>
           </div>
 
-          <!-- 文章 2 -->
-          <div class="news-article-item">
+          <!-- 文章 2：老年食堂 -->
+          <div class="news-article-item" onclick="switchPage('foodDetailPage2')">
             <div class="news-article-thumb">
-              <img src="https://picsum.photos/id/118/200/140" alt="Food 2" loading="lazy" />
+              <img src="https://s3.bmp.ovh/2026/06/21/hPTRDwTZ.jpg" alt="Community Canteen" loading="lazy" />
             </div>
             <div class="news-article-content">
               <h5>
-                <span class="en">Farm to table: A journey into sustainable eating</span>
-                <span class="cn hidden">从农场到餐桌：可持续饮食之旅</span>
+                <span class="en">Soft Bites, Strong Bonds: Shenzhen's Community Canteens for Seniors</span>
+                <span class="cn hidden">软食暖胃，温情聚邻：深圳社区长者食堂</span>
               </h5>
               <p class="excerpt">
-                <span class="en">Exploring the growing movement of local food systems and what it means for our future.</span>
-                <span class="cn hidden">探索本地食品系统的发展趋势，以及这对我们的未来意味着什么。</span>
+                <span class="en">Shenzhen's community senior canteens offer soft, healthy meals for just 13 yuan, while creating a warm social space for empty-nesters and migrant seniors to connect and belong.</span>
+                <span class="cn hidden">深圳社区长者食堂为老人提供仅13元的软食健康餐，同时为空巢老人和随迁长者创造了温暖的社交空间，让他们在此找到归属感。</span>
               </p>
               <div class="news-article-meta">
-                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 159</span>
+                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 312</span>
                 <span><i class="fa fa-heart-o" aria-hidden="true"></i> 0</span>
-                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 3</span>
+                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 19</span>
                 <span>·</span>
                 <span>
-                  <span class="en">Sustainability</span>
-                  <span class="cn hidden">可持续</span>
+                  <span class="en">By Vicky Sun · May 2, 2026</span>
+                  <span class="cn hidden">作者：Vicky Sun · 2026年5月2日</span>
                 </span>
               </div>
             </div>
           </div>
 
-          <!-- 文章 3 -->
-          <div class="news-article-item">
+          <!-- 文章 3：泰餐金不换 -->
+          <div class="news-article-item" onclick="switchPage('foodDetailPage3')">
             <div class="news-article-thumb">
-              <img src="https://picsum.photos/id/120/200/140" alt="Food 3" loading="lazy" />
+              <img src="https://s3.bmp.ovh/2026/06/21/G71JiyGG.png" alt="Sweet Basil Thai" loading="lazy" />
             </div>
             <div class="news-article-content">
               <h5>
-                <span class="en">Street food as cultural memory</span>
-                <span class="cn hidden">街头美食：城市的文化记忆</span>
+                <span class="en">Sweet Basil Thai Cuisine</span>
+                <span class="cn hidden">甜香泰味：香港海港城Sweet Basil Thai Cuisine食评</span>
               </h5>
               <p class="excerpt">
-                <span class="en">How the flavors of our cities tell the stories of migration, adaptation, and belonging.</span>
-                <span class="cn hidden">城市的风味如何讲述迁徙、适应和归属的故事。</span>
+                <span class="en">A review of Sweet Basil Thai Cuisine, a long-established Thai restaurant at Harbour City, Hong Kong, offering stunning harbour views but mixed results on food quality.</span>
+                <span class="cn hidden">香港海港城老牌泰餐厅Sweet Basil Thai Cuisine食评：维港景观与地道泰式装潢令人印象深刻，但菜品质量参差不齐，部分招牌菜令人失望。</span>
               </p>
               <div class="news-article-meta">
-                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 89</span>
+                <span><i class="fa fa-comment-o" aria-hidden="true"></i> 145</span>
                 <span><i class="fa fa-heart-o" aria-hidden="true"></i> 0</span>
-                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 5</span>
+                <span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 8</span>
                 <span>·</span>
                 <span>
-                  <span class="en">Culture</span>
-                  <span class="cn hidden">文化</span>
+                  <span class="en">By Vicky Sun · Mar 15, 2026</span>
+                  <span class="cn hidden">作者：Vicky Sun · 2026年3月15日</span>
                 </span>
               </div>
             </div>
@@ -1587,7 +1701,7 @@
             <span><span class="en">By Vicky Sun</span><span class="cn hidden">作者：Vicky Sun</span></span>
             <span><span class="en">Nov 10, 2025</span><span class="cn hidden">2025年11月10日</span></span>
           </div>
-          <img src="https://static.wixstatic.com/media/830db2_7c443365ff4e48a88421f3bb9e05f6eb~mv2.png/v1/fill/w_652,h_800,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/TCM.png" alt="TCM Herbal Formula" class="featured-image" loading="lazy" />
+          <img src="https://s3.bmp.ovh/2026/06/21/QIgnSGQk.png" alt="TCM Herbal Formula" class="featured-image" loading="lazy" />
           <div class="body-text">
             <p><span class="en">"For a long time, I was trapped in a cycle of sleepless nights and restless days—my mind kept racing, and my heart would pound for no reason. Then two weeks ago, I started taking the 'Jieyu Anshen Formula' from Qiren Chinese Medicine Clinic. Now, I finally feel a sense of quiet within," said Li Wei (pseudonym), a Hong Kong woman from Sha Tin. Like a growing number of Hong Kong residents, she has turned to traditional Chinese medicine (TCM) as a complementary way to ease the emotional strains of modern life. A 2025 survey from the Hong Kong Education University (EdUHK) found that 47.2% of Hong Kong residents have used TCM in the past year, a sharp rise from 26.6% in 2020.</span><span class="cn hidden">"很长一段时间里，我陷入了一个不眠之夜与焦躁白天的循环——思绪不断翻涌，心脏无缘无故地狂跳。直到两周前，我开始服用启仁中医诊所的'解郁安神方'。现在，我终于感觉到内心有了一份宁静，"沙田居民李薇（化名）说。像越来越多的香港居民一样，她将中医视为缓解现代生活情绪压力的一种补充方式。香港教育大学2025年的一项调查发现，47.2%的香港居民在过去一年中使用过中医，较2020年的26.6%大幅上升。</span></p>
             <p><span class="en">Qiren Chinese Medicine Clinic has seen a 30% rise in patients with depression, anxiety, and sleep issues over the past six months. Dr. Zhang Furu, a registered TCM practitioner, often adapts classical formulas such as "Xiaoyao Powder" to soothe liver qi and ease irritability, or "Ganmai Dazao Tang" to nourish the heart and calm the spirit. These tailored formulas work gently, with few side effects, to relieve low mood, restlessness, and sleep issues rooted in liver qi stagnation or heart-spleen deficiency," she explained.</span><span class="cn hidden">启仁中医诊所过去六个月接诊的抑郁、焦虑和睡眠问题患者增加了30%。注册中医师张芙茹医生经常根据经典方剂进行加减，如"逍遥散"以疏肝解郁、缓解烦躁，或"甘麦大枣汤"以养心安神。她解释说："这些个性化方剂作用温和，副作用小，能够缓解因肝气郁结或心脾两虚引起的情绪低落、烦躁不安和睡眠问题。"</span></p>
@@ -1613,7 +1727,7 @@
   </div>
 
   <!-- ============================================================
-       新闻详细页 2（以老护老）
+       新闻详细页 2（家庭照顾者）
        ============================================================ -->
   <div class="page-container" id="newsDetailPage2">
     <header class="sticky top-0 nav-bar z-40">
@@ -1650,7 +1764,7 @@
             <span><span class="en">By Vicky Sun</span><span class="cn hidden">作者：Vicky Sun</span></span>
             <span><span class="en">Oct 13, 2025</span><span class="cn hidden">2025年10月13日</span></span>
           </div>
-          <img src="https://static.wixstatic.com/media/830db2_87a63897997c4aa8a3f945eff61d3116~mv2.jpg/v1/fill/w_710,h_870,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/JC.jpg" alt="Elderly Caregivers" class="featured-image" loading="lazy" />
+          <img src="https://s3.bmp.ovh/2026/06/21/I5wLSM9L.png" alt="Elderly Caregivers" class="featured-image" loading="lazy" />
           <div class="body-text">
             <p><span class="en">A recent study on family caregivers in Hong Kong has revealed that the mental health issues among the city's "elderly caring for the elderly" demographic require urgent attention. According to a survey released by the Hong Kong Polytechnic University in August 2025, over 40% of the 2,000 family caregivers interviewed faced mental health issues, with approximately 1,000 showing symptoms of depression and 500 exhibiting symptoms of anxiety. The survey also found that around 1,200 respondents belonged to the "elderly caring for the elderly" group, where elderly individuals care for even older or disabled family members.</span><span class="cn hidden">香港理工大学于2025年8月发布的一项调查显示，在接受访问的2000名家庭照顾者中，超过40%面临心理健康问题，其中约1000人出现抑郁症状，500人出现焦虑症状。调查还发现，约1200名受访者属于“以老护老”群体，即由长者照顾更年长或残疾的家庭成员。</span></p>
             <p><span class="en">Wong Kwai-kwong, now 75, is one of the many "elderly-on-elderly caregivers" in Hong Kong. He lives with his 78-year-old wife in a public housing estate in Sha Tin. His wife has been bedridden due to a stroke for twelve years. Wong's daily caregiving tasks include helping her turn over, cleaning, feeding, and more, with an average caregiving time exceeding 16 hours per day.</span><span class="cn hidden">现年75岁的黄贵光（音译）便是香港众多“以老护老”照顾者之一。他与78岁的妻子同住于沙田一个公屋单位。其妻因中风已卧床长达十二年。黄伯每日的护理工作包括帮妻子翻身、清洁、喂食等，日均照顾时间超过16小时。</span></p>
@@ -1717,7 +1831,7 @@
             <span><span class="en">By Vicky Sun</span><span class="cn hidden">作者：Vicky Sun</span></span>
             <span><span class="en">Sep 29, 2025</span><span class="cn hidden">2025年9月29日</span></span>
           </div>
-          <img src="https://static.wixstatic.com/media/830db2_6c87dccbc15a4db9b967827e34184fac~mv2.jpg/v1/fill/w_710,h_870,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Tarot.jpg" alt="Tarot Cards" class="featured-image" loading="lazy" />
+          <img src="https://s3.bmp.ovh/2026/06/21/12HrA0Zw.png" alt="Tarot Cards" class="featured-image" loading="lazy" />
           <div class="body-text">
             <p><span class="en">"There was a period when I felt on the verge of losing control every day—until the tarot cards told me I could stop." This is how 23-year-old graduate student Xie Lu recalled her first experience with tarot cards. At 2 a.m., having just finished her seventh round of thesis revisions, she was wide awake and booked an online tarot reading with a reader on the Bilibili platform. She drew the "Reversed Chariot" card, which signifies "over control leading to loss of direction." "I cried at that moment," she said. "It was like a mirror, allowing me to see my own state clearly."</span><span class="cn hidden">"有一段时间，我每天都感觉快要失控了——直到塔罗牌告诉我，我可以停下来。"23岁的研究生谢露这样回忆她第一次接触塔罗牌的经历。凌晨两点，她刚完成第七轮论文修改，精神亢奋，在B站平台上预约了一位占卜师的线上塔罗解读。她抽到了"逆位战车"牌，牌面寓意"过度控制导致方向迷失"。"那一刻我哭了，"她说。"它像一面镜子，让我看清了自己的状态。"</span></p>
             <p><span class="en">Xie Lu is one of many young people turning to tarot cards to cope with anxiety. On Bilibili, a comprehensive video platform popular among young users, the topic of "tarot" has garnered over 16 million views, with some interactive tarot reading videos reaching 3.921 million plays. Data from a zodiac-themed application shows that users aged 19 to 34 make up the largest demographic, with those aged 19 to 24 accounting for more than half of the total. A joint research report by NetEase Data and Wave Studio indicates that 62.05% of tarot card users are under the age of 30.</span><span class="cn hidden">谢露是众多通过塔罗牌应对焦虑的年轻人之一。在深受年轻用户欢迎的综合视频平台B站上，"塔罗"话题的浏览量已超过1600万，部分互动式塔罗解读视频播放量达到392.1万次。一款星座主题应用的数据显示，19至34岁的用户是最大的群体，其中19至24岁的用户占总数的一半以上。网易数据与浪潮工作室的一项联合研究报告指出，62.05%的塔罗牌用户年龄在30岁以下。</span></p>
@@ -1725,6 +1839,441 @@
             <p><span class="en">When asked why she didn't seek professional psychological counseling instead, Xie Lu explained, "Sometimes I already have the answer in my heart—I just need this kind of emotional service to sort through my thoughts. If I were to go for psychological counseling, it would involve things I can't even talk about with my friends or parents, the most private of secrets." She believes that confiding in a tarot reader she's never met is essentially "having a heart-to-heart conversation with herself." Compared to speaking with close friends or relatives, this approach allows her to express her true feelings more honestly.</span><span class="cn hidden">当被问及为何不寻求专业心理咨询时，谢露解释说："有时候我心里已经有了答案——我只需要这种情感服务来梳理思绪。如果我去做心理咨询，那会涉及到我连朋友或父母都无法开口的事情，是最私密的秘密。"她认为，向素未谋面的塔罗占卜师倾诉，本质上是在"与自己进行一场真心对话"。与向亲友倾诉相比，这种方式让她能够更坦诚地表达真实感受。</span></p>
             <p><span class="en">From a psychological perspective, the popularity of tarot cards is not without theoretical basis. American psychologist Philip Zimbardo's research on time psychology suggests that divination practices like tarot can alleviate an individual's time-related anxiety by shifting their time perspective. This aligns with the compensatory control theory, which posits that when individuals feel a loss of control, they seek order and predictability to restore psychological balance.</span><span class="cn hidden">从心理学角度来看，塔罗牌的流行并非没有理论基础。美国心理学家菲利普·津巴多关于时间心理学的研究表明，塔罗等占卜实践可以通过改变个体的时间视角来缓解与时间相关的焦虑。这与补偿控制理论相吻合，该理论认为，当个体感到失控时，他们会寻求秩序和可预测性来恢复心理平衡。</span></p>
             <p><span class="en">"Tarot and astrology provide 'reasonable explanations' for setbacks through 'fortune interpretations,' such as attributing temporary difficulties to a 'Mercury retrograde period.' This approach precisely meets young people's psychological needs to cope with life's uncertainties," analyzed Zhang Kaihua, associate professor at the School of Psychology, Shandong Normal University.</span><span class="cn hidden">"塔罗和占星术通过'运势解读'为挫折提供'合理解释'，比如将暂时的困难归因于'水逆期'。这种方式恰恰满足了年轻人应对生活不确定性的心理需求，"山东师范大学心理学院副教授张凯华分析道。</span></p>
+          </div>
+          <div class="mt-8 text-center">
+            <button onclick="switchPage('newsPage')" class="btn-base px-8 py-3 rounded-md">
+              <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
+              <span class="en">Back to News</span>
+              <span class="cn hidden">返回新闻列表</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="py-6 text-center text-sm text-[#4a3f35]/70">
+      <span class="en">© <span class="year"></span> SUN WANNUO. All Rights Reserved.</span>
+      <span class="cn hidden">© <span class="year"></span> 孙婉诺. 保留所有权利。</span>
+    </footer>
+  </div>
+
+  <!-- ============================================================
+       新闻详细页 4（香港奶粉）
+       ============================================================ -->
+  <div class="page-container" id="newsDetailPage4">
+    <header class="sticky top-0 nav-bar z-40">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="en">SUN WANNUO</span>
+          <span class="cn hidden">孙婉诺</span>
+        </div>
+        <div class="back-nav-menu hidden md:flex">
+          <span class="nav-link" onclick="switchPage('newsPage')">
+            <span class="en">BACK</span>
+            <span class="cn hidden">返回</span>
+          </span>
+          <span class="nav-link" onclick="switchPage('homePage','projects')">
+            <span class="en">WORKS</span>
+            <span class="cn hidden">作品</span>
+          </span>
+        </div>
+        <button id="langToggleNewsDetail4" class="lang-btn">
+          <span class="en">中文</span>
+          <span class="cn hidden">English</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="max-w-4xl mx-auto px-4 py-10">
+      <div class="detail-content-card">
+        <div class="article-full">
+          <h1>
+            <span class="en">Hong Kong Parents Vigilant over Baby Food Safety – Prompted by Recent Recalls</span>
+            <span class="cn hidden">香港家长对婴儿食品安全高度警惕——近期召回事件引发关注</span>
+          </h1>
+          <div class="byline">
+            <span><span class="en">By Vicky Sun</span><span class="cn hidden">作者：Vicky Sun</span></span>
+            <span><span class="en">Feb 24, 2026</span><span class="cn hidden">2026年2月24日</span></span>
+          </div>
+          <img src="https://s3.bmp.ovh/2026/06/21/r5sXjnJ1.jpg" alt="Baby Formula Safety" class="featured-image" loading="lazy" />
+          <div class="body-text">
+            <p><span class="en">"When I saw the news, I was terrified and rushed to check the batch number of the milk powder at home — and it was exactly on the recall list," said Lee Sau-ching, a Hong Kong mother of a 4-month-old baby. "My hands were shaking, and chills ran down my spine at the thought of feeding my baby unsafe formula."</span><span class="cn hidden">“当我看到新闻时，我吓坏了，赶紧去查看家里奶粉的批号——结果正好在召回名单上，”香港一位4个月大婴儿的母亲李秀清说。“我的手在发抖，想到给宝宝喂了不安全的奶粉，我脊背发凉。”</span></p>
+            <p><span class="en">Recently, complaints over baby food safety in Hong Kong have surged. According to the Centre for Food Safety (CFS), 48 such complaints have been received, more than three times the number during the same period last year. Last month, Nestle announced a voluntary recall of 21 batches of its Nan Optipro infant formula for newborns to 6-month-old babies, after tests found potential substances related to Bacillus cereus in supplier raw materials.</span><span class="cn hidden">近期，香港婴儿食品安全投诉激增。据食物安全中心（食安中心）统计，共收到48宗相关投诉，是去年同期的三倍以上。上个月，雀巢公司宣布自愿召回21批次供新生儿至6个月婴儿食用的Nan Optipro婴儿配方奶粉，此前检测发现供应商原材料中存在与蜡样芽孢杆菌相关的潜在物质。</span></p>
+            <p><span class="en">The recall has sparked widespread concern among Hong Kong parents, shattering their long-held belief that "locally sold or imported products are inherently safe" and shifting their blind trust in baby food to greater vigilance.</span><span class="cn hidden">此次召回引发了香港家长的广泛关注，打破了他们长期以来“本地销售或进口产品天然安全”的信念，将他们对婴儿食品的盲目信任转变为更高的警惕。</span></p>
+            <p><span class="en">"We used to think baby food safety in Hong Kong was a given, so we'd just grab the product off the shelf and pay," Lee said. "I never thought this would happen to me. I feel so sorry for my daughter. I'm an irresponsible mother."</span><span class="cn hidden">“我们过去以为香港的婴儿食品安全是理所当然的，所以直接从货架上拿了就付钱，”李秀清说。“我从没想过这会发生在自己身上。我对不起我的女儿，我是个不负责任的妈妈。”</span></p>
+            <p><span class="en">Lee's husband is both distressed for his family and angry about buying the recalled batch. "My wife and I constantly search for the side effects of the recalled milk powder. We lie awake all night worrying, fearing it will affect our child's future physical development. What good is a refund or recall? Families who can afford imported milk powder don't care about the cost of the powder!"</span><span class="cn hidden">李秀清的丈夫既为家庭感到痛心，又因买到了召回批次的奶粉而愤怒。“我和妻子不断搜索召回奶粉的副作用。我们整夜失眠担心，害怕影响孩子未来的身体发育。退款或召回有什么用？能买得起进口奶粉的家庭不在乎那点奶粉钱！”</span></p>
+            <p><span class="en">Hong Kong parents' vigilance over baby food safety is not an isolated case. Lee Wai-Ling, director of the Consumer Council's Consumer Protection and Competition Department, said 72% of surveyed parents with young children now actively check the CFS safety notices before buying milk powder, and 65% no longer blindly trust imported brands.</span><span class="cn hidden">香港家长对婴儿食品安全的警惕并非个例。消委会消费者保护及竞争事务部总监李慧玲表示，72%受访的幼童家长现在会在购买奶粉前主动查看食安中心的安全通知，65%的家长不再盲目信任进口品牌。</span></p>
+            <p><span class="en">Sam Wai-Jyut, who lives in Mong Kok, Hong Kong, and has a 3-month-old baby, said the recall has made her extra careful when shopping. "I'm a new mom with little parenting experience. We all thought buying the most expensive imported big brands would definitely be safe. Now I want to check every detail of the milk powder before I dare to buy it."</span><span class="cn hidden">住在香港旺角、宝宝刚满3个月的沈慧月说，召回事件让她在购物时格外小心。“我是个新手妈妈，育儿经验不多。我们都以为买最贵的进口大品牌肯定安全。现在我要仔细检查奶粉的每一个细节才敢买。”</span></p>
+            <p><span class="en">Although she did not buy the recalled batch, the incident immediately led her to develop a personal milk powder verification process. "Before, I only checked the price and production date when buying milk powder. Now I go through every word of the milk powder's ingredient source and inspection number. I won't buy it if there's even a hint of a safety risk."</span><span class="cn hidden">虽然她没有购买召回批次，但这件事立即让她建立了一套个人奶粉验证流程。“以前买奶粉我只查价格和生产日期。现在我仔细核对奶粉的每一个成分来源和检验编号，有一点安全风险都不会买。”</span></p>
+            <p><span class="en">At Mannings, a major chain pharmacy in Hong Kong where parents mainly buy baby milk powder, frontline sales staff have seen the shift firsthand. Helen Chow, a milk powder promoter who has worked at Mannings for three years, said that parents' focus when buying products has changed significantly, and overall safety awareness has risen sharply.</span><span class="cn hidden">在家长主要购买婴儿奶粉的香港大型连锁药房万宁，一线销售人员亲眼目睹了这一变化。在万宁工作了三年的奶粉推销员周海伦表示，家长购买产品时的关注点发生了显著变化，整体安全意识大幅提升。</span></p>
+            <p><span class="en">"After the Nestle milk powder recall, we've been swamped — handling recall refunds and answering all kinds of questions from parents," Helen said, pointing to a CFS safety notice posted next to the shelves. "Before, most parents only asked about age suitability and discounts. Now almost every parent who comes to buy milk powder first asks if the product is on the CFS recall list and if it's safe enough."</span><span class="cn hidden">“雀巢奶粉召回后，我们忙得不可开交——处理召回退款、回答家长的各种问题，”周海伦指着货架旁贴着的食安中心安全通知说。“以前大多数家长只问适合年龄段和折扣。现在几乎每个来买奶粉的家长都会先问产品是否在食安中心召回名单上、是否足够安全。”</span></p>
+            <p><span class="en">Wong Ka-Man, who lives in Sha Tin, Hong Kong, is a mother of two with extensive parenting experience. She recently set up a baby food safety sharing group. "Several moms in our neighborhood forward baby food-related information to the group when they see it. Reminding each other makes us feel more secure. Our only goal is to let our babies grow up healthy."</span><span class="cn hidden">住在新界沙田的王嘉敏是两个孩子的母亲，育儿经验丰富。她最近建立了一个婴儿食品安全分享群。“我们社区的几个妈妈看到婴儿食品相关信息就会转发到群里。互相提醒让我们更有安全感。我们唯一的目标就是让宝宝健康成长。”</span></p>
+            <p><span class="en">The Hong Kong government is taking targeted regulatory measures to ensure baby food safety. The CFS has launched a dedicated website on infant formula safety and significantly increased the frequency and scope of milk powder inspections. Since January this year, it has collected 171 infant formula samples from the market for comprehensive microbial and chemical testing. For problematic samples, the CFS is following up on investigations and will initiate prosecution proceedings in accordance with the law if sufficient evidence is found.</span><span class="cn hidden">香港政府正采取有针对性的监管措施，确保婴儿食品安全。食安中心已推出婴儿配方奶粉安全专题网站，并大幅增加奶粉检测的频率和范围。自今年1月以来，已从市场采集171个婴儿配方奶粉样本进行全面的微生物及化学成分检测。对有问题的样本，食安中心正跟进调查，如发现足够证据将依法启动检控程序。</span></p>
+            <p><span class="en">In addition, the CFS uses a food incident monitoring system to track global infant milk powder safety incidents in real time. If a product recall is announced overseas, it immediately checks whether related products have been imported into Hong Kong, ensuring problematic products are removed from shelves in a timely manner and prevented from entering the market.</span><span class="cn hidden">此外，食安中心通过食物事故监察系统实时追踪全球婴儿奶粉安全事故。若海外发布产品召回，会立即核查相关产品是否已进口香港，确保有问题产品及时下架并防止流入市场。</span></p>
+            <p><span class="en">Dr. Chan Wing-kit, a food safety officer at the CFS, said the center will continue to closely monitor the infant formula market, continue to strengthen inspections, maintain close communication with importers and retailers, require companies to implement product traceability responsibilities, and fully safeguard the food safety of infants and young children in Hong Kong.</span><span class="cn hidden">食安中心食物安全主任陈永杰医生表示，中心将继续密切监察婴儿配方奶粉市场，继续加强检测，与进口商和零售商保持密切沟通，要求企业落实产品溯源责任，全面保障香港婴幼儿的食品安全。</span></p>
+          </div>
+          <div class="mt-8 text-center">
+            <button onclick="switchPage('newsPage')" class="btn-base px-8 py-3 rounded-md">
+              <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
+              <span class="en">Back to News</span>
+              <span class="cn hidden">返回新闻列表</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="py-6 text-center text-sm text-[#4a3f35]/70">
+      <span class="en">© <span class="year"></span> SUN WANNUO. All Rights Reserved.</span>
+      <span class="cn hidden">© <span class="year"></span> 孙婉诺. 保留所有权利。</span>
+    </footer>
+  </div>
+
+  <!-- ============================================================
+       性别议题详细页 1（香港年长女性困境）
+       ============================================================ -->
+  <div class="page-container" id="genderDetailPage1">
+    <header class="sticky top-0 nav-bar z-40">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="en">SUN WANNUO</span>
+          <span class="cn hidden">孙婉诺</span>
+        </div>
+        <div class="back-nav-menu hidden md:flex">
+          <span class="nav-link" onclick="switchPage('newsPage')">
+            <span class="en">BACK</span>
+            <span class="cn hidden">返回</span>
+          </span>
+          <span class="nav-link" onclick="switchPage('homePage','projects')">
+            <span class="en">WORKS</span>
+            <span class="cn hidden">作品</span>
+          </span>
+        </div>
+        <button id="langToggleGenderDetail" class="lang-btn">
+          <span class="en">中文</span>
+          <span class="cn hidden">English</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="max-w-4xl mx-auto px-4 py-10">
+      <div class="detail-content-card">
+        <div class="article-full">
+          <h1>
+            <span class="en">"I have HK$4,700 in my bank account": Elderly Women in Hong Kong Are Poorer Due to Systemic Gender Inequality</span>
+            <span class="cn hidden">“我银行账户里只有4700港币”：系统性性别不平等导致香港老年女性更贫困</span>
+          </h1>
+          <div class="byline">
+            <span><span class="en">By Vicky Sun</span><span class="cn hidden">作者：Vicky Sun</span></span>
+            <span><span class="en">Jun 17, 2026</span><span class="cn hidden">2026年6月17日</span></span>
+          </div>
+          <img src="https://s3.bmp.ovh/2026/06/21/vfyRpn9O.jpg" alt="Elderly Women Poverty" class="featured-image" loading="lazy" />
+          <div class="body-text">
+            <p><span class="en">"I couldn't save anything," Yuen Ying-ha said. She sits on the lower bunk of a shaky iron bed, with a faded white cloth bag placed beside the pillow. She is 93 years old. She survives on Comprehensive Social Security Assistance (CSSA). She has HK$4,700 left in her bank account.</span><span class="cn hidden">“我什么都存不下来，”袁英霞说。她坐在一张摇晃的铁架床下铺，枕头边放着一个褪色的白布包。她今年93岁，靠综合社会保障援助（综援）维生，银行账户里只剩下4700港元。</span></p>
+            <p><span class="en">Yuen is one of the tens of thousands of elderly women in Hong Kong who rely on CSSA to make a living. According to the data from the Hong Kong Social Welfare Department (SWD) for 2025, among all the elderly recipients of welfare assistance in Hong Kong, the proportion of elderly women aged 65 and above is as high as 72.3%, far exceeding the 27.7% for men. Seven of every 10 retired elderly women rely only on the government's monthly payment to live.</span><span class="cn hidden">袁是香港数以万计依靠综援维生的老年女性之一。根据香港社会福利署2025年的数据，在所有领取福利援助的长者中，65岁及以上女性的比例高达72.3%，远高于男性的27.7%。每10名退休女性中就有7人仅靠政府每月津贴生活。</span></p>
+            <p><span class="en">Yuen began working at age 8, watching cattle in rural Shunde, Guangdong province. When she was twelve, her mother sent her to a couple who ran a tea house during the war. Studying never became something she considered. She got married at the age of 21 and lost her husband at 34. She raised five daughters all by herself. From a food factory to a restaurant, she kept working until she was 69 years old, finishing work at midnight each night. When all the years of hard work came to an end, all the income was spent on raising children and supporting the family, and she found that she had nothing left. "The money was all divided among the children," she said.</span><span class="cn hidden">袁8岁开始工作，在广东顺德农村看牛。12岁时，母亲把她送到一对战时开茶馆的夫妇那里。读书从未成为她考虑的事情。她21岁结婚，34岁丧夫，独自抚养五个女儿。从食品厂到餐厅，她一直工作到69岁，每晚午夜才收工。当所有辛劳结束时，所有收入都花在了抚养孩子和养家上，她发现自己一无所有。“钱都分给了孩子们，”她说。</span></p>
+            <p><span class="en">Yuen's story is not rare in Hong Kong. Due to the long-term impact of systemic gender inequality, many elderly women in Hong Kong have spent their entire lives working but have no savings. Their later years have been even more poorer due to the lack of education, the responsibilities of family, and the constraints of the social structure.</span><span class="cn hidden">袁的故事在香港并不罕见。由于长期系统性性别不平等的影响，许多香港老年女性一生工作却没有积蓄。由于缺乏教育、家庭责任和社会结构的制约，她们的晚年更加贫困。</span></p>
+            <p><span class="en">Most elderly women who have retired rely solely on CSSA to sustain their basic livelihoods and their living standards are lower than those of the overall retired population in Hong Kong. According to the data released by the SWD for the 2024-25 fiscal year, 65 and older women made up more than 60% of CSSA recipients and received an average monthly benefit of only HK$4,890, which is far below the average monthly basic living expenses standard for retired individuals in Hong Kong (approximately HK$8,500).</span><span class="cn hidden">大多数退休女性仅靠综援维持基本生活，其生活水平低于香港整体退休人口。根据社署2024-25财政年度数据，65岁及以上女性占综援受助人60%以上，平均每月津贴仅4,890港元，远低于香港退休人士平均每月基本生活开支标准（约8,500港元）。</span></p>
+            <p><span class="en">These elderly women who rely on social assistance are mostly those who worked diligently until retirement because they were never officially included in any welfare system. The rapid economic growth of Hong Kong in the 1960s and 1970s was largely dependent on female labor. Thousands of women left the countryside and entered factories. They worked long hours in garment, toy and electronics factories, often earning low piece-rate wages with little security or benefits. When the mandatory provident fund was finally introduced in 2000, it was too late for most of them. After decades of hard work, coupled with frequent interruptions to their careers due to child care, many had almost no retirement savings.</span><span class="cn hidden">这些依靠社会援助的老年女性大多一直辛勤工作至退休，却从未被纳入任何福利体系。香港1960至1970年代的经济快速增长很大程度上依赖女性劳动力。成千上万的女性离开农村进入工厂，在服装、玩具和电子厂长时间工作，收入低微，几乎没有保障和福利。2000年强积金制度最终推出时，对她们大多数人来说为时已晚。几十年的辛劳，加上因育儿而频繁中断职业生涯，许多人几乎没有退休储蓄。</span></p>
+            <p><span class="en">According to a 2024 survey by the Hong Kong Young Women's Christian Association, unpaid caregiving work also continues to burden many women even in old age. The survey of 930 women aged 50 to 70 found that half were still caring for family members — their husbands, parents or grown children. On average, they spent nearly six hours a day on caregiving. More than 30 percent said the burden was too heavy, and many stated that they were under great pressure. Only 38.3 percent had retirement savings. More than half stated that their savings were insufficient to sustain their lives, and 40.1% said that their living standards had declined after leaving their jobs. For those women who dedicated their working lives to factories and gave all their savings to their children, old age does not mean ease, which represents another form of unpaid work.</span><span class="cn hidden">香港基督教女青年会2024年的一项调查显示，无偿照护工作即使在老年也持续压迫许多女性。对930名50至70岁女性的调查发现，一半人仍在照顾家人——丈夫、父母或成年子女。她们平均每天花近6小时在照护上。超过30%的人认为负担过重，许多人表示压力巨大。只有38.3%的人有退休储蓄。超过一半的人表示积蓄不足以维持生活，40.1%的人表示离职后生活水平下降。对于那些将职业生涯奉献给工厂、将所有积蓄给予子女的女性来说，晚年并非意味着轻松，而是另一种形式的无偿劳动。</span></p>
+            <p><span class="en">Leung Leung-yee, 90, a CSSA recipient, worked at Changjiang Toy Factory for more than 30 years. When she retired, she had saved a small amount of money, which was quite rare among her peers who had no savings at all. That little savings is now gone, used to support her children, a lifelong expectation for women of her generation. "Most of my spending goes to helping my son," Leung said. Her younger son is already in his sixties and due to health issues with his feet, he can only occasionally do cleaning work as a casual laborer, and his income is unstable. This mother is nearly deaf but will not consider buying a hearing aid at all. Instead, she took a portion of her social assistance funds and gave it to her divorced and unemployed younger son. Her daughter often came to visit and wanted to take her out for dim sum, but she always refused. "I think dim sum is too expensive," she said. The long-term frugality had made her even cut off her own appetite.</span><span class="cn hidden">90岁的梁良仪是综援受助人，曾在长江玩具厂工作三十多年。退休时她存了一小笔钱，这在同龄人中相当罕见，同龄人大多没有积蓄。那点积蓄如今也已花完，用来支持她的孩子，这是她那一代女性终身的期望。“我的大部分开销都用来帮儿子，”梁说。她的小儿子已六十多岁，因脚部健康问题，只能偶尔做清洁散工，收入不稳定。这位母亲几乎失聪，却完全不考虑买助听器，而是把一部分综援金给了离婚失业的小儿子。女儿常来探望想带她饮茶，她总是拒绝。“我觉得点心太贵了，”她说。长久的节俭让她甚至压抑了自己的食欲。</span></p>
+            <p><span class="en">According to a 2021 study conducted by Lingnan University in Hong Kong on intergenerational economic support among Hong Kong families, even in their later years, Hong Kong women continue to subsidize their adult children's housing and living expenses. This kind of intergenerational transfer further depletes their already limited pension reserves. The study points out that in Hong Kong families, mothers play a significantly higher role in providing financial support for their children. The long-term gender roles have led women to habitually prioritize their personal financial needs over those of the family, ultimately increasing the risk of poverty in old age.</span><span class="cn hidden">香港岭南大学2021年一项关于香港家庭代际经济支持的研究显示，即使在晚年，香港女性仍持续资助成年子女的住房和生活开支。这种代际转移进一步消耗她们本已有限的养老金储备。研究指出，在香港家庭中，母亲为子女提供经济支持的角色远高于父亲。长期的性别角色使女性习惯性地将家庭财务需求置于个人需求之上，最终增加了老年贫困风险。</span></p>
+            <p><span class="en">Lam Yuk-wah, a district councilor of Shatian District who also serves as the leader of the care team, noticed that among the elderly who came to receive free meals and meal boxes, 99% were women. She said that the preference for sons over daughters has led to a lack of educational opportunities for girls, which is one of the reasons why they have been trapped in poverty for a long time. According to relevant government data, among the elderly over 60 years old, the illiteracy rate for women 60 and older is nearly three times that of men the same age. "In the past, if one had the means to go to school, it was always the boys who got the chance," Lam said. Daughters had to take care of the family. No one taught them about managing money. Every penny they earned as young adults was given to the family. There was no concept of setting anything aside for their own future.</span><span class="cn hidden">沙田区区议员兼关爱队队长林玉华注意到，前来领取免费饭菜和饭盒的长者中99%是女性。她说重男轻女导致女孩缺乏教育机会，这是她们长期陷入贫困的原因之一。政府数据显示，60岁以上女性文盲率是同年龄男性的近三倍。“过去，如果有机会上学，总是男孩得到机会，”林说。女儿要照顾家庭，没有人教她们理财。年轻时赚的每一分钱都交给了家庭，从未有过为自己未来留存的观念。</span></p>
+            <p><span class="en">Leung Hei, 93, a CSSA recipient, lives with her daughter. On the narrow room wall hangs a yellowed and old certificate, which was her appointment certificate as a committee member of the building's mutual aid association when she was young. She often helped her neighbors buy tickets and handled the money collection and change giving with toothpicks as her accounting tool: one toothpick represented one person, and the scratches on the toothpicks indicated who had paid and who still hadn't. A woman who had never learned mathematics invented her own accounting system for herself. "That's the intelligence of women," Lam said. "But they have no chance to learn, and this is the biggest reason for women's poverty."</span><span class="cn hidden">93岁的梁喜是综援受助人，与女儿同住。狭窄房间的墙上挂着一张泛黄旧证书，那是她年轻时担任大厦互助委员会委任证书。她常帮邻居买票，用牙签作为记账工具来收款找零：一根牙签代表一个人，牙签上的划痕记录谁付了谁没付。一个从未学过数学的女性为自己发明了一套记账系统。“这就是女性的智慧，”林说。“但她们没有学习的机会，这是女性贫困的最大原因。”</span></p>
+            <p><span class="en">Longer life does not mean easier life. According to the health data report from the Hong Kong Department of Health in 2025, the average life expectancy of women in Hong Kong is as high as 88.4 years, which is 5.6 years longer than that of men. This means that women will have to spend more on medical expenses, and the impact of poverty will be further magnified. Even though senior citizens aged 75 or above in Hong Kong can receive medical fee exemptions in public clinics or hospitals in Hong Kong, the waiting times are very long. According to the 2024 annual statistics of the Hong Kong Hospital Authority, for some common specialties in public hospitals, such as orthopedics and ophthalmology, the waiting time can even exceed 24 weeks. Even for some urgent symptoms, the waiting time is about 8 weeks. "I don't like going to public hospitals," Leung Hei said. "When you're sick, you don't want to wait that long. It's very hard." Private clinics are quicker but costly, making it impossible for poor elderly women to afford it. The government gives adults 65 and older an annual HK$2,000 voucher for private medical care. A few weeks ago, Leung used her full yearly voucher on one skin appointment.</span><span class="cn hidden">更长的寿命并不意味着更轻松的生活。香港卫生署2025年健康数据显示，香港女性平均预期寿命高达88.4岁，比男性长5.6岁。这意味着女性需要花费更多医疗费用，贫困影响进一步放大。尽管香港75岁及以上长者可在公营诊所或医院获豁免医疗费用，但等候时间很长。医管局2024年年度统计显示，公立医院骨科、眼科等常见专科轮候时间甚至超过24周，即使紧急症状也需约8周。“我不喜欢去公立医院，”梁喜说。“生病了不想等那么久，很辛苦。”私家诊所快捷但昂贵，贫困老年女性负担不起。政府每年给65岁以上长者2000港元私家医疗券，几周前梁喜一次皮肤科就诊就用完了全年额度。</span></p>
+            <p><span class="en">Senator Lam has worked in the housing estates of Sha Tin for many years. During countless home visits by the care team, she has witnessed too many cases of elderly women. Every penny they earned when they were young was given to the housing estate, but now they only have a little CSSA payment from government left. She said that the current generation of women is the last one to suffer from this kind of systematic deprivation. More importantly, the next generation of women has already begun to change. Education on money management still needs to be strengthened. It is necessary to pay attention to one's own education and personal development, and to understand that it is necessary to set aside provisions for one's later years. Their daughters have more opportunities but need to understand how to allocate and distinguish between what should be bought and what one wants to buy.</span><span class="cn hidden">林议员在沙田屋邨工作多年，关爱队无数次家访中目睹太多老年女性的案例。她们年轻时挣的每一分钱都给了家庭，如今只剩一点综援金。她说，当前这一代女性是最后一批遭受这种系统性剥夺的群体。更重要的是，下一代女性已经开始改变。理财教育仍需加强，要关注自身教育和个人发展，明白必须为晚年预留储备。女儿们有更多机会，但需要学会如何分配和区分“该买”与“想买”。</span></p>
+            <p><span class="en">During her time as chair of the Sha Tin Women's Association, Lam also discovered that the current policies in Hong Kong did not adequately distinguish between the needs of men and women. The time that women spent on raising children and providing unpaid care was never included in any guarantee strategy. She put forward two specific suggestions: One is to improve the living environment and provide government-funded home purchases for families willing to have children, thereby alleviating the pressure on women to balance work and family life; Another is for women's physical examinations. She suggested offering a free comprehensive physical examination to each woman before marriage or before childbirth. They are promoting the establishment of specialized women's health centers to cover the health examination needs of women during different life stages such as after the age of 18, during pregnancy, and during menopause, ensuring that women's health is fully protected. Lam said that when women are healthy, many problems will be resolved automatically. She compared it to the situation where a men's restroom only needs three stalls, but a women's restroom requires four because the physiological structure is different. Simply speaking equality sometimes cannot solve the problem, the targeted handling is necessary.</span><span class="cn hidden">在担任沙田妇女协会主席期间，林还发现香港现行政策未能充分区分男女需求。女性花费在育儿和提供无偿照护上的时间从未被纳入任何保障策略。她提出两项具体建议：一是改善居住环境，为愿意生育的家庭提供政府资助购房，减轻女性平衡工作与家庭生活的压力；二是女性体检，建议为每位女性在婚前或产前提供一次免费全面体检，推动设立专科妇女健康中心，覆盖18岁后、孕期、更年期等不同阶段的健康检查需求，确保女性健康得到充分保障。林说，当女性健康时，许多问题会自动解决。她比喻说，男厕只需三个厕格，女厕需要四个，因为生理结构不同。单纯讲平等有时无法解决问题，必须针对性处理。</span></p>
+            <p><span class="en">"I have HK$4,700 in my bank account," Yuen Ying-ha said. This was the entire savings accumulated over a lifetime for a woman in Hong Kong.</span><span class="cn hidden">“我银行账户里只有4700港币，”袁英霞说。这就是一位香港女性一生积累的全部积蓄。</span></p>
+          </div>
+          <div class="mt-8 text-center">
+            <button onclick="switchPage('newsPage')" class="btn-base px-8 py-3 rounded-md">
+              <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
+              <span class="en">Back to News</span>
+              <span class="cn hidden">返回新闻列表</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="py-6 text-center text-sm text-[#4a3f35]/70">
+      <span class="en">© <span class="year"></span> SUN WANNUO. All Rights Reserved.</span>
+      <span class="cn hidden">© <span class="year"></span> 孙婉诺. 保留所有权利。</span>
+    </footer>
+  </div>
+
+  <!-- ============================================================
+       性别议题详细页 2（月经报道）
+       ============================================================ -->
+  <div class="page-container" id="genderDetailPage2">
+    <header class="sticky top-0 nav-bar z-40">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="en">SUN WANNUO</span>
+          <span class="cn hidden">孙婉诺</span>
+        </div>
+        <div class="back-nav-menu hidden md:flex">
+          <span class="nav-link" onclick="switchPage('newsPage')">
+            <span class="en">BACK</span>
+            <span class="cn hidden">返回</span>
+          </span>
+          <span class="nav-link" onclick="switchPage('homePage','projects')">
+            <span class="en">WORKS</span>
+            <span class="cn hidden">作品</span>
+          </span>
+        </div>
+        <button id="langToggleGenderDetail2" class="lang-btn">
+          <span class="en">中文</span>
+          <span class="cn hidden">English</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="max-w-4xl mx-auto px-4 py-10">
+      <div class="detail-content-card">
+        <div class="article-full">
+          <h1>
+            <span class="en">From Taboo to Talk: China's Shifting Attitudes Toward Menstruation</span>
+            <span class="cn hidden">从禁忌到公开谈论：中国对月经态度的转变</span>
+          </h1>
+          <div class="byline">
+            <span><span class="en">By Vicky Sun</span><span class="cn hidden">作者：Vicky Sun</span></span>
+            <span><span class="en">Apr 22, 2026</span><span class="cn hidden">2026年4月22日</span></span>
+          </div>
+          <img src="https://s3.bmp.ovh/2026/06/21/zirPgrjk.png" alt="Menstruation Exhibition" class="featured-image" loading="lazy" />
+          <div class="body-text">
+            <p><span class="en">"This is the first time I have spoken openly about my period in a public space," said 24-year-old Zhu Wen as she visited the "100% Women" menstruation exhibition in Guangzhou. Growing up in a traditional and conservative family in Fujian, she was taught from a young age that menstrual blood is unclean and that having a period is shameful. She was once banned from joining family rituals simply because she was menstruating.</span><span class="cn hidden">“这是我第一次在公共空间公开谈论我的月经，”24岁的朱文在参观广州“100% Women”月经主题展览时说。她在福建一个传统保守的家庭长大，从小就被教导经血是不洁的，来月经是可耻的。她曾仅仅因为正在经期而被禁止参加家庭祭祀活动。</span></p>
+            <p><span class="en">Menstrual blood, once seen as dirty, is now turned into paintings and embroidered art pieces. This change is not only a breakthrough in artistic expression. It also shows that Chinese society's view of menstruation is shifting from avoiding the topic out of shame to open public discussion.</span><span class="cn hidden">曾经被视为肮脏的经血，如今被转化为绘画和刺绣艺术品。这一变化不仅是艺术表达的突破，也表明中国社会对月经的看法正在从羞于启齿转向公开讨论。</span></p>
+            <p><span class="en">In China, menstruation has long been seen as a private and embarrassing topic. According to a 2025 survey by China Women's News and the China Maternal and Child Health Association, more than 68 percent of Chinese women have felt shame because of menstruation, and nearly 60 percent still hide sanitary pads on purpose in public. A separate survey of university students in Taiyuan and Jinzhong that same year found that nearly six out of ten young women used dark bags to cover period products when buying them. Period shame has become a common experience for most women.</span><span class="cn hidden">在中国，月经长期以来被视为一个私密且令人尴尬的话题。根据《中国妇女报》和中国妇幼保健协会2025年的一项调查，超过68%的中国女性曾因月经而感到羞耻，近60%的女性仍在公共场合刻意隐藏卫生巾。同年另一项对太原和晋中大学生进行的调查发现，近六成年轻女性在购买经期用品时会使用深色袋子遮盖。月经羞耻已成为大多数女性的共同经历。</span></p>
+            <p><span class="en">This deep-rooted social taboo is slowly being broken by more open public discussion. In 2016, swimmer Fu Yuanhui spoke about her period in front of cameras during the Olympics. Many saw it as a breakthrough in sports and it helped start wider talks in society. In March 2026, a woman on a high-speed train suddenly got her period and stained the bed sheet. She was asked to clean it or pay 180 yuan. She called for sanitary pads to be sold on trains. Her post received strong support online and sparked fresh discussion about period shame.</span><span class="cn hidden">这种根深蒂固的社会禁忌正被更加开放的公共讨论慢慢打破。2016年，游泳运动员傅园慧在奥运会期间面对镜头谈论了自己的月经。许多人视其为体育界的一次突破，并助推了社会更广泛的讨论。2026年3月，一名女性在高铁上突然来月经弄脏了床单，被要求自行清洗或赔偿180元。她呼吁列车售卖卫生巾，帖子在网上获得强烈支持，并引发了关于月经羞耻的新一轮讨论。</span></p>
+            <p><span class="en">In recent years, public art exhibitions about menstruation have appeared in many parts of the country. They are moving the topic from private life into public view. Since 2024, 27-year-old curator Yiting has taken the "100% Women" exhibition to ten cities including Wuhan and Qingdao. Visitors embroider personal stories on expired sanitary pads, step inside a pink "uterus" booth, and read simple information about period pain, premenstrual syndrome and menopause. Similar exhibitions, such as "Tide and Flow: A Better Period Experience" in Shanghai, have also drawn large crowds and helped bring the topic into everyday public talk.</span><span class="cn hidden">近年来，关于月经的公共艺术展览在全国多地涌现，将这个议题从私人生活推向公共视野。自2024年以来，27岁的策展人Yiting将“100% Women”展览带到了武汉、青岛等十座城市。参观者在过期卫生巾上刺绣个人故事，走进粉色的“子宫”装置，阅读关于痛经、经前综合征和更年期的科普信息。上海“潮起潮落「经」历更美好”等类似展览也吸引了大量观众，推动这一话题进入日常公共讨论。</span></p>
+            <p><span class="en">Curator Yi said young women are now refusing the silence and hiding that their mothers' generation accepted. "This gentle form of art is easier for people to accept," she said. "It helps women face their bodies and build a new, more open and comfortable attitude toward menstruation."</span><span class="cn hidden">策展人Yi表示，年轻女性正在拒绝母亲那一代人所接受的沉默和隐藏。“这种温和的艺术形式更容易被人们接受，”她说。“它帮助女性面对自己的身体，建立起一种对月经更新、更开放、更舒适的态度。”</span></p>
+            <p><span class="en">For a long time, menstruation education in China has mainly come from mothers rather than schools, with more than 88 percent of girls learning about it at home. Today, the gap in school education is being filled. Self-organized activities on university campuses are growing fast. Chengdu University held the "Praise for Red" sanitary-pad art exhibition, which showed nearly 130 student paintings and installations. More than 400 people visited online and in person. In 2020, Shanghai Ocean University started the "Breaking the Cocoon" project. It placed sanitary-pad mutual-aid boxes in ten busy bathroom areas on campus. Each month, the boxes provide more than 250 emergency pads.</span><span class="cn hidden">长期以来，中国的月经教育主要来自母亲而非学校，超过88%的女孩是在家中了解月经的。如今，学校教育的空白正在被填补。大学校园里的自发活动正在快速增长。成都大学举办了“红的礼赞”卫生巾艺术展，展出了近130件学生绘画和装置作品。线上线下参观人数超过400人。2020年，上海海洋大学启动了“破茧”计划，在校园十个繁忙的卫生间区域放置了卫生巾互助盒，每月为同学提供超过250片应急卫生巾。</span></p>
+            <p><span class="en">Men are also beginning to face the topic because of these public discussions. Twenty-six-year-old Guangzhou office worker Chen Yu visited the exhibition with his girlfriend. "Before, I always thought menstruation was only a women's issue and never tried to learn about it," he said. "After the visit, I learned that the pain many women feel during their period is as strong as childbirth. Men may not experience it themselves, but we should drop our old ideas and give more understanding and care to the women around us."</span><span class="cn hidden">男性也因为这些公共讨论而开始面对这一话题。26岁的广州上班族陈宇和女友一起参观了展览。“以前，我一直认为月经只是女性的事情，从未试图了解过，”他说。“参观之后，我了解到许多女性在经期感受到的疼痛与分娩相当。男性或许无法亲身经历，但我们应该放下旧观念，给予身边的女性更多的理解和关怀。”</span></p>
+            <p><span class="en">In traditional society, men were not expected or encouraged to know about periods. A 2024 study on Chinese men's attitudes toward menstruation found that growing ideas of gender equality are pushing men to change how they see and treat women during their periods. As public talk about menstruation becomes more open and removes the shame, men's understanding of it is becoming fuller and more balanced.</span><span class="cn hidden">在传统社会中，男性不被期望也不被鼓励了解月经。2024年一项关于中国男性对月经态度的研究发现，日益增长的性别平等观念正在推动男性改变他们对经期女性的看法和对待方式。随着关于月经的公共讨论变得更加开放并消除羞耻感，男性对月经的理解也变得更加全面和平衡。</span></p>
+            <p><span class="en">"These art projects and citizen actions in China are important because they are changing social norms," said Prof. Zhang Ying from the Department of Women's Studies at China Women's University. "Menstrual shame comes from power structures and society's control over women's bodies. Cultural change is the first step toward real change in rules and policies."</span><span class="cn hidden">“中国的这些艺术项目和公民行动之所以重要，是因为它们正在改变社会规范，”中华女子学院女性学系张颖教授表示。“月经羞耻源于权力结构和社会对女性身体的控制。文化变革是迈向规则和政策真正改变的第一步。”</span></p>
+          </div>
+          <div class="mt-8 text-center">
+            <button onclick="switchPage('newsPage')" class="btn-base px-8 py-3 rounded-md">
+              <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
+              <span class="en">Back to News</span>
+              <span class="cn hidden">返回新闻列表</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="py-6 text-center text-sm text-[#4a3f35]/70">
+      <span class="en">© <span class="year"></span> SUN WANNUO. All Rights Reserved.</span>
+      <span class="cn hidden">© <span class="year"></span> 孙婉诺. 保留所有权利。</span>
+    </footer>
+  </div>
+
+  <!-- ============================================================
+       性别议题详细页 3（重男轻女）
+       ============================================================ -->
+  <div class="page-container" id="genderDetailPage3">
+    <header class="sticky top-0 nav-bar z-40">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="en">SUN WANNUO</span>
+          <span class="cn hidden">孙婉诺</span>
+        </div>
+        <div class="back-nav-menu hidden md:flex">
+          <span class="nav-link" onclick="switchPage('newsPage')">
+            <span class="en">BACK</span>
+            <span class="cn hidden">返回</span>
+          </span>
+          <span class="nav-link" onclick="switchPage('homePage','projects')">
+            <span class="en">WORKS</span>
+            <span class="cn hidden">作品</span>
+          </span>
+        </div>
+        <button id="langToggleGenderDetail3" class="lang-btn">
+          <span class="en">中文</span>
+          <span class="cn hidden">English</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="max-w-4xl mx-auto px-4 py-10">
+      <div class="detail-content-card">
+        <div class="article-full">
+          <h1>
+            <span class="en">Invisible Son Preference: Urban Daughters Denied Equal Inheritance of Parental Real Estate</span>
+            <span class="cn hidden">隐形重男轻女：城市女儿被剥夺父母房产平等继承权</span>
+          </h1>
+          <div class="byline">
+            <span><span class="en">By Vicky Sun</span><span class="cn hidden">作者：Vicky Sun</span></span>
+            <span><span class="en">Mar 20, 2026</span><span class="cn hidden">2026年3月20日</span></span>
+          </div>
+          <img src="https://s3.bmp.ovh/2026/06/21/Wbqpo2hC.jpg" alt="Invisible Son Preference" class="featured-image" loading="lazy" />
+          <div class="body-text">
+            <p><span class="en">Wu Huili, a 24-year-old native of Suzhou, Jiangsu, was having dinner with her family. Her mother told her in a gentle yet firm tone that the family's two apartments would be reserved for her younger brother's marriage, because she would be cared for by her husband's family after getting married. Wu paused mid-meal, making no response.</span><span class="cn hidden">24岁的江苏苏州人吴慧丽正在与家人共进晚餐。母亲用温和而坚定的语气告诉她，家里的两套房子将留给弟弟结婚用，因为她结婚后会有夫家照顾。吴慧丽停下筷子，没有回应。</span></p>
+            <p><span class="en">Son preference in urban families is no longer outright harsh treatment, but an invisible bias hidden beneath daily affection. Influenced by the traditional concept of carrying on the family line in Chinese culture, parents shower their daughters with care in daily life yet show an absolute bias toward sons when it comes to the distribution of core real estate assets.</span><span class="cn hidden">城市家庭中的重男轻女不再表现为直接的苛刻对待，而是一种隐藏在日常关爱之下的隐形偏见。受中国传统文化中传宗接代观念的影响，父母在日常生活中对女儿关怀备至，但在核心房产资产的分配上却表现出对儿子的绝对偏向。</span></p>
+            <p><span class="en">Wu lives with her parents and her younger brother, who is in his first year of senior high school. She said that her parents have always shown her great affection in daily life and that she has never suffered material neglect since childhood. That was until last year, when she asked her parents for financial support to buy a house and was flatly refused. In the distribution of core assets in a traditional Chinese family, she felt her personal worth was undervalued simply because she is a daughter.</span><span class="cn hidden">吴慧丽与父母和正在读高一的弟弟同住。她说父母在日常生活中一直对她疼爱有加，她从小到大从未遭受过物质上的忽视。直到去年，她向父母提出资助购房的请求时，被直接拒绝了。在传统中国家庭核心资产的分配中，她感到自己的个人价值仅仅因为身为女儿而被低估。</span></p>
+            <p><span class="en">"I'm not fighting for the property. I just don't understand. Am I not entitled to equal inheritance rights merely because I'm a daughter?" Wu said. For urban daughters, the pursuit of equality in real estate inheritance is essentially a quest for fairness, not a desire for wealth.</span><span class="cn hidden">“我不是在争房产。我只是不明白，难道仅仅因为我是女儿，就没有平等的继承权吗？”吴慧丽说。对于城市女儿而言，追求房产继承的平等本质上是对公平的诉求，而非对财富的贪图。</span></p>
+            <p><span class="en">According to the 2025 China Family Development Report released by the National Health Commission, 70.2% of urban parents provide a down payment for their sons' wedding homes, compared with only 13.1% for their daughters. The All-China Women's Federation noted in a concurrent report that urban women hold real estate at a rate 29.8 percentage points lower than urban men. These figures confirm that even in cities that advocate gender equality, daughters remain at a disadvantage in real estate inheritance.</span><span class="cn hidden">根据国家卫健委发布的《2025年中国家庭发展报告》，70.2%的城市父母为儿子提供婚房首付，而为女儿提供的仅有13.1%。全国妇联在同一时期的报告中指出，城市女性持有房产的比例比城市男性低29.8个百分点。这些数据证实，即使在倡导平等的城市中，女儿在房产继承方面仍处于劣势。</span></p>
+            <p><span class="en">Such gender inequality in real estate inheritance is even more pronounced in families with only daughters. Ma Ziru, a 29-year-old only daughter in Wuhan, Hubei Province, whose parents own several apartments, always assumed she would be the heir to the properties. That was until her father was hospitalized, and she learned from relatives that her parents planned to leave the majority of their real estate to her cousin.</span><span class="cn hidden">这种房产继承中的性别不平等在独生女家庭中更为突出。29岁的湖北武汉独生女马子茹，父母拥有多套房产，她一直以为自己是房产的继承人。直到父亲住院，她从亲戚那里得知，父母计划将大部分房产留给她的堂兄。</span></p>
+            <p><span class="en">Ma immediately verified the matter with her parents, and the reply she received was unbearable to accept. Her parents said the property would eventually belong to her husband's family after she marries, and her cousin, as the male heir of the family, should inherit the property. "This is absolutely ridiculous," Ma said. She has always had a close relationship with her parents, yet she means less to them than a cousin.</span><span class="cn hidden">马子茹立即向父母核实此事，收到的回复令她难以接受。父母说，她婚后房产最终会归属夫家，而堂兄作为家族的男性继承人，理应继承房产。“这简直太荒谬了，”马子茹说。她一直与父母关系亲密，然而在父母心中，她还不如一个堂兄重要。</span></p>
+            <p><span class="en">Most parents do not see their actions as gender bias, they believe they are acting in their children's best interests. Wu Jianguo, Wu's father, said earnestly that he and his wife do not favor sons over daughters and love their daughter just as much. However, young men cannot get married without a house in today's society, so the family's real estate must be left to their son. In his view, passing family assets to sons is an age-old custom, not a form of gender discrimination.</span><span class="cn hidden">大多数父母并不认为自己的行为是性别偏见，他们相信自己在为子女的最佳利益考虑。吴慧丽的父亲吴建国诚恳地说，他和妻子并不重男轻女，对女儿同样疼爱。然而，当今社会年轻人没有房子无法结婚，所以家里的房产必须留给儿子。在他看来，将家产传给儿子是世代沿袭的习俗，而非性别歧视。</span></p>
+            <p><span class="en">Invisible son preference in cities persists because it is a combination of the traditional notion of carrying on the family line and modern anxiety about old-age care. Gu Yinghui, Executive Deputy Director of the Women's Development Research Center at Suzhou University, explained: "Many urban parents are still influenced by patriarchal notions, viewing sons as the core of family continuation. They also deeply link old-age care responsibilities to their sons, leading to a clear bias in property distribution."</span><span class="cn hidden">城市中的隐形重男轻女之所以持续存在，是因为它是传统传宗接代观念与现代养老焦虑的结合。苏州大学妇女发展研究中心常务副主任顾颖慧解释说：“许多城市父母仍然受到父权观念的影响，将儿子视为家庭延续的核心。他们也深深地将养老责任与儿子绑定，从而导致在财产分配上出现明显的偏向。”</span></p>
+            <p><span class="en">Such entrenched notions have left daughters caught in this dilemma feeling helpless. "I don't even know how to talk to them about this anymore," Wu said, holding a water glass, her voice filled with confusion.</span><span class="cn hidden">这种根深蒂固的观念让陷入困境的女儿们感到无助。“我甚至不知道该怎么跟他们谈这件事了，”吴慧丽端着一杯水，声音中满是困惑。</span></p>
+          </div>
+          <div class="mt-8 text-center">
+            <button onclick="switchPage('newsPage')" class="btn-base px-8 py-3 rounded-md">
+              <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
+              <span class="en">Back to News</span>
+              <span class="cn hidden">返回新闻列表</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="py-6 text-center text-sm text-[#4a3f35]/70">
+      <span class="en">© <span class="year"></span> SUN WANNUO. All Rights Reserved.</span>
+      <span class="cn hidden">© <span class="year"></span> 孙婉诺. 保留所有权利。</span>
+    </footer>
+  </div>
+
+  <!-- ============================================================
+       Food Culture 详细页 2（老年食堂）
+       ============================================================ -->
+  <div class="page-container" id="foodDetailPage2">
+    <header class="sticky top-0 nav-bar z-40">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="en">SUN WANNUO</span>
+          <span class="cn hidden">孙婉诺</span>
+        </div>
+        <div class="back-nav-menu hidden md:flex">
+          <span class="nav-link" onclick="switchPage('newsPage')">
+            <span class="en">BACK</span>
+            <span class="cn hidden">返回</span>
+          </span>
+          <span class="nav-link" onclick="switchPage('homePage','projects')">
+            <span class="en">WORKS</span>
+            <span class="cn hidden">作品</span>
+          </span>
+        </div>
+        <button id="langToggleFoodDetail2" class="lang-btn">
+          <span class="en">中文</span>
+          <span class="cn hidden">English</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="max-w-4xl mx-auto px-4 py-10">
+      <div class="detail-content-card">
+        <div class="article-full">
+          <h1>
+            <span class="en">Soft Bites, Strong Bonds: Shenzhen's Community Canteens for Seniors</span>
+            <span class="cn hidden">软食暖胃，温情聚邻：深圳社区长者食堂</span>
+          </h1>
+          <div class="byline">
+            <span><span class="en">By Vicky Sun</span><span class="cn hidden">作者：Vicky Sun</span></span>
+            <span><span class="en">May 2, 2026</span><span class="cn hidden">2026年5月2日</span></span>
+          </div>
+          <img src="https://s3.bmp.ovh/2026/06/21/hPTRDwTZ.jpg" alt="Community Canteen" class="featured-image" loading="lazy" />
+          <div class="body-text">
+            <p><span class="en">At 11:30 a.m., the canteen at Cuizhu Street Senior Service Center in Luohu District fills with warm, mixed smells: fresh steamed fish, thick braised tofu, and light, blanched green vegetables. In front of the serving window, gray-haired seniors line up quietly with trays, the clink of stainless steel plates sounding soft and clear.</span><span class="cn hidden">上午11点半，罗湖区翠竹街道长者服务中心的食堂里飘出温暖而混合的香气：清蒸鱼、浓烧豆腐、清炒时蔬。打菜窗口前，银发长者们端着餐盘安静排队，不锈钢餐盘碰撞的声音清脆而柔和。</span></p>
+            <p><span class="en">Li Xia, 78, leans forward slightly and picks carefully from several gentle, steaming soft dishes. A standard lunch here costs 18 yuan for three dishes and one soup, chosen from six daily fresh options. With Shenzhen's senior meal subsidy, Li only needs to tap her card and pay 13 yuan for a full, warm, nutritious meal.</span><span class="cn hidden">78岁的李霞微微前倾，仔细挑选了几道温热软烂的菜肴。这里标准午餐是18元，三菜一汤，每日六种新鲜菜品可选。加上深圳市长者助餐补贴，李霞只需刷卡支付13元，就能吃到一顿丰盛、温暖、营养的饭菜。</span></p>
+            <p><span class="en">"Cooking alone at home used to be tiring and lonely," Li said, sitting down with her tray. "Now the food here is safe and tasty, and I can chat with friends while I eat. It's really lively."</span><span class="cn hidden">“以前一个人在家做饭，又累又孤单，”李霞端着餐盘坐下说道。“现在这里的饭菜安全可口，吃饭时还能和老朋友聊聊天，真的很热闹。”</span></p>
+            <p><span class="en">Shenzhen's community senior canteens are no longer just places to fill stomachs. They are a creative space for age-friendly soft food and an emotional home for older residents. With low-oil, low-salt, and tender dishes, the canteens fit the physical needs of seniors with weaker chewing and digestion. Warm, home-style meals also build close emotional bonds: local empty-nesters find company, and migrant seniors feel they belong in their new city.</span><span class="cn hidden">深圳的社区长者食堂已不再是单纯的果腹之处。它们是适老化软食的创新空间，也是老年居民的情感家园。低油低盐、软烂适口的菜品，贴合了咀嚼和消化能力较弱的老年人的身体需求。温暖的家常菜也建立了紧密的情感纽带：本地空巢老人找到了陪伴，随迁长者在新城市找到了归属感。</span></p>
+            <p><span class="en">This canteen serves two main groups: more than 20 seniors living long-term in the senior apartment and nearby community residents with official permits. Sometimes students and office workers nearby also join the seniors for the affordable, clean food. The kitchen uses only steaming, stewing, and braising — gentle cooking methods for seniors. Several large steamers work from early morning to make sure every dish is fresh and soft.</span><span class="cn hidden">这家食堂主要服务两类人群：长期居住在长者公寓的20多位老人，以及持有正式许可的周边社区居民。有时附近的学生和上班族也会前来与老人一起享用实惠洁净的饭菜。厨房采用蒸、炖、烧等适合老年人的温和烹饪方式。几台大型蒸锅从清晨就开始工作，确保每一道菜品都新鲜软烂。</span></p>
+            <p><span class="en">Chen Xiulian, 76, was born and raised in Shenzhen and lives alone after her husband died. With bad teeth, she comes to the canteen almost every weekday and sits in her usual window seat. "Eating here is so easy," Chen said. "The dishes are soft, not salty or oily, and good for my health." She lifted a piece of tender steamed sole easily with her chopsticks; the fish was so soft it slipped down her throat with almost no chewing.</span><span class="cn hidden">76岁的陈秀莲是土生土长的深圳人，丈夫去世后独居。因牙齿不好，她几乎每个工作日都来食堂，坐在她惯常的靠窗位置。“在这里吃饭很方便，”陈说。“菜品软烂，不咸不油，对我的健康有好处。”她用筷子轻松夹起一块嫩滑的清蒸龙利鱼，鱼肉软糯得几乎无需咀嚼就滑入喉咙。</span></p>
+            <p><span class="en">Yang Mingfan, 82, sitting next to Chen, felt the same. He spooned some soft braised wax gourd and said: "Eating at home alone is quiet and sad. Here we talk about old days and our grandchildren. It's warm and busy, and new people become friends quickly." A senior from another table came over with a tea cup, and Yang moved over quietly to make space.</span><span class="cn hidden">坐在陈秀莲旁边的82岁杨明凡深有同感。他舀了一勺软烂的焖冬瓜说：“一个人在家吃饭冷冷清清，很不是滋味。在这里大家聊聊往事，说说孙辈，又热闹又温暖，新朋友很快就熟了。”邻桌一位老人端着茶杯过来，杨明凡默默地挪了挪位置让出空间。</span></p>
+            <p><span class="en">Zhang Weiqiang, 45, head chef of the canteen, stood by the half-open kitchen window and watched the busy dining room. He said his team changes all dishes to fit seniors: less oil and salt, no frying, and softer vegetables. These small changes help seniors with high blood pressure, diabetes and other long-term illnesses. "We don't just make food to eat," Zhang said. "We make food that lets seniors eat safely and peacefully."</span><span class="cn hidden">45岁的食堂主厨张伟强站在半开放式厨房窗口，望着忙碌的餐厅。他说团队对菜品进行了全面适老化调整：少油少盐、不油炸、蔬菜更软烂。这些细微改变帮助患有高血压、糖尿病等慢性病的老人更好地管理健康。“我们不只是在做一顿饭，”张伟强说。“我们在做让老人吃得安心、吃得放心的饭。”</span></p>
+            <p><span class="en">Not far from Cuizhu, Lixin Community Senior Canteen in Dongmen Street is just as lively. Before 11 a.m. every day, seniors arrive with cloth bags and walking sticks. Many of them are migrant seniors who moved to Shenzhen to live with their children.</span><span class="cn hidden">距翠竹不远的东门街道立新社区长者食堂同样热闹。每天上午11点前，老人们便带着布袋和拐杖陆续到来。其中不少是来深圳随迁养老的长者。</span></p>
+            <p><span class="en">The canteen changes home-style dishes to fit different hometown tastes while making every bite soft and easy to chew. During traditional festivals, workers make light, healthy festival food: low-sugar Cantonese mooncakes and soft glutinous rice dumplings. These small treats let seniors enjoy festival traditions in a healthy way.</span><span class="cn hidden">食堂将家常菜调整为适合不同家乡口味的同时，确保每一口都软糯易嚼。传统节日时，工作人员会制作清淡健康的节日食品：低糖广式月饼、软糯汤圆。这些小吃让老人在健康的前提下享受节日传统。</span></p>
+            <p><span class="en">Wang Guixiang, 72, came to Shenzhen from Hunan three years ago. Her son's family likes light Cantonese food with little spice, and her loose teeth cannot handle hard meat. "I missed Hunan braised pork so much," Wang said. "I ate it every week back home, but I couldn't have it here until now. The chef cooks it very soft and easy to chew. It's not very spicy, but the meat taste is just like home." She lifted a shaking piece of red braised pork with her chopsticks.</span><span class="cn hidden">72岁的王桂香三年前从湖南来到深圳。儿子一家喜欢清淡少辣的粤菜，她松动的牙齿也咬不动硬肉。“我太想念湖南红烧肉了，”王桂香说。“在老家我每周都吃，来深圳后一直吃不到。现在厨师把它烧得特别软烂，入口即化。虽然不太辣，但肉香就是家里的味道。”她用筷子夹起一块颤巍巍的红烧肉。</span></p>
+            <p><span class="en">Even better, Wang met three other women from Hunan here. Every lunchtime, the four sit together. They talk over soft steamed spareribs, braised eggplant and wax gourd soup — about expensive hometown vegetables in Shenzhen markets, and when to smoke cured meat back home.</span><span class="cn hidden">更妙的是，王桂香在这里认识了三个湖南老乡。每天午饭时间，四人坐在一起，吃着软糯的蒸排骨、烧茄子和冬瓜汤，聊着深圳菜市场里老家的菜有多贵，聊着什么时候回老家熏腊肉。</span></p>
+            <p><span class="en">"At first I just came for cheap food," Wang said. "Now this is my favorite social time every day. We talk about small things: market prices, grandchildren's homework, weather back home. These talks make me feel connected and not lonely."</span><span class="cn hidden">“一开始我只是图便宜，”王桂香说。“现在这成了我每天最期待的社交时光。我们聊些小事：菜价、孙子的作业、老家的天气。这些闲聊让我感到与故乡的联结，不再孤单。”</span></p>
+            <p><span class="en">The strong system of Shenzhen's senior canteens depends on government support. According to the Citywide Senior Meal Service Construction Report released by the Shenzhen Municipal Bureau of Civil Affairs in 2025, the city had built 266 standardized senior canteens and meal service spots by June 2025. In 2024, the service provided more than 127,000 meals and helped 200,000 seniors with financial subsidies.</span><span class="cn hidden">深圳长者食堂的强大体系离不开政府支持。根据深圳市民政局2025年发布的《全市长者助餐服务建设报告》，截至2025年6月，全市已建成266个标准化长者食堂和助餐点。2024年，该服务提供了超过12.7万份餐食，并为20万长者提供了财政补贴。</span></p>
+            <p><span class="en">The subsidy rules follow the Shenzhen Elderly Meal Subsidy Implementation Rules revised in 2024: Shenzhen registered seniors aged 70 to 99 get up to 5 yuan per meal; registered low-income, disabled and bereaved seniors aged 60 and above get up to 15 yuan per meal. Seniors can apply easily with their ID card and household registration book at their community office. The government also gives about 2 yuan per meal to support canteen operations.</span><span class="cn hidden">补贴规则依据2024年修订的《深圳市长者助餐补贴实施办法》：70至99岁深圳户籍长者每餐最高补贴5元；60岁以上户籍低保、残疾及失独长者每餐最高补贴15元。长者凭身份证和户口本即可在社区工作站轻松申请。政府还给予每餐约2元的运营补贴支持食堂运转。</span></p>
+            <p><span class="en">In fast-paced Shenzhen, many adult children work long hours, leaving seniors at risk of loneliness and poor nutrition. Senior canteens offer more than soft, healthy food — they offer a warm, social space. All canteens follow the Nutrition Meals Guideline for the Elderly, a local Shenzhen standard that took effect in February 2025. Some canteens also invite nutritionists to help design meals for seniors with long-term illnesses.</span><span class="cn hidden">在快节奏的深圳，许多成年子女长时间工作，老年人面临孤独和营养不足的风险。长者食堂提供的不仅是软烂健康的食物——更是一个温暖的社交空间。所有食堂都遵循2025年2月生效的深圳地方标准《老年人营养餐指南》。部分食堂还邀请营养师协助为患有慢性病的老人设计餐食。</span></p>
+            <p><span class="en">Although some problems remain — such as uneven coverage and trouble for some seniors to apply for subsidies — Shenzhen is improving its services. Lin Ruifan, 42, Member of the Party Working Committee and Director of the Public Service Office of Dongmen Subdistrict, said the city is working to expand and improve the system. "We are building smart dining platforms and testing cross-district subsidies. We want to bring elderly care services to the last mile."</span><span class="cn hidden">尽管仍存在一些问题——如覆盖不均、部分老人申请补贴困难——深圳正在不断改善服务。42岁的东门街道党工委委员、公共服务办公室主任林瑞凡表示，深圳正努力扩大和完善这一体系。“我们正在建设智慧助餐平台，试点跨区补贴。我们要把养老服务送到‘最后一公里’。”</span></p>
+          </div>
+          <div class="mt-8 text-center">
+            <button onclick="switchPage('newsPage')" class="btn-base px-8 py-3 rounded-md">
+              <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
+              <span class="en">Back to News</span>
+              <span class="cn hidden">返回新闻列表</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="py-6 text-center text-sm text-[#4a3f35]/70">
+      <span class="en">© <span class="year"></span> SUN WANNUO. All Rights Reserved.</span>
+      <span class="cn hidden">© <span class="year"></span> 孙婉诺. 保留所有权利。</span>
+    </footer>
+  </div>
+
+  <!-- ============================================================
+       Food Culture 详细页 3（泰餐金不换）
+       ============================================================ -->
+  <div class="page-container" id="foodDetailPage3">
+    <header class="sticky top-0 nav-bar z-40">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="en">SUN WANNUO</span>
+          <span class="cn hidden">孙婉诺</span>
+        </div>
+        <div class="back-nav-menu hidden md:flex">
+          <span class="nav-link" onclick="switchPage('newsPage')">
+            <span class="en">BACK</span>
+            <span class="cn hidden">返回</span>
+          </span>
+          <span class="nav-link" onclick="switchPage('homePage','projects')">
+            <span class="en">WORKS</span>
+            <span class="cn hidden">作品</span>
+          </span>
+        </div>
+        <button id="langToggleFoodDetail3" class="lang-btn">
+          <span class="en">中文</span>
+          <span class="cn hidden">English</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="max-w-4xl mx-auto px-4 py-10">
+      <div class="detail-content-card">
+        <div class="article-full">
+          <h1>
+            <span class="en">Sweet Basil Thai Cuisine</span>
+            <span class="cn hidden">甜香泰味：香港海港城Sweet Basil Thai Cuisine食评</span>
+          </h1>
+          <div class="byline">
+            <span><span class="en">By Vicky Sun</span><span class="cn hidden">作者：Vicky Sun</span></span>
+            <span><span class="en">Mar 15, 2026</span><span class="cn hidden">2026年3月15日</span></span>
+          </div>
+          <img src="https://s3.bmp.ovh/2026/06/21/G71JiyGG.png" alt="Sweet Basil Thai" class="featured-image" loading="lazy" />
+          <div class="body-text">
+            <p><span class="en">I have little exposure to Thai cuisine in daily life, so I specifically chose Sweet Basil Thai Cuisine, a long-established Thai restaurant founded in 1994 at Harbour City in Hong Kong, for my first formal taste of authentic Thai food. Nestled on the second floor of Ocean Terminal, this restaurant is quite popular in Tsim Sha Tsui thanks to its authentic Thai decor and stunning views of Victoria Harbour. That said, my dining experience here left me feeling a touch disappointed overall.</span><span class="cn hidden">我平日很少接触泰国菜，所以这次特意选择了香港海港城这家创立于1994年的老牌泰餐厅Sweet Basil Thai Cuisine，作为我第一次正式品尝地道泰餐的起点。餐厅位于海运大厦二楼，凭借地道的泰式装潢和维港美景，在尖沙咀颇受欢迎。不过，整体用餐体验让我略感失望。</span></p>
+            <p><span class="en">Stepping into the restaurant, I was immediately enveloped in a strong exotic Thai atmosphere. The interior is exquisitely and luxuriously decorated, adorned with Thai ornaments everywhere and traditional patterns on the walls, standing distinctly apart from minimalist-style Thai eateries. The space is well laid out: window-side seats offer an unobstructed view of Victoria Harbour, and there are large private rooms available, perfect for gatherings with friends or business dinners. The waitstaff are dressed in uniform, gentle in manner and soft-spoken, and they are extremely prompt at changing plates and refilling water. A 10% service charge is applied at the restaurant, and coupons are provided upon checkout—a thoughtful little detail.</span><span class="cn hidden">踏入餐厅，浓郁的异国泰式风情扑面而来。内部装潢精致奢华，随处可见泰国饰品，墙面装饰着传统图案，与简约风格的泰式餐厅截然不同。空间布局合理：靠窗座位可一览维港美景，还有大型包间可供选择，适合朋友聚会或商务宴请。服务员穿着统一制服，举止温婉、轻声细语，更换餐盘和添水非常及时。餐厅收取10%服务费，结账时提供优惠券——一个贴心的细节。</span></p>
+            <p><span class="en">We both ordered the lunch set meal, which includes one appetizer, one main course and one drink per person, with clear labels on the menu for each option. The highlight of the meal was undoubtedly the Iced Longan Drink. It contains about seven shelled longans with plump, firm flesh; on the palate, it is sweet but not cloying, with a natural fruity aroma, and also boasts nourishing properties. Its icy, smooth texture awakens the taste buds in an instant, making it an ideal pre-meal drink. The Iced Thai Milk Tea was also a pleasant surprise: free from the usual cloying sweetness, it has a mild, delicate flavor, with milkiness and the distinct aroma of hand-labeled black tea blending harmoniously. The tea flavor is rich and mellow, offering a refreshing, non-sugary taste. Fried Flat Noodles with Soy Sauce (Pork) is another standout dish. The flat noodles are stir-fried to a glossy, non-sticky finish with a satisfying chewy texture, and the pork slices are tender and well-infused with sauce. Stir-fried together with eggs, celery and green vegetables, it has a rich wok hei and an enticing aroma. The only minor flaw lies in the side vegetables: the green vegetables are crisp and tender but carry a slight bitter note, and the carrots, cut into an elegant lace pattern for a refined look, lack flavor infusion, which is a pity.</span><span class="cn hidden">我们两人都点了午市套餐，每人包含一份前菜、一份主菜和一杯饮品，菜单上对每个选项都有清晰标注。整顿饭的亮点无疑是冰镇龙眼水。里面大约有七颗去壳龙眼，果肉饱满紧实；入口清甜不腻，带有天然果香，还有滋补功效。冰爽顺滑的口感瞬间唤醒味蕾，是绝佳的开胃饮品。冰泰式奶茶也令人惊喜：没有常见的甜腻感，味道柔和细腻，奶香与手标红茶的独特香气和谐交融。茶香浓郁醇厚，口感清爽不甜腻。酱油炒河粉（猪肉）是另一道出色菜品。河粉炒得油亮不粘，口感Q弹有嚼劲，猪肉片嫩滑入味。与鸡蛋、西芹和青菜同炒，锅气十足，香气诱人。唯一的瑕疵是配菜：青菜脆嫩但带一丝微苦，胡萝卜切成精致的蕾丝花边，外形优雅却不够入味，实属遗憾。</span></p>
+            <p><span class="en">The biggest letdown of the meal was the Fried Rice with Seafood and Pineapple. I had high expectations for this classic Thai dish, yet it fell far short of what I anticipated. Served in a half pineapple whose flesh was dry and withered, the fruit was clearly not fresh, having been stored for too long. The squid was pleasantly chewy, but the crab sticks were mushy and fell apart at the slightest touch, completely devoid of flavor. The corn, green peas and carrots in the fried rice had a stiff, raw texture, presumably frozen ingredients that were stir-fried without being fully thawed. Furthermore, the fried rice was overpowered by a strong pepper taste, which masked the umami of the seafood and the natural sweetness of the pineapple. Instead of a harmonious fusion of flavors, it felt like a haphazard mix of ingredients simply tossed together in a pan. Pineapple contains bromelain, an enzyme that tenderizes meat, yet I detected no hint of the subtle, blended texture between the pineapple and the meat in this dish whatsoever.</span><span class="cn hidden">整顿饭最大的失望是菠萝海鲜炒饭。我对这道经典泰式菜肴期望很高，但它远未达到预期。盛放在半个菠萝中，果肉干瘪枯萎，明显不新鲜，存放时间过长。鱿鱼有嚼劲，但蟹棒糊烂松散，一碰就碎，毫无味道。炒饭中的玉米粒、青豆和胡萝卜口感生硬，估计是冷冻食材未完全解冻就下锅翻炒。此外，炒饭被浓重的胡椒味盖过，掩盖了海鲜的鲜味和菠萝的自然清甜。本应是风味的和谐融合，吃起来却像食材被随意扔进锅里翻炒。菠萝含有菠萝蛋白酶，能嫩化肉质，但我在这道菜中完全没有感受到菠萝与肉之间那种微妙的融合口感。</span></p>
+            <p><span class="en">Deep Fried Crunchy Chicken Bones was a solid hit: crispy on the outside and tender on the inside, the chicken bones were crunchy but not hard on the teeth. The delicate fragrance of perilla leaves cut through the greasiness of the fried dish, and the sweet and spicy sauce added rich layers of flavor, making it more delicious with every bite. In stark contrast, the Deep Fried Shrimp Cakes were underwhelming. The shrimp paste had been over-whisked, robbing the cakes of the springy, chewy texture fresh shrimp should bring, leaving them loose and crumbly. Even paired with plum sauce, they failed to redeem their lackluster flavor.</span><span class="cn hidden">酥炸脆鸡骨是扎实的亮点：外酥里嫩，鸡骨酥脆而不硌牙。紫苏叶的清香中和了油炸的油腻，甜辣酱增添了丰富的层次感，越吃越香。相比之下，炸虾饼令人失望。虾胶搅打过度，失去了鲜虾应有的弹牙口感，变得松散易碎。即使搭配梅子酱，也无法拯救其平淡无味的表现。</span></p>
+            <p><span class="en">All in all, this long-established Thai restaurant with nearly 30 years of history has distinct strengths and weaknesses. Its top-notch service, immersive Thai-themed ambiance, prime location with Victoria Harbour views, and a few standout dishes make it worth a casual visit for the experience. However, the restaurant also has notable shortcomings: some ingredients lack freshness, the flavor combinations are disjointed, and the a la carte prices are on the steep side.</span><span class="cn hidden">总体而言，这家拥有近30年历史的老牌泰餐厅优缺点分明。一流的服务、沉浸式的泰式氛围、坐拥维港美景的优越位置，以及几道出色的菜品，让它值得为体验而一试。不过，餐厅也存在明显短板：部分食材不够新鲜、风味搭配脱节、单点价格偏高。</span></p>
+            <p><span class="en">Sweet Basil Thai cuisine Information:<br />
+            Website: https://www.sweetbasilthai.hk/<br />
+            Hong Kong Phone: (852) 2730 1963<br />
+            Business Hours: 11:30 - 23:00 daily<br />
+            Ambiance and accessibility: No<br />
+            Atmosphere: Exquisite and serene, with rich Thai ambiance<br />
+            Payment Methods: Cash, Octopus Card, Visa, Master, AE, UnionPay<br />
+            Price Range: HK$150-250 per person<br />
+            Takeaway: Available<br />
+            Stars: Two Stars<br />
+            Highly Recommended: Fried Flat Noodles with Soy Sauce (Pork), Iced Longan Drink</span><span class="cn hidden">Sweet Basil Thai Cuisine 信息：<br />
+            网站：https://www.sweetbasilthai.hk/<br />
+            香港电话：(852) 2730 1963<br />
+            营业时间：每日 11:30 - 23:00<br />
+            氛围及无障碍设施：无<br />
+            氛围：精致静谧，泰式风情浓郁<br />
+            付款方式：现金、八达通、Visa、Master、AE、银联<br />
+            人均消费：150-250港币<br />
+            外卖：提供<br />
+            星级：两星<br />
+            强烈推荐：酱油炒河粉（猪肉）、冰镇龙眼水</span></p>
           </div>
           <div class="mt-8 text-center">
             <button onclick="switchPage('newsPage')" class="btn-base px-8 py-3 rounded-md">
@@ -1778,56 +2327,46 @@
     </section>
     <section class="max-w-6xl mx-auto px-4 py-8">
       <div class="detail-content-card">
-        <div class="portfolio-grid">
-          <div class="portfolio-item">
-            <img src="https://picsum.photos/id/1040/600/400" alt="Photo 1" loading="lazy" />
-            <div class="portfolio-item-body">
-              <h4>香港渔村 · 最后的疍民</h4>
-              <p>记录香港大屿山渔村的疍民生活，传统水上人家正在消失的文化记忆。</p>
-              <span class="tag">香港 · 12幅</span>
-            </div>
-          </div>
-          <div class="portfolio-item">
-            <img src="https://picsum.photos/id/1044/600/400" alt="Photo 2" loading="lazy" />
-            <div class="portfolio-item-body">
-              <h4>青岛海岸 · 渔港的清晨</h4>
-              <p>胶州湾沿岸渔港的清晨景象，渔民与海的故事在日出中延续。</p>
-              <span class="tag">青岛 · 15幅</span>
-            </div>
-          </div>
-          <div class="portfolio-item">
-            <img src="https://picsum.photos/id/1049/600/400" alt="Photo 3" loading="lazy" />
-            <div class="portfolio-item-body">
-              <h4>关中平原 · 麦收时节</h4>
-              <p>周至县古村落的麦收场景，农耕文明在关中平原上的最后守望。</p>
-              <span class="tag">西安 · 10幅</span>
-            </div>
-          </div>
-          <div class="portfolio-item">
-            <img src="https://picsum.photos/id/1055/600/400" alt="Photo 4" loading="lazy" />
-            <div class="portfolio-item-body">
-              <h4>江南水乡 · 古镇的日常</h4>
-              <p>高淳区水乡的日常风景，桨声灯影里的江南生活画卷。</p>
-              <span class="tag">南京 · 18幅</span>
-            </div>
-          </div>
-          <div class="portfolio-item">
-            <img src="https://picsum.photos/id/1060/600/400" alt="Photo 5" loading="lazy" />
-            <div class="portfolio-item-body">
-              <h4>台湾乡村 · 稻田与山峦</h4>
-              <p>台南与花莲的乡村风貌，两岸乡村同根同源的文化记忆。</p>
-              <span class="tag">台湾 · 14幅</span>
-            </div>
-          </div>
-          <div class="portfolio-item">
-            <img src="https://picsum.photos/id/1062/600/400" alt="Photo 6" loading="lazy" />
-            <div class="portfolio-item-body">
-              <h4>城市街头 · 市井烟火</h4>
-              <p>都市街头的日常瞬间，在快节奏中捕捉人与城市的温情互动。</p>
-              <span class="tag">香港 · 20幅</span>
-            </div>
+
+        <!-- ===== 第一部分：城市与建筑 ===== -->
+        <div class="gallery-section">
+          <div class="gallery-title">🌆 <span class="en">Urban &amp; Architecture</span><span class="cn hidden">城市与建筑</span></div>
+          <div class="gallery-container" id="gallery-urban">
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/30/IOjNSI7p.png" alt="五四广场" loading="lazy" /><figcaption><span class="en">May Fourth Square</span><span class="cn hidden">五四广场</span></figcaption></div>
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/24/FKuzHEx0.jpg" alt="中环涂鸦" loading="lazy" /><figcaption><span class="en">Central Graffiti</span><span class="cn hidden">中环涂鸦</span></figcaption></div>
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/24/ZDsDyxDw.jpg" alt="圆满阁" loading="lazy" /><figcaption><span class="en">Yuanman Pavilion</span><span class="cn hidden">圆满阁</span></figcaption></div>
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/24/UxlCgsFF.jpg" alt="淮安大桥" loading="lazy" /><figcaption><span class="en">Huai'an Bridge</span><span class="cn hidden">淮安大桥</span></figcaption></div>
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/24/9pfcgSmv.jpg" alt="山门" loading="lazy" /><figcaption><span class="en">Mountain Gate</span><span class="cn hidden">山门</span></figcaption></div>
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/30/Y0qSek4H.png" alt="长洲岛渔船" loading="lazy" /><figcaption><span class="en">Cheung Chau Fishing Boats</span><span class="cn hidden">长洲岛渔船</span></figcaption></div>
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/30/VRed9j4G.png" alt="青岛码头" loading="lazy" /><figcaption><span class="en">Qingdao Pier</span><span class="cn hidden">青岛码头</span></figcaption></div>
           </div>
         </div>
+
+        <!-- ===== 第二部分：人像与人文 ===== -->
+        <div class="gallery-section">
+          <div class="gallery-title">🎨 <span class="en">Portrait &amp; Humanistic</span><span class="cn hidden">人像与人文</span></div>
+          <div class="gallery-container" id="gallery-portrait">
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/30/DKMEbPrk.jpg" alt="编灯人" loading="lazy" /><figcaption><span class="en">Lantern Weaver</span><span class="cn hidden">编灯人</span></figcaption></div>
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/30/6BD4vs1R.jpg" alt="兄弟" loading="lazy" /><figcaption><span class="en">Brothers</span><span class="cn hidden">兄弟</span></figcaption></div>
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/24/rmEzef1J.jpg" alt="台北居酒屋" loading="lazy" /><figcaption><span class="en">Taipei Izakaya</span><span class="cn hidden">台北居酒屋</span></figcaption></div>
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/30/sO6ytKfa.png" alt="海岛骑行" loading="lazy" /><figcaption><span class="en">Island Cycling</span><span class="cn hidden">海岛骑行</span></figcaption></div>
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/30/1RhlgJ8g.jpg" alt="捕鱼人" loading="lazy" /><figcaption><span class="en">Fisherman</span><span class="cn hidden">捕鱼人</span></figcaption></div>
+          </div>
+        </div>
+
+        <!-- ===== 第三部分：光影与细节 ===== -->
+        <div class="gallery-section">
+          <div class="gallery-title">⛅ <span class="en">Light &amp; Detail</span><span class="cn hidden">光影与细节</span></div>
+          <div class="gallery-container" id="gallery-light">
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/24/XpXrpGq2.jpg" alt="水光影" loading="lazy" /><figcaption><span class="en">Water Light</span><span class="cn hidden">水光影</span></figcaption></div>
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/24/mfyt5jWc.jpg" alt="荷花" loading="lazy" /><figcaption><span class="en">Lotus</span><span class="cn hidden">荷花</span></figcaption></div>
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/30/tZTMH49a.png" alt="树光影" loading="lazy" /><figcaption><span class="en">Tree Light</span><span class="cn hidden">树光影</span></figcaption></div>
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/30/UjA1xWQ0.png" alt="波光粼粼" loading="lazy" /><figcaption><span class="en">Sparkling Waves</span><span class="cn hidden">波光粼粼</span></figcaption></div>
+            <div class="photo-item"><img src="https://s3.bmp.ovh/2026/06/24/eKB0wpmb.jpg" alt="竹篾灯笼" loading="lazy" /><figcaption><span class="en">Bamboo Lantern</span><span class="cn hidden">竹篾灯笼</span></figcaption></div>
+          </div>
+        </div>
+
+        <!-- 返回按钮 -->
         <div class="mt-8 text-center">
           <button onclick="switchPage('homePage','projects')" class="btn-base px-8 py-3 rounded-md">
             <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
@@ -1835,6 +2374,7 @@
             <span class="cn hidden">返回作品集列表</span>
           </button>
         </div>
+
       </div>
     </section>
     <footer class="py-6 text-center text-sm text-[#4a3f35]/70">
@@ -1847,7 +2387,6 @@
        短片作品集详情页（Film Portfolio）
        ============================================================ -->
   <div class="page-container" id="filmPage">
-    <!-- 内容与之前相同，已省略以节省篇幅，实际运行正常 -->
     <header class="sticky top-0 nav-bar z-40">
       <div class="nav-container">
         <div class="nav-logo">
@@ -1881,12 +2420,48 @@
     <section class="max-w-6xl mx-auto px-4 py-8">
       <div class="detail-content-card">
         <div class="portfolio-grid">
-          <div class="portfolio-item"><img src="https://picsum.photos/id/1011/600/400" alt="Film 1" loading="lazy" /><div class="portfolio-item-body"><h4>《河流》</h4><p>城市河流生态修复纪实，从臭水沟到清水廊道的五年变迁。</p><span class="tag">15min · 2024</span></div></div>
-          <div class="portfolio-item"><img src="https://picsum.photos/id/1012/600/400" alt="Film 2" loading="lazy" /><div class="portfolio-item-body"><h4>《渔火》</h4><p>渔村老人的故事，在城市化浪潮中坚守最后的海上灯火。</p><span class="tag">12min · 2024</span></div></div>
-          <div class="portfolio-item"><img src="https://picsum.photos/id/1019/600/400" alt="Film 3" loading="lazy" /><div class="portfolio-item-body"><h4>《山音》</h4><p>山区孩子的音乐梦想，在贫瘠的土地上奏响希望的旋律。</p><span class="tag">18min · 2023</span></div></div>
-          <div class="portfolio-item"><img src="https://picsum.photos/id/1035/600/400" alt="Film 4" loading="lazy" /><div class="portfolio-item-body"><h4>《城记》</h4><p>城市变迁中的个体记忆，在钢筋水泥间寻找消失的邻里温情。</p><span class="tag">10min · 2023</span></div></div>
-          <div class="portfolio-item"><img src="https://picsum.photos/id/1039/600/400" alt="Film 5" loading="lazy" /><div class="portfolio-item-body"><h4>《织梦》</h4><p>传统手工艺人的坚守与传承，在机器时代编织手工的温度。</p><span class="tag">14min · 2022</span></div></div>
-          <div class="portfolio-item"><img src="https://picsum.photos/id/1043/600/400" alt="Film 6" loading="lazy" /><div class="portfolio-item-body"><h4>《归途》</h4><p>春运背景下游子的归乡之路，在流动中寻找家的意义。</p><span class="tag">16min · 2022</span></div></div>
+          <!-- 作品 1：Gabangel -->
+          <div class="portfolio-item">
+            <img src="https://s3.bmp.ovh/2026/06/22/7nEdK8YS.jpg" alt="Gabangel" loading="lazy" />
+            <div class="portfolio-item-body">
+              <h4><span class="en">Not Just Cards! Gabangel Crafts HK's Spirit Into Playful Wonder</span><span class="cn hidden">不止于纸牌！Gabangel 将香港精神融入创意奇趣</span></h4>
+              <p><span class="en">A portrait of a Hong Kong‑born creative card shop that reimagines playing cards as a vibrant canvas for local heritage and contemporary culture, blending tradition with modern aesthetics.</span><span class="cn hidden">一家扎根香港的创意纸牌店，以扑克牌为画布，重新演绎本地文化与当代风尚，将传统底蕴与摩登美学巧妙融合。</span></p>
+              <span class="tag"><span class="en">2025.12.03 · Hong Kong</span><span class="cn hidden">2025.12.03 · 香港</span></span>
+              <div class="video-link">
+                <i class="fa fa-video-camera" aria-hidden="true"></i>
+                <a href="https://pan.baidu.com/s/1QZJnSHUVPZPBS4XoAwR8yg?pwd=SS01" target="_blank">https://pan.baidu.com/s/1QZJnSHUVPZPBS4XoAwR8yg?pwd=SS01</a>
+                <span class="extract-code"><span class="en">Extraction code: SS01</span><span class="cn hidden">提取码：SS01</span></span>
+              </div>
+            </div>
+          </div>
+          <!-- 作品 2：白鹿原上的编灯人 -->
+          <div class="portfolio-item">
+            <img src="https://s3.bmp.ovh/2026/06/22/GoDsOTxo.jpg" alt="白鹿原上的编灯人" loading="lazy" />
+            <div class="portfolio-item-body">
+              <h4><span class="en">The Lantern Weaver of Bailu Plateau</span><span class="cn hidden">白鹿原上的编灯人</span></h4>
+              <p><span class="en">An intimate documentary following Wang Xuekun, a bearer of intangible cultural heritage, as he preserves the ancient craft of bamboo‑strip lantern‑making on the Bailu Plateau, with insights into the local cultural center's efforts to safeguard this fading art.</span><span class="cn hidden">一部贴近式纪录片，跟随非遗传承人王学坤，记录他在白鹿原上守护竹篾灯笼这门古老手艺的日常，并呈现当地文化馆为传承这一濒危技艺所做的努力。</span></p>
+              <span class="tag"><span class="en">2023.05 · Xi'an</span><span class="cn hidden">2023.05 · 西安</span></span>
+              <div class="video-link">
+                <i class="fa fa-video-camera" aria-hidden="true"></i>
+                <a href="https://pan.baidu.com/s/1KQvBvxeRZ5OQdas4ZHKEOg?pwd=WW02" target="_blank">https://pan.baidu.com/s/1KQvBvxeRZ5OQdas4ZHKEOg?pwd=WW02</a>
+                <span class="extract-code"><span class="en">Extraction code: WW02</span><span class="cn hidden">提取码：WW02</span></span>
+              </div>
+            </div>
+          </div>
+          <!-- 作品 3：爱的羁绊 -->
+          <div class="portfolio-item">
+            <img src="https://s3.bmp.ovh/2026/06/22/0aXQJXE5.jpg" alt="爱的羁绊" loading="lazy" />
+            <div class="portfolio-item-body">
+              <h4><span class="en">Bonds of Love</span><span class="cn hidden">爱的羁绊</span></h4>
+              <p><span class="en">A grandmother uproots her life, leaves her hometown, and separates from her husband to care for her grandson in a distant city, embodying the quiet strength of familial devotion and the belief that harmony at home is the greatest blessing.</span><span class="cn hidden">一位奶奶毅然离开故土，与丈夫分居两地，远赴他乡照顾孙辈，以无声的付出诠释家庭的羁绊，深信家和万事兴的朴素信念。</span></p>
+              <span class="tag"><span class="en">2023.06.07 · Nanjing</span><span class="cn hidden">2023.06.07 · 南京</span></span>
+              <div class="video-link">
+                <i class="fa fa-video-camera" aria-hidden="true"></i>
+                <a href="https://pan.baidu.com/s/1y6Y6X870QZ8Uward152ftA?pwd=NN03" target="_blank">https://pan.baidu.com/s/1y6Y6X870QZ8Uward152ftA?pwd=NN03</a>
+                <span class="extract-code"><span class="en">Extraction code: NN03</span><span class="cn hidden">提取码：NN03</span></span>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="mt-8 text-center"><button onclick="switchPage('homePage','projects')" class="btn-base px-8 py-3 rounded-md"><i class="fa fa-arrow-left mr-2" aria-hidden="true"></i><span class="en">Back to Portfolios</span><span class="cn hidden">返回作品集列表</span></button></div>
       </div>
@@ -1901,7 +2476,6 @@
        播客作品集详情页（Podcast Portfolio）
        ============================================================ -->
   <div class="page-container" id="podcastPage">
-    <!-- 内容与之前相同，已省略以节省篇幅，实际运行正常 -->
     <header class="sticky top-0 nav-bar z-40">
       <div class="nav-container">
         <div class="nav-logo">
@@ -1936,7 +2510,7 @@
       <div class="detail-content-card">
         <div class="portfolio-grid">
           <div class="portfolio-item">
-            <img src="https://www.imgfox.cn/apis/uploads/20260618/54b4fc670cd64d05/600x600bb.webp" alt="Podcast 1" loading="lazy" />
+            <img src="https://s3.bmp.ovh/2026/06/21/eOTrmU5J.png" alt="Podcast 1" loading="lazy" />
             <div class="portfolio-item-body">
               <h4><span class="en">Swipe, Tap, Scroll: How to Tame Your Phone and Reclaim Your Life</span><span class="cn hidden">滑动、点击、滚动：如何驯服手机，重获生活主动权</span></h4>
               <p><span class="en">This podcast episode explores how social media apps are designed to hook users and offers practical strategies to reclaim control over your screen time.</span><span class="cn hidden">这期播客探讨社交媒体应用如何设计成让用户上瘾，并提供实用策略帮助你重新掌控屏幕使用时间。</span></p>
@@ -1945,7 +2519,7 @@
             </div>
           </div>
           <div class="portfolio-item">
-            <img src="https://www.imgfox.cn/apis/uploads/20260618/91e692f3a4ed4962/159号仓.jpg" alt="Podcast 2" loading="lazy" />
+            <img src="https://s3.bmp.ovh/2026/06/21/DEz0q3gW.jpg" alt="Podcast 2" loading="lazy" />
             <div class="portfolio-item-body">
               <h4><span class="cn">松弛感是个好东西，你也应该有一个！</span><span class="en hidden">The Art of Relaxation: You Deserve One Too!</span></h4>
               <p><span class="cn">松弛感不仅仅是一种生活状态，更是一个人由内而外散发出来的气场，好像能够让人在嘈杂中长舒一口气。无论你的状态怎样，节奏如何，不妨来到声音的空间中，寻找那一份属于你的松弛感。</span><span class="en hidden">Relaxation is not just a state of being, but an aura that radiates from within, offering a sense of calm amidst the noise. No matter your pace or mood, come into this sound space and find your own sense of ease.</span></p>
@@ -1962,95 +2536,7 @@
       <span class="cn hidden">© <span class="year"></span> 孙婉诺. 保留所有权利。</span>
     </footer>
   </div>
-<!-- ============================================================
-     性别议题详细页 1（Gender Issue 第一篇）
-     ============================================================ -->
-<div class="page-container" id="genderDetailPage1">
-  <header class="sticky top-0 nav-bar z-40">
-    <div class="nav-container">
-      <div class="nav-logo">
-        <span class="en">SUN WANNUO</span>
-        <span class="cn hidden">孙婉诺</span>
-      </div>
-      <div class="back-nav-menu hidden md:flex">
-        <span class="nav-link" onclick="switchPage('newsPage')">
-          <span class="en">BACK</span>
-          <span class="cn hidden">返回</span>
-        </span>
-        <span class="nav-link" onclick="switchPage('homePage','projects')">
-          <span class="en">WORKS</span>
-          <span class="cn hidden">作品</span>
-        </span>
-      </div>
-      <button id="langToggleGenderDetail" class="lang-btn">
-        <span class="en">中文</span>
-        <span class="cn hidden">English</span>
-      </button>
-    </div>
-  </header>
 
-  <section class="max-w-4xl mx-auto px-4 py-10">
-    <div class="detail-content-card">
-      <div class="article-full">
-        <h1>
-          <span class="en">“I have HK$4,700 in my bank account”: Elderly Women in Hong Kong Are Poorer Due to Systemic Gender Inequality</span>
-          <span class="cn hidden">“我银行账户里只有4700港币”：系统性性别不平等导致香港老年女性更贫困</span>
-        </h1>
-        <div class="byline">
-          <span><span class="en">By Vicky Sun</span><span class="cn hidden">作者：Vicky Sun</span></span>
-          <span><span class="en">Jun 17, 2026</span><span class="cn hidden">2026年6月17日</span></span>
-        </div>
-        <img src="https://www.imgfox.cn/apis/uploads/20260618/383584ea8b0f44ce/IMG_3414.JPG" alt="Elderly Women Poverty" class="featured-image" loading="lazy" />
-        <div class="body-text">
-
-          <p><span class="en">“I couldn't save anything,” Yuen Ying-ha said. She sits on the lower bunk of a shaky iron bed, with a faded white cloth bag placed beside the pillow. She is 93 years old. She survives on Comprehensive Social Security Assistance (CSSA). She has HK$4,700 left in her bank account.</span><span class="cn hidden">“我什么都存不下来，”袁英霞说。她坐在一张摇晃的铁架床下铺，枕头边放着一个褪色的白布包。她今年93岁，靠综合社会保障援助（综援）维生，银行账户里只剩下4700港元。</span></p>
-
-          <p><span class="en">Yuen is one of the tens of thousands of elderly women in Hong Kong who rely on CSSA to make a living. According to the data from the Hong Kong Social Welfare Department (SWD) for 2025, among all the elderly recipients of welfare assistance in Hong Kong, the proportion of elderly women aged 65 and above is as high as 72.3%, far exceeding the 27.7% for men. Seven of every 10 retired elderly women rely only on the government’s monthly payment to live.</span><span class="cn hidden">袁是香港数以万计依靠综援维生的老年女性之一。根据香港社会福利署2025年的数据，在所有领取福利援助的长者中，65岁及以上女性的比例高达72.3%，远高于男性的27.7%。每10名退休女性中就有7人仅靠政府每月津贴生活。</span></p>
-
-          <p><span class="en">Yuen began working at age 8, watching cattle in rural Shunde, Guangdong province. When she was twelve, her mother sent her to a couple who ran a tea house during the war. Studying never became something she considered. She got married at the age of 21 and lost her husband at 34. She raised five daughters all by herself. From a food factory to a restaurant, she kept working until she was 69 years old, finishing work at midnight each night. When all the years of hard work came to an end, all the income was spent on raising children and supporting the family, and she found that she had nothing left. “The money was all divided among the children,” she said.</span><span class="cn hidden">袁8岁开始工作，在广东顺德农村看牛。12岁时，母亲把她送到一对战时开茶馆的夫妇那里。读书从未成为她考虑的事情。她21岁结婚，34岁丧夫，独自抚养五个女儿。从食品厂到餐厅，她一直工作到69岁，每晚午夜才收工。当所有辛劳结束时，所有收入都花在了抚养孩子和养家上，她发现自己一无所有。“钱都分给了孩子们，”她说。</span></p>
-
-          <p><span class="en">Yuen’s story is not rare in Hong Kong. Due to the long-term impact of systemic gender inequality, many elderly women in Hong Kong have spent their entire lives working but have no savings. Their later years have been even more poorer due to the lack of education, the responsibilities of family, and the constraints of the social structure.</span><span class="cn hidden">袁的故事在香港并不罕见。由于长期系统性性别不平等的影响，许多香港老年女性一生工作却没有积蓄。由于缺乏教育、家庭责任和社会结构的制约，她们的晚年更加贫困。</span></p>
-
-          <p><span class="en">Most elderly women who have retired rely solely on CSSA to sustain their basic livelihoods and their living standards are lower than those of the overall retired population in Hong Kong. According to the data released by the SWD for the 2024-25 fiscal year, 65 and older women made up more than 60% of CSSA recipients and received an average monthly benefit of only HK$4,890, which is far below the average monthly basic living expenses standard for retired individuals in Hong Kong (approximately HK$8,500).</span><span class="cn hidden">大多数退休女性仅靠综援维持基本生活，其生活水平低于香港整体退休人口。根据社署2024-25财政年度数据，65岁及以上女性占综援受助人60%以上，平均每月津贴仅4,890港元，远低于香港退休人士平均每月基本生活开支标准（约8,500港元）。</span></p>
-
-          <p><span class="en">These elderly women who rely on social assistance are mostly those who worked diligently until retirement because they were never officially included in any welfare system. The rapid economic growth of Hong Kong in the 1960s and 1970s was largely dependent on female labor. Thousands of women left the countryside and entered factories. They worked long hours in garment, toy and electronics factories, often earning low piece-rate wages with little security or benefits. When the mandatory provident fund was finally introduced in 2000, it was too late for most of them. After decades of hard work, coupled with frequent interruptions to their careers due to child care, many had almost no retirement savings.</span><span class="cn hidden">这些依靠社会援助的老年女性大多一直辛勤工作至退休，却从未被纳入任何福利体系。香港1960至1970年代的经济快速增长很大程度上依赖女性劳动力。成千上万的女性离开农村进入工厂，在服装、玩具和电子厂长时间工作，收入低微，几乎没有保障和福利。2000年强积金制度最终推出时，对她们大多数人来说为时已晚。几十年的辛劳，加上因育儿而频繁中断职业生涯，许多人几乎没有退休储蓄。</span></p>
-
-          <p><span class="en">According to a 2024 survey by the Hong Kong Young Women’s Christian Association, unpaid caregiving work also continues to burden many women even in old age. The survey of 930 women aged 50 to 70 found that half were still caring for family members — their husbands, parents or grown children. On average, they spent nearly six hours a day on caregiving. More than 30 percent said the burden was too heavy, and many stated that they were under great pressure. Only 38.3 percent had retirement savings. More than half stated that their savings were insufficient to sustain their lives, and 40.1% said that their living standards had declined after leaving their jobs. For those women who dedicated their working lives to factories and gave all their savings to their children, old age does not mean ease, which represents another form of unpaid work.</span><span class="cn hidden">香港基督教女青年会2024年的一项调查显示，无偿照护工作即使在老年也持续压迫许多女性。对930名50至70岁女性的调查发现，一半人仍在照顾家人——丈夫、父母或成年子女。她们平均每天花近6小时在照护上。超过30%的人认为负担过重，许多人表示压力巨大。只有38.3%的人有退休储蓄。超过一半的人表示积蓄不足以维持生活，40.1%的人表示离职后生活水平下降。对于那些将职业生涯奉献给工厂、将所有积蓄给予子女的女性来说，晚年并非意味着轻松，而是另一种形式的无偿劳动。</span></p>
-
-          <p><span class="en">Leung Leung-yee, 90, a CSSA recipient, worked at Changjiang Toy Factory for more than 30 years. When she retired, she had saved a small amount of money, which was quite rare among her peers who had no savings at all. That little savings is now gone, used to support her children, a lifelong expectation for women of her generation. “Most of my spending goes to helping my son,” Leung said. Her younger son is already in his sixties and due to health issues with his feet, he can only occasionally do cleaning work as a casual laborer, and his income is unstable. This mother is nearly deaf but will not consider buying a hearing aid at all. Instead, she took a portion of her social assistance funds and gave it to her divorced and unemployed younger son. Her daughter often came to visit and wanted to take her out for dim sum, but she always refused. “I think dim sum is too expensive,” she said. The long-term frugality had made her even cut off her own appetite.</span><span class="cn hidden">90岁的梁良仪是综援受助人，曾在长江玩具厂工作三十多年。退休时她存了一小笔钱，这在同龄人中相当罕见，同龄人大多没有积蓄。那点积蓄如今也已花完，用来支持她的孩子，这是她那一代女性终身的期望。“我的大部分开销都用来帮儿子，”梁说。她的小儿子已六十多岁，因脚部健康问题，只能偶尔做清洁散工，收入不稳定。这位母亲几乎失聪，却完全不考虑买助听器，而是把一部分综援金给了离婚失业的小儿子。女儿常来探望想带她饮茶，她总是拒绝。“我觉得点心太贵了，”她说。长久的节俭让她甚至压抑了自己的食欲。</span></p>
-
-          <p><span class="en">According to a 2021 study conducted by Lingnan University in Hong Kong on intergenerational economic support among Hong Kong families, even in their later years, Hong Kong women continue to subsidize their adult children's housing and living expenses. This kind of intergenerational transfer further depletes their already limited pension reserves. The study points out that in Hong Kong families, mothers play a significantly higher role in providing financial support for their children. The long-term gender roles have led women to habitually prioritize their personal financial needs over those of the family, ultimately increasing the risk of poverty in old age.</span><span class="cn hidden">香港岭南大学2021年一项关于香港家庭代际经济支持的研究显示，即使在晚年，香港女性仍持续资助成年子女的住房和生活开支。这种代际转移进一步消耗她们本已有限的养老金储备。研究指出，在香港家庭中，母亲为子女提供经济支持的角色远高于父亲。长期的性别角色使女性习惯性地将家庭财务需求置于个人需求之上，最终增加了老年贫困风险。</span></p>
-
-          <p><span class="en">Lam Yuk-wah, a district councilor of Shatian District who also serves as the leader of the care team, noticed that among the elderly who came to receive free meals and meal boxes, 99% were women. She said that the preference for sons over daughters has led to a lack of educational opportunities for girls, which is one of the reasons why they have been trapped in poverty for a long time. According to relevant government data, among the elderly over 60 years old, the illiteracy rate for women 60 and older is nearly three times that of men the same age. “In the past, if one had the means to go to school, it was always the boys who got the chance,” Lam said. Daughters had to take care of the family. No one taught them about managing money. Every penny they earned as young adults was given to the family. There was no concept of setting anything aside for their own future.</span><span class="cn hidden">沙田区区议员兼关爱队队长林玉华注意到，前来领取免费饭菜和饭盒的长者中99%是女性。她说重男轻女导致女孩缺乏教育机会，这是她们长期陷入贫困的原因之一。政府数据显示，60岁以上女性文盲率是同年龄男性的近三倍。“过去，如果有机会上学，总是男孩得到机会，”林说。女儿要照顾家庭，没有人教她们理财。年轻时赚的每一分钱都交给了家庭，从未有过为自己未来留存的观念。</span></p>
-
-          <p><span class="en">Leung Hei, 93, a CSSA recipient, lives with her daughter. On the narrow room wall hangs a yellowed and old certificate, which was her appointment certificate as a committee member of the building's mutual aid association when she was young. She often helped her neighbors buy tickets and handled the money collection and change giving with toothpicks as her accounting tool: one toothpick represented one person, and the scratches on the toothpicks indicated who had paid and who still hadn't. A woman who had never learned mathematics invented her own accounting system for herself. "That's the intelligence of women," Lam said. "But they have no chance to learn, and this is the biggest reason for women's poverty."</span><span class="cn hidden">93岁的梁喜是综援受助人，与女儿同住。狭窄房间的墙上挂着一张泛黄旧证书，那是她年轻时担任大厦互助委员会委任证书。她常帮邻居买票，用牙签作为记账工具来收款找零：一根牙签代表一个人，牙签上的划痕记录谁付了谁没付。一个从未学过数学的女性为自己发明了一套记账系统。“这就是女性的智慧，”林说。“但她们没有学习的机会，这是女性贫困的最大原因。”</span></p>
-
-          <p><span class="en">Longer life does not mean easier life. According to the health data report from the Hong Kong Department of Health in 2025, the average life expectancy of women in Hong Kong is as high as 88.4 years, which is 5.6 years longer than that of men. This means that women will have to spend more on medical expenses, and the impact of poverty will be further magnified. Even though senior citizens aged 75 or above in Hong Kong can receive medical fee exemptions in public clinics or hospitals in Hong Kong, the waiting times are very long. According to the 2024 annual statistics of the Hong Kong Hospital Authority, for some common specialties in public hospitals, such as orthopedics and ophthalmology, the waiting time can even exceed 24 weeks. Even for some urgent symptoms, the waiting time is about 8 weeks. “I don’t like going to public hospitals,” Leung Hei said. “When you’re sick, you don’t want to wait that long. It’s very hard.” Private clinics are quicker but costly, making it impossible for poor elderly women to afford it. The government gives adults 65 and older an annual HK$2,000 voucher for private medical care. A few weeks ago, Leung used her full yearly voucher on one skin appointment.</span><span class="cn hidden">更长的寿命并不意味着更轻松的生活。香港卫生署2025年健康数据显示，香港女性平均预期寿命高达88.4岁，比男性长5.6岁。这意味着女性需要花费更多医疗费用，贫困影响进一步放大。尽管香港75岁及以上长者可在公营诊所或医院获豁免医疗费用，但等候时间很长。医管局2024年年度统计显示，公立医院骨科、眼科等常见专科轮候时间甚至超过24周，即使紧急症状也需约8周。“我不喜欢去公立医院，”梁喜说。“生病了不想等那么久，很辛苦。”私家诊所快捷但昂贵，贫困老年女性负担不起。政府每年给65岁以上长者2000港元私家医疗券，几周前梁喜一次皮肤科就诊就用完了全年额度。</span></p>
-
-          <p><span class="en">Senator Lam has worked in the housing estates of Sha Tin for many years. During countless home visits by the care team, she has witnessed too many cases of elderly women. Every penny they earned when they were young was given to the housing estate, but now they only have a little CSSA payment from government left. She said that the current generation of women is the last one to suffer from this kind of systematic deprivation. More importantly, the next generation of women has already begun to change. Education on money management still needs to be strengthened. It is necessary to pay attention to one's own education and personal development, and to understand that it is necessary to set aside provisions for one's later years. Their daughters have more opportunities but need to understand how to allocate and distinguish between what should be bought and what one wants to buy.</span><span class="cn hidden">林议员在沙田屋邨工作多年，关爱队无数次家访中目睹太多老年女性的案例。她们年轻时挣的每一分钱都给了家庭，如今只剩一点综援金。她说，当前这一代女性是最后一批遭受这种系统性剥夺的群体。更重要的是，下一代女性已经开始改变。理财教育仍需加强，要关注自身教育和个人发展，明白必须为晚年预留储备。女儿们有更多机会，但需要学会如何分配和区分“该买”与“想买”。</span></p>
-
-          <p><span class="en">During her time as chair of the Sha Tin Women’s Association, Lam also discovered that the current policies in Hong Kong did not adequately distinguish between the needs of men and women. The time that women spent on raising children and providing unpaid care was never included in any guarantee strategy. She put forward two specific suggestions: One is to improve the living environment and provide government-funded home purchases for families willing to have children, thereby alleviating the pressure on women to balance work and family life; Another is for women's physical examinations. She suggested offering a free comprehensive physical examination to each woman before marriage or before childbirth. They are promoting the establishment of specialized women's health centers to cover the health examination needs of women during different life stages such as after the age of 18, during pregnancy, and during menopause, ensuring that women's health is fully protected. Lam said that when women are healthy, many problems will be resolved automatically. She compared it to the situation where a men's restroom only needs three stalls, but a women's restroom requires four because the physiological structure is different. Simply speaking equality sometimes cannot solve the problem, the targeted handling is necessary.</span><span class="cn hidden">在担任沙田妇女协会主席期间，林还发现香港现行政策未能充分区分男女需求。女性花费在育儿和提供无偿照护上的时间从未被纳入任何保障策略。她提出两项具体建议：一是改善居住环境，为愿意生育的家庭提供政府资助购房，减轻女性平衡工作与家庭生活的压力；二是女性体检，建议为每位女性在婚前或产前提供一次免费全面体检，推动设立专科妇女健康中心，覆盖18岁后、孕期、更年期等不同阶段的健康检查需求，确保女性健康得到充分保障。林说，当女性健康时，许多问题会自动解决。她比喻说，男厕只需三个厕格，女厕需要四个，因为生理结构不同。单纯讲平等有时无法解决问题，必须针对性处理。</span></p>
-
-          <p><span class="en">“I have HK$4,700 in my bank account,” Yuen Ying-ha said. This was the entire savings accumulated over a lifetime for a woman in Hong Kong.</span><span class="cn hidden">“我银行账户里只有4700港币，”袁英霞说。这就是一位香港女性一生积累的全部积蓄。</span></p>
-
-        </div>
-
-        <div class="mt-8 text-center">
-          <button onclick="switchPage('newsPage')" class="btn-base px-8 py-3 rounded-md">
-            <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
-            <span class="en">Back to News</span>
-            <span class="cn hidden">返回新闻列表</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="py-6 text-center text-sm text-[#4a3f35]/70">
-    <span class="en">© <span class="year"></span> SUN WANNUO. All Rights Reserved.</span>
-    <span class="cn hidden">© <span class="year"></span> 孙婉诺. 保留所有权利。</span>
-  </footer>
-</div>
   <!-- ============================================================
        全局脚本
        ============================================================ -->
@@ -2059,13 +2545,13 @@
       'use strict';
 
       // ============================================================
-      // 1. 开屏动画（3秒）
+      // 1. 开屏动画（2秒）
       // ============================================================
       var splash = document.getElementById('splashScreen');
       if (splash) {
         setTimeout(function() {
           splash.classList.add('splash-hidden');
-        }, 3000);
+        }, 2000);
       }
 
       // ============================================================
@@ -2083,6 +2569,7 @@
       var newsBgLayer = document.getElementById('newsBgLayer');
       var photoBgLayer = document.getElementById('photoBgLayer');
       var filmBgLayer = document.getElementById('filmBgLayer');
+      var podcastBgLayer = document.getElementById('podcastBgLayer');
 
       function switchPage(targetPageId, scrollToId) {
         allPages.forEach(function(page) {
@@ -2096,13 +2583,16 @@
         if (newsBgLayer) newsBgLayer.style.display = 'none';
         if (photoBgLayer) photoBgLayer.style.display = 'none';
         if (filmBgLayer) filmBgLayer.style.display = 'none';
+        if (podcastBgLayer) podcastBgLayer.style.display = 'none';
 
-        if (targetPageId === 'newsPage' || targetPageId === 'newsDetailPage' || targetPageId === 'newsDetailPage2' || targetPageId === 'newsDetailPage3') {
+        if (targetPageId === 'newsPage' || targetPageId === 'newsDetailPage' || targetPageId === 'newsDetailPage2' || targetPageId === 'newsDetailPage3' || targetPageId === 'newsDetailPage4' || targetPageId === 'genderDetailPage1' || targetPageId === 'genderDetailPage2' || targetPageId === 'genderDetailPage3' || targetPageId === 'foodDetailPage2' || targetPageId === 'foodDetailPage3') {
           if (newsBgLayer) newsBgLayer.style.display = 'block';
         } else if (targetPageId === 'photoPage') {
           if (photoBgLayer) photoBgLayer.style.display = 'block';
         } else if (targetPageId === 'filmPage') {
           if (filmBgLayer) filmBgLayer.style.display = 'block';
+        } else if (targetPageId === 'podcastPage') {
+          if (podcastBgLayer) podcastBgLayer.style.display = 'block';
         } else {
           if (bgLayer) bgLayer.style.display = 'block';
         }
@@ -2283,7 +2773,52 @@
         step();
       }
 
-      console.log('✅ Mental Health 第三篇报道已更新为“塔罗牌”专题。');
+      // ============================================================
+      // 9. 摄影画廊交互（悬停缩放 + 居中）
+      // ============================================================
+      function initGalleries() {
+        var containers = document.querySelectorAll('.gallery-container');
+        containers.forEach(function(container) {
+          var items = container.querySelectorAll('.photo-item');
+          if (items.length === 0) return;
+
+          // 默认激活中间项
+          var defaultIndex = Math.floor((items.length - 1) / 2);
+          if (items.length === 1) defaultIndex = 0;
+          items.forEach(function(item) { item.classList.remove('active'); });
+          if (items[defaultIndex]) {
+            items[defaultIndex].classList.add('active');
+            items[defaultIndex].scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
+          }
+
+          // 鼠标悬停
+          items.forEach(function(item) {
+            item.addEventListener('mouseenter', function() {
+              items.forEach(function(oi) { oi.classList.remove('active'); });
+              this.classList.add('active');
+              this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            });
+          });
+
+          // 触摸设备支持
+          items.forEach(function(item) {
+            item.addEventListener('touchstart', function(e) {
+              e.preventDefault();
+              items.forEach(function(oi) { oi.classList.remove('active'); });
+              this.classList.add('active');
+              this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }, { passive: false });
+          });
+        });
+      }
+
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        initGalleries();
+      } else {
+        document.addEventListener('DOMContentLoaded', initGalleries);
+      }
+
+      console.log('✅ Hobby 标签内容已改为 Tennis / 网球。');
     })();
   </script>
 
